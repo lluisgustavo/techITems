@@ -78,8 +78,7 @@
 							<th><i class="fa fa-bullhorn"></i> Categoria</th>
 							<th><i class="fa fa-table"></i> Pai</th>
 							<th><i class=" fa fa-edit"></i> Status</th>
-							<th><i class=" fa fa-edit"></i> Ação</th>
-							<th></th>
+							<th><i class=" fa fa-edit"></i> Ação</th> 
 						</tr>
 					</thead>
 					<tbody id="table-body">

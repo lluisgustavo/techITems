@@ -3,11 +3,11 @@
 	$this->view("header", $data);
 ?>
         <!-- Masthead-->
-        <header class="masthead">
+        <header class="masthead h-100">
             <div class="container px-4 px-lg-5 h-100">
                 <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
                     <div class="col-lg-10 align-self-end">
-                        <h1 class="text-white text-uppercase font-weight-bold">Sistema WEB para Gestão de Lojas de Informática</h1>
+                        <h1 class="text-dark text-uppercase font-weight-bold">Sistema WEB para Gestão de Lojas de Informática</h1>
                         <hr class="divider" />
                     </div>
                     <div class="col-lg-8 align-self-baseline">
@@ -121,7 +121,7 @@
                                     <div class="fw-bolder">Sua mensagem foi enviada com sucesso.</div>
                                     To activate this form, sign up at
                                     <br />
-                                    <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
+                                    <a href=""></a>
                                 </div>
                             </div>
                             <!-- Submit error message-->

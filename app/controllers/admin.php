@@ -77,22 +77,15 @@ Class Admin extends Controller{
         }
 
         $db = Database::newInstance();
-        $products = $db->read("SELECT * FROM products ORDER BY description ASC");
-        $product = $this->load_model("Product");
-        $categories = $db->read("SELECT * FROM categories where status = 1 ORDER BY category ASC");
-        $category = $this->load_model("Category");
+        $suppliers = $db->read("SELECT * FROM suppliers ORDER BY id ASC");
+        $supplier = $this->load_model("Supplier"); 
+        $adresses = $db->read("SELECT * FROM address ORDER BY id ASC"); 
+        $address = $this->load_model("Address");
 
-        $tableRows = $product->make_table($products, $category);
+        $tableRows = $supplier->make_table($suppliers, $address); 
 
-        $selectCategories = $category->make_select($categories);
-        $allCategories = $db->read("SELECT * FROM categories ORDER BY category ASC");
-        $selectEditCategories = $category->make_select_edit_product($allCategories);
-        $data['dropdownEditCategories'] = $selectEditCategories;
-
-        $data['tableRows'] = $tableRows;
-        $data['dropdownCategories'] = $selectCategories;
-
-        $data['page_title'] = "Produtos";
+        $data['tableRows'] = $tableRows; 
+        $data['page_title'] = "Fornecedores";
         $this->view('admin/suppliers', $data);
     }
 }

@@ -1,14 +1,7 @@
-/*price range*/
-
- $('#sl2').slider();
-
-	var RGBChange = function() {
-	  $('#RGB').css('background', 'rgb('+r.getValue()+','+g.getValue()+','+b.getValue()+')')
-	};	
-		
 /*scroll to top*/
 
 $(document).ready(function(){
+
 	$(function () {
 		//===== Preloader
 	
@@ -20,6 +13,7 @@ $(document).ready(function(){
 			document.querySelector('.preloader').style.opacity = '0';
 			document.querySelector('.preloader').style.display = 'none';
 		}
+		
 		$.scrollUp({
 	        scrollName: 'scrollUp', // Element ID
 	        scrollDistance: 300, // Distance from top/bottom before showing element (px)
@@ -35,6 +29,49 @@ $(document).ready(function(){
 	        scrollImg: false, // Set true to use image
 	        activeOverlay: false, // Set CSS color to display scrollUp active point, e.g '#00FFFF'
 	        zIndex: 2147483647 // Z-Index for the overlay
-		});
+		}); 
+
+		
+			// Navbar shrink function
+			var navbarShrink = function () {
+				const navbarCollapsible = document.body.querySelector('#mainNav');
+				if (!navbarCollapsible) {
+					return;
+				}
+				if (window.scrollY === 0) {
+					navbarCollapsible.classList.remove('navbar-shrink')
+				} else {
+					navbarCollapsible.classList.add('navbar-shrink')
+				}
+
+			};
+
+			// Shrink the navbar 
+			navbarShrink();
+
+			// Shrink the navbar when page is scrolled
+			document.addEventListener('scroll', navbarShrink);
+
+			// Activate Bootstrap scrollspy on the main nav element
+			const mainNav = document.body.querySelector('#mainNav');
+			if (mainNav) {
+				new bootstrap.ScrollSpy(document.body, {
+					target: '#mainNav',
+					offset: 74,
+				});
+			};
+
+			// Collapse responsive navbar when toggler is visible
+			const navbarToggler = document.body.querySelector('.navbar-toggler');
+			const responsiveNavItems = [].slice.call(
+				document.querySelectorAll('#navbarResponsive .nav-link')
+			);
+			responsiveNavItems.map(function (responsiveNavItem) {
+				responsiveNavItem.addEventListener('click', () => {
+					if (window.getComputedStyle(navbarToggler).display !== 'none') {
+						navbarToggler.click();
+					}
+				});
+			});
 	});
 });

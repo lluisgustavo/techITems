@@ -106,7 +106,7 @@ Class User{
         $_SESSION['error'] = $this->error;        
     }
 
-    public function logout(){
+    public function logout(){ 
        if(isset($_SESSION['user_url'])){
            unset($_SESSION['user_url']);
        }

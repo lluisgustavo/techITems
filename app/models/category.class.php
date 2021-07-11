@@ -37,8 +37,7 @@ Class Category{
         $sqlGetOne = "SELECT * FROM categories WHERE id = :id LIMIT 1";
         $category = $db->read($sqlGetOne, $arr);  
         if($category) return $category[0];
-        return "";
-        
+        return ""; 
     }
 
     public function update($data){

@@ -15,7 +15,7 @@
                 </li>
 
                 <li class="sub-menu">
-                    <a href="<?= ROOT ?>admin/products">
+                    <a href="<?= ROOT ?>admin/suppliers">
                         <i class="fa fa-people-arrows"></i>
                         <span>Fornecedores</span>
                     </a>

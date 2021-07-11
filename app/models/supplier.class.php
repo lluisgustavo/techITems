@@ -26,7 +26,7 @@ Class Supplier{
 
     public function readAll($data = ""){
         $db = Database::newInstance();
-        return $db->read("SELECT * FROM categories ORDER BY category ASC");
+        return $db->read("SELECT * FROM suppliers ORDER BY supplier_name ASC");
     }
 
     public function getOne($id){
@@ -34,7 +34,7 @@ Class Supplier{
         $db = Database::newInstance(); 
 
         $arr['id'] = $id;
-        $sqlGetOne = "SELECT * FROM categories WHERE id = :id LIMIT 1";
+        $sqlGetOne = "SELECT * FROM suppliers WHERE id = :id LIMIT 1";
         $category = $db->read($sqlGetOne, $arr);  
         if($category) return $category[0];
         return "";
@@ -58,29 +58,42 @@ Class Supplier{
         return $db->write($sqlDeleteCategory);
     }
 
-    public function make_table($categories){
+    public function make_table($suppliers, $model = null){
         $result = "";
-        if(is_array($categories)){
-            foreach($categories as $Category){
-                $edit_args = $Category->id . ", '" . $Category->category . "', " . $Category->parent;
-                $empty = "''";
-                $parent = "Sem pai";
-
-                if(isset($Category->parent) && !empty($Category->parent) && null !== $Category->parent) $parent = $this->getOne($Category->parent)->category;
-   
+        if(is_array($suppliers)){
+            foreach($suppliers as $Supplier){ 
+                if(null !== $model->getOne($Supplier->address_id) && is_object($model->getOne($Supplier->address_id))) {
+                    $address = $model->getOne($Supplier->address_id);
+                    $address_string = $address->street . ', ' . $address->number;
+                    if(!empty($address->complement)) $address_string .= ' - ' . $address->complement . ' - ';
+                    $address_string .= ' - ' . $address->district . ' - ';
+                    $address_string .= ' - ' . $address->city . ',' . $address->state;
+                    $address_string .= ' - ' . $address->country;
+                }else{
+                    $address = "";
+                }     
+ 
                 $result .= '<tr>
-                                <td><a href="basic_table.html#">' . $Category->category . '</a></td>
-                                <td><a href="basic_table.html#">'  . $parent . '</a></td>';
+                                <td>' . $Supplier->id . '</td>
+                                <td>'  . $Supplier->supplier_name . '</td>
+                                <td>'  . $Supplier->contact_name . '</td>
+                                <td>'  . $Supplier->contact_mail . '</td>
+                                <td>'  . $Supplier->contact_phone . '</td>
+                                <td>'  . $address_string . '</td>';
                                 
                 
-                ($Category->status == 1) ? $result .= '<td><span style="cursor: pointer" onclick="toggleStatus(' . $Category->id . ')" class="badge rounded-pill bg-success">Ativo</span></td>' : $result .= '<td><span style="cursor: pointer" onclick="toggleStatus(' . $Category->id . ')" class="badge rounded-pill bg-warning text-dark">Inativo</span></td>';
+                ($Supplier->status == 1) ? $result .= '<td><span style="cursor: pointer" onclick="toggleStatus(' . $Supplier->id . ')" class="badge rounded-pill bg-success">Ativo</span></td>' : $result .= '<td><span style="cursor: pointer" onclick="toggleStatus(' . $Supplier->id . ')" class="badge rounded-pill bg-warning text-dark">Inativo</span></td>';
                  
                 $result .= '<td>  
-                                <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#edit-category" 
-                                    data-bs-id="' . $Category->id . '" data-bs-category="' . $Category->category . '" data-bs-parent="' . $Category->parent . '">
+                                <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#edit-supplier" 
+                                    data-bs-id="' . $Supplier->id . '" data-bs-supplier="' . $Supplier->supplier_name . '" data-bs-contact="' . $Supplier->contact_name . '"
+                                    data-bs-email="' . $Supplier->contact_mail . '" data-bs-phone="' . $Supplier->contact_phone . '" data-bs-address_id="' . $address->id . '"
+                                    data-bs-address_street="' . $address->street . '" data-bs-address_no="' . $address->number . '" data-bs-address_complement="' . $address->complement . '"
+                                    data-bs-address_district="' . $address->district . '" data-bs-address_city="' . $address->city . '" data-bs-address_state="' . $address->state . '"
+                                    data-bs-address_postalcode="' . $address->postalcode . '" data-bs-address_country="' . $address->country . '">
                                     <i class="fa fa-pencil"></i>
                                 </button>
-                                <button onclick="deleteRow(' . $Category->id . ')" class="btn btn-sm btn-danger"><i class="fa fa-trash-o"></i></button>
+                                <button onclick="deleteRow(' . $Supplier->id . ')" class="btn btn-sm btn-danger"><i class="fa fa-trash-o"></i></button>
                             </td>
                         </tr>';  
             }
@@ -89,55 +102,4 @@ Class Supplier{
         return $result;
     }
 
-    public function make_select($categories){
-        $result = "";
-        
-        if(is_array($categories)){
-            $result .= '<select name="categoria-produto" id="categoria-produto" class="form-control">';
-            foreach($categories as $Category){
-                $result .= '<option value="' . $Category->id . '">' . $Category->category . '</option>';
-            }
-            $result .= '</select>';
-        }
-        return $result;
-    }
-
-    public function make_select_parent($categories){
-        $result = ""; 
-        if(is_array($categories)){
-            $result .= '<select name="pai-categoria" id="pai-categoria" class="form-control">
-                <option value="" selected>Selecione uma categoria</option>';
-            foreach($categories as $Category){
-                $result .= '<option value="' . $Category->id . '">' . $Category->category . '</option>';
-            }
-            $result .= '</select>';
-        }
-        return $result;
-    } 
-
-    public function make_select_edit_category($categories){
-        $result = "";
-        if(is_array($categories)){
-            $result .= '<select name="editar-pai-categoria" id="editar-pai-categoria" class="form-control">
-                <option value="" selected>Selecione uma categoria</option>';
-            foreach($categories as $Category){
-                $result .= '<option value="' . $Category->id . '">' . $Category->category . '</option>';
-            }
-            $result .= '</select>';
-        }
-        return $result;
-    } 
-
-    public function make_select_edit_product($categories){
-        $result = "";
-        if(is_array($categories)){
-            $result .= '<select name="editar-categoria-produto" id="editar-categoria-produto" class="form-control">
-                <option value="" selected>Selecione uma categoria</option>';
-            foreach($categories as $Category){
-                $result .= '<option value="' . $Category->id . '">' . $Category->category . '</option>';
-            }
-            $result .= '</select>';
-        }
-        return $result;
-    } 
 }

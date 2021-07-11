@@ -39,7 +39,7 @@
  
 	<!-- adicionar produto -->
 	<div class="modal fade" id="add-new-product" tabindex="-1" aria-labelledby="add-new-product" aria-hidden="true">
-		<div class="modal-dialog">
+		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title" id="addNewLabel">Adicionar Produto</h5>
@@ -108,7 +108,7 @@
 
 	<!-- editar produto -->
 	<div class="modal fade" id="edit-product" tabindex="-1" aria-labelledby="edit-product" aria-hidden="true">
-		<div class="modal-dialog">
+		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">
 				<form class="form-inline" id="edit-product-form" role="form">
 					<div class="modal-header">
