@@ -26,7 +26,7 @@ Class Database{
     }
 
     public function write($query, $data = array()){  
-        $statement = self::$con->prepare($query); 
+        $statement = self::$con->prepare($query);  
         $result = $statement->execute($data);
 
         if($result){
