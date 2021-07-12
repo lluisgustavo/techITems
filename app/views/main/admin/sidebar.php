@@ -4,13 +4,13 @@
             <!-- sidebar menu start-->
             <ul class="sidebar-menu" id="nav-accordion">
             
-                <p class="centered"><a href="profile.html"><img src="<?= ASSETS . THEME ?>admin/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
+                <p class="centered"><a href="profile.html"><img src="<?= ASSETS . THEME . $data['user_data']->avatar ?>" class="img-circle" width="60"></a></p>
                 <h5 class="centered"><?= $data['user_data']->name ?></h5>
             
                 <li class="sub-menu">
                     <a href="<?= ROOT ?>admin" >
                         <i class="fa fa-desktop"></i>
-                        <span>Dashboard</span>
+                        <span>Início</span>
                     </a>
                 </li>
 
@@ -43,26 +43,24 @@
                 </li>
 
                 <li class="sub-menu">
-                    <a href="javascript:;">
+                    <a href="<?= ROOT ?>admin/stock">
+                    <i class="fas fa-boxes"></i>
+                        <span>Estoque</span>
+                    </a>
+                </li> 
+
+                <li class="sub-menu">
+                    <a href="<?= ROOT ?>admin/config">
                         <i class="fa fa-cogs"></i>
                         <span>Configurações</span>
                     </a>
-                    <ul class="sub">
-                        <li><a href="<?= ROOT ?>admin/settings/slider">Configuracões</a></li>
-                        <li><a href="<?= ROOT ?>admin/settings/slider">Imagens Slider</a></li>
-                    </ul>
                 </li>
 
                 <li class="sub-menu">
-                    <a href="javascript:;">
+                    <a href="<?= ROOT ?>admin/users">
                         <i class="fa fa-user"></i>
                         <span>Usuários</span>
-                    </a>
-                    <ul class="sub">
-                        <li><a href="<?= ROOT ?>admin/users/">Usuarios</a></li>
-                        <li><a href="<?= ROOT ?>admin/users/customers">Clientes</a></li>
-                        <li><a href="<?= ROOT ?>admin/users/admins">Administradores</a></li>
-                    </ul>
+                    </a> 
                 </li>
 
                 <li class="sub-menu">
