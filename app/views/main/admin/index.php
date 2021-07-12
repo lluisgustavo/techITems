@@ -8,7 +8,7 @@
       *********************************************************************************************************************************************************** -->
 
 	  <div class="container h-100">
-		  	<div class="row h-50 justify-content-around align-items-center">
+		  	<div class="row justify-content-around align-items-center">
 				<div class="col-3 text-center">
 					<a href="<?= ROOT ?>admin/suppliers">
 						<button class="btn btn-primary btn-lg size-btn"> 
@@ -33,14 +33,21 @@
 						</button>
 					</a>
 				</div> 
-			</div> 
-
-			<div class="row h-50 justify-content-around align-items-center">
+			</div>   
+			<div class="row justify-content-around align-items-center">
 				<div class="col-3 text-center">
 					<a href="<?= ROOT ?>admin/users">
 						<button class="btn btn-warning btn-lg size-btn text-white"> 
-							<i class="fa-2x fas fa-reorder"></i>  
+							<i class="fa-2x fa fa-reorder"></i>  
 							<p>Pedidos</p> 
+						</button>
+					</a>
+				</div>
+				<div class="col-3 text-center">
+					<a href="<?= ROOT ?>admin/users">
+						<button class="btn btn-outline-dark btn-lg size-btn"> 
+							<i class="fa-2x fas fa-boxes"></i>  
+							<p>Estoque</p> 
 						</button>
 					</a>
 				</div> 
@@ -52,6 +59,9 @@
 						</button>
 					</a>
 				</div> 
+			</div>  
+
+			<div class="row justify-content-around align-items-center">
 				<div class="col-3 text-center">
 					<a href="<?= ROOT ?>admin/reports">
 						<button class="btn btn-dark btn-lg size-btn text-white"> 
@@ -60,9 +70,6 @@
 						</button>
 					</a>
 				</div> 
-			</div>  
-
-			<div class="row h-50 justify-content-around align-items-center">
 				<div class="col-3 text-center">
 					<a href="<?= ROOT ?>admin/analytics">
 						<button class="btn btn-secondary btn-lg size-btn text-white"> 
