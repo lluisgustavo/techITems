@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,16 +10,16 @@
         <title><?= WEBSITE_TITLE ?> - <?= $page_title?></title>
 
         <!-- Bootstrap core CSS -->
-        <link href="<?= ASSETS . THEME ?>admin/css/bootstrap.css" rel="stylesheet">
+        <link type="text/css" href="<?= ASSETS . THEME ?>admin/css/bootstrap.css" rel="stylesheet">
         <!--external css-->
-        <link href="<?= ASSETS . THEME ?>admin/font-awesome/css/font-awesome.css" rel="stylesheet" /> 
+        <link type="text/css" href="<?= ASSETS . THEME ?>admin/font-awesome/css/font-awesome.css" rel="stylesheet" /> 
         <link rel="stylesheet" type="text/css" href="<?= ASSETS . THEME ?>admin/lineicons/style.css">    
 
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="<?= ASSETS . THEME ?>images/favicon.png" />
         <!-- Custom styles for this template -->
-        <link href="<?= ASSETS . THEME ?>admin/css/style.css" rel="stylesheet">
-        <link href="<?= ASSETS . THEME ?>admin/css/style-responsive.css" rel="stylesheet">
+        <link type="text/css" href="<?= ASSETS . THEME ?>admin/css/style.css" rel="stylesheet">
+        <link type="text/css" href="<?= ASSETS . THEME ?>admin/css/style-responsive.css" rel="stylesheet">
  
         <script src="https://kit.fontawesome.com/7bd74a3e7b.js" crossorigin="anonymous"></script>	
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -29,7 +29,7 @@
         <![endif]-->
     </head>
 
-    <body class="min-vh-100 d-flex flex-column h-100">
+    <body class="min-vh-100 d-flex flex-column">
         <!--[if lte IE 9]>
         <p class="browserupgrade">
             You are using an <strong>outdated</strong> browser. Please

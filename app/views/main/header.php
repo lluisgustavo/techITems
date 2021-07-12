@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" /> 
         <title><?=$data['page_title']?></title>
-        <link href="<?=ASSETS . THEME?>css/bootstrap.min.css" rel="stylesheet">   
-        <link href="<?=ASSETS . THEME?>css/animate.css" rel="stylesheet"> 
-        <link href="<?=ASSETS . THEME?>css/responsive.css" rel="stylesheet"> 
-        <link href="<?=ASSETS . THEME?>css/main.css" rel="stylesheet" />
+        <link type="text/css" href="<?=ASSETS . THEME?>css/bootstrap.min.css" rel="stylesheet">   
+        <link type="text/css" href="<?=ASSETS . THEME?>css/animate.css" rel="stylesheet"> 
+        <linktype="text/css"  href="<?=ASSETS . THEME?>css/responsive.css" rel="stylesheet"> 
+        <link type="text/css" href="<?=ASSETS . THEME?>css/main.css" rel="stylesheet" />
         <script src="https://kit.fontawesome.com/7bd74a3e7b.js" crossorigin="anonymous"></script>	
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="<?= ASSETS . THEME ?>images/favicon.png"/>
