@@ -21,7 +21,8 @@
 						<th><i class="fa fa-bullhorn"></i> Imagem</th>
 						<th class="text-right"><i class=""></i> Quantidade</th>
 						<th><i class="fa fa-list-alt"></i> Categoria</th>
-						<th class="text-right"><i class="fa fa-money"></i> Preço</th>
+						<th class="text-right"><i class="fa fa-money"></i> Preço de Compra</th>
+						<th class="text-right"><i class="fa fa-money"></i> Preço de Venda</th>
 						<th class="text-right"><i class="fa fa-calendar"></i> Data</th>
 						<th><i class="fa fa-star-o"></i> Status</th>
 						<th><i class=" fa fa-edit"></i> Ação</th>
@@ -61,7 +62,11 @@
 								<input name="quantidade-produto" id="quantidade-produto" type="number" class="form-control" value="1" placeholder="0" min='1' step='1' required>
 							</div>
 							<div class="form-group col-md-6">
-								<label class="control-label" for="preco-produto">Preço</label>
+								<label class="control-label" for="preco-produto">Preço de Compra</label>
+								<input name="preco-produto" id="preco-produto" type="number" class="form-control" value="0.00" placeholder="0.00" min="0.01" step="0.01" required>
+							</div>
+							<div class="form-group col-md-6">
+								<label class="control-label" for="preco-produto">Preço de Venda</label>
 								<input name="preco-produto" id="preco-produto" type="number" class="form-control" value="0.00" placeholder="0.00" min="0.01" step="0.01" required>
 							</div>
 						</div>

@@ -10,8 +10,12 @@
 						<div class="card-header">
 							<h2>Entre na sua conta</h2>
 						</div>
-						<div class="d-flex justify-content-center text-center mt-3">
-							<span style="font-size: 1.5em; font-weight: bold; color: red"><?php check_error() ?></span>
+						<div class="card-body"> 
+							<div class="row justify-content-center text-center">
+								<span style="font-size: 1.5em; font-weight: bold; color: red"><?php check_error() ?></span>
+								<div class="col-md-4" style="display: inline-block; float: none">
+								</div>
+							</div> 
 							<form method="POST">
 								<div class="mb-3">
 									<label for="email" class="form-label">E-mail</label>
@@ -27,7 +31,7 @@
 									<label class="form-check-label" for="mantenha-logado">Mantenha-me logado</label>
 								</div>
 								<button type="submit" class="btn btn-primary mb-3">Entrar</button>
-							</form> 
+							</form>  
 						</div>
 						<div class="card-footer">
 							<p>Não tem uma conta? <a href="<?= ROOT ?>register">Registre-se</a>
@@ -38,11 +42,6 @@
 		</div> 
 		<section id="form"><!--form-->
 			<div class="container">
-				<div class="row justify-content-center text-center">
-					<span style="font-size: 1.5em; font-weight: bold; color: red"><?php check_error() ?></span>
-					<div class="col-md-4" style="display: inline-block; float: none">
-					</div>
-				</div>
 			</div>
 		</section><!--/form-->
 	</div>	

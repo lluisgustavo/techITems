@@ -3,7 +3,7 @@
 Class Admin extends Controller{
     public function index(){
         $User = $this->load_model('User');
-        $user_data = $User->check_login(true, ["admin"]);
+        $user_data = $User->check_login(true, ["admin", "customer"]);
 
         if(is_object($user_data)){
             $data['user_data'] = $user_data;
@@ -87,5 +87,71 @@ Class Admin extends Controller{
         $data['tableRows'] = $tableRows; 
         $data['page_title'] = "Fornecedores";
         $this->view('admin/suppliers', $data);
+    }
+    
+    public function orders(){
+        $User = $this->load_model('User');
+        $user_data = $User->check_login(true, ["admin"]);
+
+        if(is_object($user_data)){
+            $data['user_data'] = $user_data;
+        }
+
+        $db = Database::newInstance();
+        $suppliers = $db->read("SELECT * FROM suppliers ORDER BY id ASC");
+        $supplier = $this->load_model("Supplier"); 
+        $adresses = $db->read("SELECT * FROM address ORDER BY id ASC"); 
+        $address = $this->load_model("Address");
+
+        $tableRows = $supplier->make_table($suppliers, $address); 
+
+        $data['tableRows'] = $tableRows; 
+        $data['page_title'] = "Fornecedores";
+        $this->view('admin/suppliers', $data);
+    }
+
+    public function stock(){
+        $User = $this->load_model('User');
+        $user_data = $User->check_login(true, ["admin"]);
+
+        if(is_object($user_data)){
+            $data['user_data'] = $user_data;
+        }
+
+        $db = Database::newInstance();  
+        $products = $db->read("SELECT * FROM products LIMIT 24");
+        $product = $this->load_model("Product");
+        $categories = $db->read("SELECT * FROM categories where status = 1 ORDER BY category ASC");
+        $category = $this->load_model("Category");
+
+        $stock_quantity = $db->read("SELECT SUM(quantity) as stock_quantity FROM products LIMIT 1"); 
+        $tableRows = $product->make_table($products, $category); 
+
+        $data['tableRows'] = $tableRows; 
+        $data['stock_quantity'] = $stock_quantity[0]->stock_quantity; 
+        $data['rows'] = $products;
+        $data['page_title'] = "Estoque";
+        $this->view('admin/stock', $data);
+    }
+
+    public function users(){
+        $User = $this->load_model('User');
+        $user_data = $User->check_login(true, ["admin"]);
+
+        if(is_object($user_data)){
+            $data['user_data'] = $user_data;
+        }
+
+        $db = Database::newInstance();
+        $suppliers = $db->read("SELECT * FROM suppliers ORDER BY id ASC");
+        $supplier = $this->load_model("Stock"); 
+        $adresses = $db->read("SELECT * FROM address ORDER BY id ASC"); 
+        $address = $this->load_model("Address");
+
+        $tableRows = $stock->make_table($suppliers, $address); 
+
+        $data['tableRows'] = $tableRows; 
+        $data['page_title'] = "Estoque";
+        $this->view('admin/stock', $data);
     }
 }

@@ -194,7 +194,7 @@ Class Address{
         return ""; 
     }
 
-    public function make_table($products, $model = null){
+    /*public function make_table($products, $model = null){
         $result = "";
         if(is_array($products)){ 
             foreach($products as $Product){ 
@@ -269,5 +269,5 @@ Class Address{
         }
 
         return $result;
-    } 
+    } */
 }

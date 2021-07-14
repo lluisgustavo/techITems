@@ -232,7 +232,8 @@ Class Product{
                                 </td>
                                 <td class="text-right">' . $Product->quantity . '</td>
                                 <td class="text-right">' . $categoryColumn .  '</td>
-                                <td class="text-right"> R$ ' . $Product->price . '</td>
+                                <td class="text-right"> R$ ' . $Product->price_buy . '</td>
+                                <td class="text-right"> R$ ' . $Product->price_sell . '</td>
                                 <td class="text-right">' . date("d/m/Y H:i:s", strtotime($Product->date)) . '</td>';
                 
                 ($Product->status == 1) ? $result .= '<td><span style="cursor: pointer" onclick="toggleStatus(' . $Product->id . ')" class="badge rounded-pill bg-success">Ativo</span></td>' : $result .= '<td><span style="cursor: pointer" onclick="toggleStatus(' . $Product->id . ')" class="badge rounded-pill bg-warning text-dark">Inativo</span></td>';
@@ -240,7 +241,7 @@ Class Product{
                 $result .= '<td>  
                                 <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#edit-product" 
                                     data-bs-id="' . $Product->id . '" data-bs-title="' . $Product->title . '" data-bs-description="' . $Product->description . '" data-bs-quantity="' . $Product->quantity . '"
-                                    data-bs-price="' . $Product->price . '" data-bs-category="' . $Product->category . '" data-bs-slug="' . $Product->slug . '"
+                                    data-bs-price_buy="' . $Product->price_buy . '" data-bs-price_sell="' . $Product->price_sell . '" data-bs-category="' . $Product->category . '" data-bs-slug="' . $Product->slug . '"
                                     data-bs-image="' . $Product->image . '"';
                                     if(!empty($Product->image2)) $result .= ' data-bs-image2="' . $Product->image2 . '"'; 
                                     if(!empty($Product->image3)) $result .= ' data-bs-image3="' . $Product->image3 . '"'; 
