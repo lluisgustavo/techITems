@@ -20,7 +20,7 @@
 								<div class="mb-3">
 									<label for="email" class="form-label">E-mail</label>
 									<input class="form-control" name="email" value="<?= isset($_POST['email']) ? $_POST['email'] : ''?>" type="email" placeholder="E-mail" />
-								<div id="emailHelp" class="form-text">Não compartilharemos seu e-mail com ninguém.</div>
+									<div id="emailHelp" class="form-text">Não compartilharemos seu e-mail com ninguém.</div>
 								</div>
 								<div class="mb-3">
 									<label for="password" class="form-label">Senha</label>
@@ -34,7 +34,7 @@
 							</form>  
 						</div>
 						<div class="card-footer">
-							<p>Não tem uma conta? <a href="<?= ROOT ?>register">Registre-se</a>
+							<p>Não tem uma conta? <a href="<?= ROOT ?>signup">Registre-se</a>
 						</div>
 					</div>
 				</div> 
