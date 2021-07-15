@@ -142,16 +142,35 @@ Class Admin extends Controller{
             $data['user_data'] = $user_data;
         }
 
-        $db = Database::newInstance();
-        $suppliers = $db->read("SELECT * FROM suppliers ORDER BY id ASC");
-        $supplier = $this->load_model("Stock"); 
-        $adresses = $db->read("SELECT * FROM address ORDER BY id ASC"); 
-        $address = $this->load_model("Address");
+        $db = Database::newInstance(); 
+        $users = $db->read("SELECT * FROM users ORDER BY id ASC"); 
+        $user = $this->load_model("User");
 
-        $tableRows = $stock->make_table($suppliers, $address); 
+        $tableRows = $user->make_table($users); 
 
         $data['tableRows'] = $tableRows; 
-        $data['page_title'] = "Estoque";
-        $this->view('admin/stock', $data);
+        $data['page_title'] = "Usuários";
+        $this->view('admin/users', $data);
+    }
+    
+    public function buy(){
+        $User = $this->load_model('User');
+        $user_data = $User->check_login(true, ["admin", "customer"]);
+
+        if(is_object($user_data)){
+            $data['user_data'] = $user_data;
+        }
+
+        $db = Database::newInstance();
+        $products = $db->read("SELECT * FROM products ORDER BY id ASC");
+        $product = $this->load_model("Product"); 
+        $categories = $db->read("SELECT * FROM categories ORDER BY id ASC"); 
+        $category = $this->load_model("Category");
+
+        //$tableRows = $product->make_table($products, $category); 
+
+        $data['rows'] = $products;   
+        $data['page_title'] = "Comprar";
+        $this->view('admin/buy', $data);
     }
 }

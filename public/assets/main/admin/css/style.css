@@ -2327,3 +2327,7 @@ label {
     opacity: 0;
   }
 }
+
+.buy-product-card{
+    height: 150px;
+}

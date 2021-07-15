@@ -57,7 +57,7 @@
                                 Painel
                             </a> 
                         </li>
-                        <li class="nav-item">  
+                        <li class="nav-item">                                  
                             <a class="fs-5 nav-link text-uppercase text-danger" href="<?= ROOT ?>logout">
                                 Sair
                             </a> 
