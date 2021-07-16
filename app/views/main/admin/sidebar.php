@@ -6,7 +6,8 @@
             
                 <p class="centered"><a href="profile.html"><img src="<?= ASSETS . THEME . $data['user_data']->avatar ?>" class="img-circle" width="60"></a></p>
                 <h5 class="centered"><?= $data['user_data']->name ?></h5>
-            
+
+                <?php if($data['user_data']->rank == 'admin'): ?>
                 <li class="sub-menu">
                     <a href="<?= ROOT ?>admin" >
                         <i class="fa fa-desktop"></i>
@@ -69,6 +70,14 @@
                         <span>Backup</span>
                     </a>
                 </li> 
+                <?php elseif($data['user_data']->rank == 'customer'): ?>
+                <li class="sub-menu">
+                    <a href="<?= ROOT ?>admin/buy" >
+                        <i class="fa fa-desktop"></i>
+                        <span>Comprar</span>
+                    </a>
+                </li>
+                <?php endif; ?>
             </ul>
             <!-- sidebar menu end--> 
         </aside>

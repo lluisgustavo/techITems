@@ -61,6 +61,9 @@
 							<th>Preço</th>
 						</tr> 
 					</table>
+
+					<button class="btn btn-primary" type="submit">Calcular Preço</button>
+					<button class="btn btn-primary" type="submit">Comprar</button>
 				</form>
 			</div>
 		</div>
@@ -75,20 +78,31 @@ function addToCart(element){
 	var product_price = $(element).data('price');
 	var product_image = $(element).data('image');
 
-	var item = `<tr> 
+	var item = `<tr id="row_produto_` + product_id +`"> 
 					<td>
 						<img style="max-height:100px" class="w-100 h-100" src="` + root + product_image + `" alt="">
 					</td>
 					<td>
 						` + product_name + `
+						<small><button class="btn btn-secondary" onclick="removeFromCart(` + product_id +`)">Remover</button></small>
+						<div class="col-md-2">
+							<input class="form-control" name="qtd_Produto_` + product_id +`" value="1" type="number" min="1" max="999" step="1">
+						</div>
 					</td>
 					<td>
-						` + product_price.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}) + `
+						<span class="vlrProduto_` + product_id +`">`+ product_price.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}) + `</span>
 					</td>
 				</tr>`;
- 
+
 	$('#cart_table').append(item); 
-}
+	$(element).prop('disabled', 'true');
+} 
+
+function removeFromCart(id){  
+	$('#product_' + id).removeAttr("disabled");
+	$('#product_' + id).prop("checked", false);
+	$('#row_produto_' + id).remove(); 
+} 
 </script>
 
 <?php
