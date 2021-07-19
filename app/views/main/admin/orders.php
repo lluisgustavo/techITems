@@ -23,12 +23,10 @@
 								</div>
 								<form class="form-inline" role="form">
 									<div class="modal-body">
-										<div class="form-group">
-											<label class="control-label" for="add-category">Nome da Categoria</label>
+										<div class="form-group"> 
 											<input name="categoria" id="categoria" type="text" class="form-control" placeholder="Nome da Categoria" autofocus required>
 										</div>
-										<div class="form-group">
-											<label class="control-label" for="add-category">Pai (opcional)</label>
+										<div class="form-group"> 
 											<?php echo $dropdownCategories; ?>
 										</div>
 									</div>
@@ -53,12 +51,10 @@
 									</div>
 									<div class="modal-body">
 										<input name="editar-id-categoria" type="hidden" id="editar-id-categoria" class="form-control">
-										<div class="form-group">
-											<label class="control-label" for="add-category">Nome da Categoria</label>
+										<div class="form-group"> 
 											<input name="editar-categoria" id="editar-categoria" type="text" class="form-control" placeholder="Nome da Categoria" autofocus required>
 										</div>
-										<div class="form-group">
-											<label class="control-label" for="editar-pai-categoria">Pai (opcional)</label>
+										<div class="form-group"> 
 											<?php echo $dropdownEditCategories; ?>
 										</div>
 									</div>

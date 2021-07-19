@@ -24,70 +24,56 @@
 								<form class="form-inline" role="form">
 									<div class="modal-body">
                                         <h4>Fornecedor</h4>
-										<div class="form-group">
-											<label class="control-label" for="fornecedor-nome">Nome do Fornecedor</label>
+										<div class="form-group"> 
 											<input name="fornecedor-nome" id="fornecedor-nome" type="text" class="form-control" placeholder="Nome do Fornecedor" autofocus required>
 										</div> 
-										<div class="form-group">
-											<label class="control-label" for="fornecedor-CNPJ">CNPJ</label>
+										<div class="form-group"> 
 											<input name="fornecedor-CNPJ" id="fornecedor-CNPJ" type="text" class="form-control" placeholder="CNPJ do Fornecedor" required>
 										</div>
-										<div class="form-group">
-											<label class="control-label" for="fornecedor-contato">Nome do Contato</label>
+										<div class="form-group"> 
 											<input name="fornecedor-contato" id="fornecedor-contato" type="text" class="form-control" placeholder="Nome do Contato" required>
 										</div>
-										<div class="form-group">
-											<label class="control-label" for="fornecedor-contato">E-mail do Contato</label>
+										<div class="form-group"> 
 											<input name="fornecedor-email" id="fornecedor-email" type="email" class="form-control" placeholder="E-mail do Contato" required>
 										</div>
-										<div class="form-group">
-											<label class="control-label" for="fornecedor-contato">Telefone do Contato</label>
+										<div class="form-group"> 
 											<input name="fornecedor-telefone" id="fornecedor-telefone" type="tel" class="form-control" placeholder="Telefone do Contato" required>
 										</div>
 
                                         <h4 class="mt-3">Endereço</h4>
                                         <div class="row">
-											<div class="form-group col-md-3">
-												<label class="control-label" for="fornecedor-endereco-CEP">CEP</label>
+											<div class="form-group col-md-3"> 
 												<input onblur="pesquisacep(this.value);" name="fornecedor-endereco-CEP" id="fornecedor-endereco-CEP" type="text" class="form-control" placeholder="CEP" required>
 											</div>
-											<div class="form-group col-md-9">
-												<label class="control-label" for="fornecedor-endereco-rua">Rua</label>
+											<div class="form-group col-md-9"> 
 												<input name="fornecedor-endereco-rua" id="fornecedor-endereco-rua" type="text" class="form-control" placeholder="Rua" required>
 											</div>
 										</div>
                                         <div class="row">
-                                            <div class="form-group col-md-3">
-                                                <label class="control-label" for="fornecedor-endereco-numero">Número</label>
+                                            <div class="form-group col-md-3"> 
                                                 <input name="fornecedor-endereco-numero" id="fornecedor-endereco-numero" type="text" class="form-control" placeholder="Número" required>
                                             </div>
-                                            <div class="form-group col-md-9">
-                                                <label class="control-label" for="fornecedor-endereco-complemento">Complemento</label>
+                                            <div class="form-group col-md-9"> 
                                                 <input name="fornecedor-endereco-complemento" id="fornecedor-endereco-complemento" type="text" class="form-control" placeholder="Complemento">
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="form-group col-md-4">
-                                                <label class="control-label" for="fornecedor-endereco-bairro">Bairro</label>
+                                            <div class="form-group col-md-4"> 
                                                 <input name="fornecedor-endereco-bairro" id="fornecedor-endereco-bairro" type="text" class="form-control" placeholder="Bairro" required>
                                             </div>
-                                            <div class="form-group col-md-4">
-                                                <label class="control-label" for="fornecedor-endereco-cidade">Cidade</label>
+                                            <div class="form-group col-md-4"> 
                                                 <input name="fornecedor-endereco-cidade" id="fornecedor-endereco-cidade" type="text" class="form-control" placeholder="Cidade" required>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="form-group col-md-6">
-                                                <label class="control-label" for="fornecedor-endereco-estado">Estado</label>
+                                            <div class="form-group col-md-6"> 
                                                 <input name="fornecedor-endereco-estado" id="fornecedor-endereco-estado" type="text" class="form-control" placeholder="Estado" required>
                                             </div>
-                                            <div class="form-group col-md-6">
-                                                <label class="control-label" for="fornecedor-endereco-pais">País</label>
+                                            <div class="form-group col-md-6"> 
                                                 <input name="fornecedor-endereco-pais" id="fornecedor-endereco-pais" type="text" class="form-control" placeholder="País" required>
                                             </div>
                                         </div>
-										<div class="form-group">
-											<label class="control-label" for="fornecedor-endereco-ref">Referência</label>
+										<div class="form-group"> 
 											<input name="fornecedor-endereco-ref" id="fornecedor-endereco-ref" type="text" class="form-control">
 										</div>
 									</div>

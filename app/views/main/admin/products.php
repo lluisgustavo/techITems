@@ -48,34 +48,27 @@
 				</div>
 				<form class="form-inline" role="form">
 					<div class="modal-body">
-						<div class="form-group col-md-12">
-							<label class="control-label" for="nome-produto">Nome do Produto</label>
+						<div class="form-group col-md-12"> 
 							<input name="nome-produto" type="text" id="nome-produto" class="form-control" placeholder="Nome do Produto" autofocus required>
 						</div>
-						<div class="form-group col-md-12">
-							<label class="control-label" for="descricao-produto">Descrição do Produto</label>
+						<div class="form-group col-md-12"> 
 							<textarea name="descricao-produto" id="descricao-produto" placeholder="Descrição do Produto" rows="3" class="form-control"></textarea>
 						</div>
 						<div class="row">
-							<div class="form-group col-md-6">
-								<label class="control-label" for="quantidade-produto">Quantidade</label>
+							<div class="form-group col-md-6"> 
 								<input name="quantidade-produto" id="quantidade-produto" type="number" class="form-control" value="1" placeholder="0" min='1' step='1' required>
 							</div>
-							<div class="form-group col-md-6">
-								<label class="control-label" for="preco-produto">Preço de Compra</label>
+							<div class="form-group col-md-6"> 
 								<input name="preco-produto" id="preco-produto" type="number" class="form-control" value="0.00" placeholder="0.00" min="0.01" step="0.01" required>
 							</div>
-							<div class="form-group col-md-6">
-								<label class="control-label" for="preco-produto">Preço de Venda</label>
+							<div class="form-group col-md-6"> 
 								<input name="preco-produto" id="preco-produto" type="number" class="form-control" value="0.00" placeholder="0.00" min="0.01" step="0.01" required>
 							</div>
 						</div>
-						<div class="form-group col-md-12">
-							<label class="control-label" for="categoria-produto">Categoria</label>
+						<div class="form-group col-md-12"> 
 							<?php echo $dropdownCategories ?>
 						</div>
-						<div class="form-group col-md-12">
-							<label class="control-label" for="slug-produto">Slug</label>
+						<div class="form-group col-md-12"> 
 							<input name="slug-produto" id="slug-produto" type="text" class="form-control"  placeholder="Slug do produto">
 						</div>
 						<div class="form-group col-md-12">
@@ -122,30 +115,24 @@
 					</div>
 					<div class="modal-body">
 						<input name="editar-id-produto" type="hidden" id="editar-id-produto" class="form-control">
-						<div class="form-group col-md-12">
-							<label class="control-label" for="editar-nome-produto">Nome do Produto</label>
+						<div class="form-group col-md-12"> 
 							<input name="editar-nome-produto" type="text" id="editar-nome-produto" class="form-control" placeholder="Nome do Produto" autofocus required>
 						</div>
-						<div class="form-group col-md-12">
-							<label class="control-label" for="editar-descricao-produto">Descrição do Produto</label>
+						<div class="form-group col-md-12"> 
 							<textarea name="editar-descricao-produto" id="editar-descricao-produto" placeholder="Descrição do Produto" rows="3" class="form-control"></textarea>
 						</div>
 						<div class="row">
-							<div class="form-group col-md-6">
-								<label class="control-label" for="editar-quantidade-produto">Quantidade</label>
+							<div class="form-group col-md-6"> 
 								<input name="editar-quantidade-produto" id="editar-quantidade-produto" type="number" class="form-control" value="1" placeholder="0" min='1' step='1' required>
 							</div>
-							<div class="form-group col-md-6">
-								<label class="control-label" for="editar-preco-produto">Preço</label>
+							<div class="form-group col-md-6"> 
 								<input name="editar-preco-produto" id="editar-preco-produto" type="number" class="form-control" value="0.00" placeholder="0.00" min="0.01" step="0.01" required>
 							</div>
 						</div>
-						<div class="form-group col-md-12">
-							<label class="control-label" for="editar-categoria-produto">Categoria</label>
+						<div class="form-group col-md-12"> 
 							<?php echo $dropdownEditCategories ?>
 						</div>
-						<div class="form-group col-md-12">
-							<label class="control-label" for="editar-slug-produto">Slug</label>
+						<div class="form-group col-md-12"> 
 							<input name="editar-slug-produto" id="editar-slug-produto" type="text" class="form-control"  placeholder="Slug do produto">
 						</div>
 						<div class="form-group col-md-12">
