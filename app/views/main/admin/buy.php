@@ -62,7 +62,7 @@
 						</tr> 
 					</table>
 
-					<button class="btn btn-primary" type="submit">Calcular Preço</button>
+					<button onclick="calcTotal(event)" class="btn btn-primary">Calcular Preço</button>
 					<button class="btn btn-primary" type="submit">Comprar</button>
 				</form>
 			</div>
@@ -86,15 +86,25 @@ function addToCart(element){
 						` + product_name + `
 						<small><button class="btn btn-secondary" onclick="removeFromCart(` + product_id +`)">Remover</button></small>
 						<div class="col-md-2">
-							<input class="form-control" name="qtd_Produto_` + product_id +`" value="1" type="number" min="1" max="999" step="1">
+							<input class="form-control" name="produto_` + product_id +`" type="hidden">
+							<input class="form-control" name="qtdProduto_` + product_id +`" value="1" type="number" min="1" max="999" step="1">
 						</div>
 					</td>
 					<td>
-						<span class="vlrProduto_` + product_id +`">`+ product_price.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}) + `</span>
+						<span id="vlrProduto_` + product_id +`">`+ product_price.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}) + `</span>
 					</td>
 				</tr>`;
 
+	if($('#row_order_price')){ 
+		$('#row_order_price').remove()
+	}
+
 	$('#cart_table').append(item); 
+
+	if($('#row_order_price')){ 
+		calcTotal();
+	}
+
 	$(element).prop('disabled', 'true');
 } 
 
@@ -102,7 +112,42 @@ function removeFromCart(id){
 	$('#product_' + id).removeAttr("disabled");
 	$('#product_' + id).prop("checked", false);
 	$('#row_produto_' + id).remove(); 
+	calcTotal();
 } 
+
+function calcTotal(){ 
+	event.preventDefault();
+
+	if($('#row_order_price')){ 
+		$('#row_order_price').remove()
+	}
+
+	var soma = 0;
+	var regex = '/^R$ +|R$ +$/g';
+	$.each($('#cart_table [id^="vlrProduto_"]'), function(){
+		var preco_item = $(this).text();
+		preco_item = preco_item.substring(3);
+		//soma += preco_item;
+		preco_item = preco_item.replace('.', '|');
+		preco_item = preco_item.replace(',', '.');
+		preco_item = preco_item.replace('|', ''); 
+		preco_item = parseFloat(preco_item); 
+		soma += preco_item; 
+	}) 
+	
+	var item = `<tr id="row_order_price"> 
+					<td> 
+					</td>
+					<td> 
+					</td>
+					<td>
+						<span id="vlrTotal">`+ soma.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}) + `</span>
+					</td>
+				</tr>`;
+
+	$('#cart_table').append(item); 
+}
+
 </script>
 
 <?php
