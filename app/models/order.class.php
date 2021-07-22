@@ -2,24 +2,20 @@
 
 Class Order{
     public function create($data = []){
-        $db = Database::newInstance();
-        $arr['category'] = ucwords($data->category);
-        $arr['parent'] = ucwords($data->parent);
- 
+        $db = Database::newInstance(); 
 
-        if(!preg_match("/^([a-zA-Zà-úÀ-Ú0-9]|-|_|\s)+$/", $arr['category'])){
-            $_SESSION['error'] = "Digite um nome de categoria válido <br>";
-        }
+        $arr['product_list'] = implode(', ', $data->product_IDs);
+        $arr['qty_product_list'] = implode(', ', $data->product_Qtd);
+        $arr['customer_id'] = $_SESSION['user_url']; 
+        $arr['ordered_at'] = date("Y-m-d H:i:s");
 
-        if(!isset($_SESSION['error']) || $_SESSION['error'] == ""){
-            $sqlCategory = "INSERT INTO orders (category, parent) VALUES (:category, :parent)";
- 
-            $check = $db->write($sqlCategory, $arr);
+        $sqlCategory = "INSERT INTO orders (product_list, qty_product_list, customer_id, ordered_at) VALUES (:product_list, :qty_product_list, :customer_id, :ordered_at)";
 
-            if($check){
-                return true;
-            }
-        }
+        $check = $db->write($sqlCategory, $arr);
+
+        if($check){
+            return true;
+        } 
 
         return false;
     }

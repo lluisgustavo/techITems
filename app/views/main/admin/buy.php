@@ -62,8 +62,7 @@
 						</tr> 
 					</table>
 
-					<button onclick="calcTotal(event)" class="btn btn-primary">Calcular Preço</button>
-					<button class="btn btn-primary" type="submit">Comprar</button>
+					<button onclick="collectData(event); return false;" class="btn btn-primary" type="submit">Comprar</button>
 				</form>
 			</div>
 		</div>
@@ -71,6 +70,57 @@
 
 <script type="text/javascript">      
 var root = '<?= ROOT ?>';
+
+function collectData(element){  
+	var arrayIds = [];
+	var arrayQtd = [];
+	$.each($('#cart_table [name^="product"]'), function(){   
+		let id = $(this).val();  
+		arrayIds.push(id); 
+	}) 
+	$.each($('#cart_table [name^="qtdProduto"]'), function(){   
+		let qtd = $(this).val();  
+		arrayQtd.push(qtd); 
+	}) 
+	 
+	sendData({
+		product_IDs: arrayIds,
+		product_Qtd: arrayQtd,
+		data_type: 'add-order'
+	});
+}
+
+function sendData(data = {}){
+	var ajax = new XMLHttpRequest();
+ 
+	ajax.addEventListener('readystatechange', function(){
+		if(ajax.readyState == 4 && ajax.status == 200){ 
+			handleResult(ajax.responseText);
+		}
+	});
+
+	ajax.open("POST","<?=ROOT?>ajaxbuy", true);
+	ajax.send(JSON.stringify(data));
+}
+
+function handleResult(result){
+		if(result != ""){      
+			console.log(result);
+			var obj = JSON.parse(result);
+			if(typeof(obj.data_type) != 'undefined'){
+				if(obj.data_type == "add-order"){
+					if(obj.message_type == 'info'){
+						alert(obj.message); 
+					
+						var table_body = document.querySelector("#table-body");
+						table_body.innerHTML = obj.data;
+					} else {
+						alert(obj.message);
+					}    
+			}
+		}
+	}
+}
 
 function addToCart(element){
 	var product_id = $(element).data('id');
@@ -86,8 +136,8 @@ function addToCart(element){
 						` + product_name + `
 						<small><button class="btn btn-secondary" onclick="removeFromCart(` + product_id +`)">Remover</button></small>
 						<div class="col-md-2">
-							<input class="form-control" name="produto_` + product_id +`" type="hidden">
-							<input class="form-control" name="qtdProduto_` + product_id +`" value="1" type="number" min="1" max="999" step="1">
+							<input class="form-control" name="product[` + product_id +`]" value="` + product_id +`" type="hidden">
+							<input onChange="totalVlrProduto(` + product_id +`, ` + product_price + `, this)" class="form-control" name="qtdProduto[` + product_id +`]" value="1" type="number" min="1" max="999" step="1">
 						</div>
 					</td>
 					<td>
@@ -95,18 +145,22 @@ function addToCart(element){
 					</td>
 				</tr>`;
 
-	if($('#row_order_price')){ 
-		$('#row_order_price').remove()
-	}
 
-	$('#cart_table').append(item); 
+	$('#cart_table').append(item);   
 
-	if($('#row_order_price')){ 
+	if($('#row_order_price')){  
 		calcTotal();
 	}
 
 	$(element).prop('disabled', 'true');
 } 
+
+function totalVlrProduto(id, price, element){
+	var qty = $(element).val(); 
+	var totalProductPrice = parseInt(qty) * parseFloat(price); 
+	$('#vlrProduto_' + id).text(totalProductPrice.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}))
+	calcTotal();
+}
 
 function removeFromCart(id){  
 	$('#product_' + id).removeAttr("disabled");
@@ -124,10 +178,9 @@ function calcTotal(){
 
 	var soma = 0;
 	var regex = '/^R$ +|R$ +$/g';
-	$.each($('#cart_table [id^="vlrProduto_"]'), function(){
+	$.each($('#cart_table [id^="vlrProduto_"]'), function(){ 
 		var preco_item = $(this).text();
-		preco_item = preco_item.substring(3);
-		//soma += preco_item;
+		preco_item = preco_item.substring(3); 
 		preco_item = preco_item.replace('.', '|');
 		preco_item = preco_item.replace(',', '.');
 		preco_item = preco_item.replace('|', ''); 
@@ -135,15 +188,15 @@ function calcTotal(){
 		soma += preco_item; 
 	}) 
 	
-	var item = `<tr id="row_order_price"> 
+	var item = `<tfoot id="row_order_price"> 
 					<td> 
 					</td>
-					<td> 
+					<td> <b class="float-end">Total:
 					</td>
 					<td>
 						<span id="vlrTotal">`+ soma.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}) + `</span>
 					</td>
-				</tr>`;
+				</tfoot>`;
 
 	$('#cart_table').append(item); 
 }
