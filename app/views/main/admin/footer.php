@@ -12,7 +12,7 @@
     <footer class="footer mt-auto py-3 site-footer">
         <div class="container text-center">
             <span class="text-bold text-dark">
-                    Arduamente desenvolvido por 
+                    Desenvolvido por 
                 <a href="www.luisdesouza.com.br">Luis de Souza</a>
                 <a href="#" class="go-top">
                     <i class="fa fa-angle-up"></i>

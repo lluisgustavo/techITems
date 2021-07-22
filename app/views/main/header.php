@@ -8,15 +8,15 @@
         <title><?=$data['page_title']?></title>
         <link type="text/css" href="<?=ASSETS . THEME?>css/bootstrap.min.css" rel="stylesheet">   
         <link type="text/css" href="<?=ASSETS . THEME?>css/animate.css" rel="stylesheet"> 
-        <linktype="text/css"  href="<?=ASSETS . THEME?>css/responsive.css" rel="stylesheet"> 
+        <link type="text/css"  href="<?=ASSETS . THEME?>css/responsive.css" rel="stylesheet"> 
         <link type="text/css" href="<?=ASSETS . THEME?>css/main.css" rel="stylesheet" />
         <script src="https://kit.fontawesome.com/7bd74a3e7b.js" crossorigin="anonymous"></script>	
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="<?= ASSETS . THEME ?>images/favicon.png"/>
         <!-- Bootstrap Icons-->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+        <link type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Google fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
+        <link type="text/css" href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css" />
     </head>
     <body id="page-top">
