@@ -88,6 +88,8 @@ function collectData(element){
 		product_Qtd: arrayQtd,
 		data_type: 'add-order'
 	});
+
+	removeEveryRowCart();
 }
 
 function sendData(data = {}){
@@ -105,7 +107,7 @@ function sendData(data = {}){
 
 function handleResult(result){
 		if(result != ""){      
-			console.log(result);
+			//console.log(result);
 			var obj = JSON.parse(result);
 			if(typeof(obj.data_type) != 'undefined'){
 				if(obj.data_type == "add-order"){
@@ -167,6 +169,10 @@ function removeFromCart(id){
 	$('#product_' + id).prop("checked", false);
 	$('#row_produto_' + id).remove(); 
 	calcTotal();
+} 
+
+function removeEveryRowCart(){  
+	$('#cart_table').children( 'tr:not(:first)' ).remove();
 } 
 
 function calcTotal(){ 

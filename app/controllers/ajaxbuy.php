@@ -4,8 +4,7 @@ Class AjaxBuy extends Controller{
     public function index(){
         $data = file_get_contents("php://input"); 
         $data = json_decode($data); 
-
-        show($_SESSION);
+ 
         if(is_object($data) && isset($data->data_type)){
             $db = Database::getInstance();
             $order = $this->load_model('Order');

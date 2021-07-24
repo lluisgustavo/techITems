@@ -5,7 +5,8 @@ Class App{
     protected $method = "index";
     protected $params;
 
-    public function __construct(){
+    public function __construct(){ 
+        $this->hsts(); 
         $url = $this->parseURL();
   
         if(file_exists("../app/controllers/" . strtolower($url[0]) . ".php")){
@@ -32,5 +33,16 @@ Class App{
     private function parseURL(){
         $url = isset($_GET['url']) ? $_GET['url'] : "home";
         return explode('/', filter_var(trim($url, "/"), FILTER_SANITIZE_URL));
+    }
+
+    public function hsts() {
+        //If the HTTPS is not found to be "on"
+        if(!isset($_SERVER["HTTPS"]) || $_SERVER["HTTPS"] != "on")
+        {
+            //Tell the browser to redirect to the HTTPS URL.
+            header("Location: https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"], true, 301);
+            //Prevent the rest of the script from executing.
+            exit;
+        }
     }
 }
