@@ -22,7 +22,7 @@ Class Order{
 
     public function readAll($data = ""){
         $db = Database::newInstance();
-        return $db->read("SELECT * FROM orders ORDER BY id ASC");
+        return $db->read("SELECT * FROM tb_orders ORDER BY id ASC");
     }
 
     public function getOne($id){
@@ -30,7 +30,7 @@ Class Order{
         $db = Database::newInstance(); 
 
         $arr['id'] = $id;
-        $sqlGetOne = "SELECT * FROM orders WHERE id = :id LIMIT 1";
+        $sqlGetOne = "SELECT * FROM tb_orders WHERE id = :id LIMIT 1";
         $category = $db->read($sqlGetOne, $arr);  
         if($category) return $category[0];
         return ""; 
@@ -42,14 +42,14 @@ Class Order{
         $arr['category'] = $data->category;
         $arr['parent'] = $data->parent; 
   
-        $sqlUpdateCategory = "UPDATE orders SET category = :category, parent = :parent WHERE id = :id";
+        $sqlUpdateCategory = "UPDATE tb_orders SET category = :category, parent = :parent WHERE id = :id";
         $db->write($sqlUpdateCategory, $arr);
     }
 
     public function delete($id){
         $db = Database::newInstance();
         $id = (int)$id;
-        $sqlDeleteCategory = "DELETE FROM orders WHERE id = '$id' LIMIT 1";
+        $sqlDeleteCategory = "DELETE FROM tb_orders WHERE id = '$id' LIMIT 1";
         return $db->write($sqlDeleteCategory);
     }
 

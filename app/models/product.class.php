@@ -30,7 +30,7 @@ Class Product{
         }
 
         $arr_slug['slug'] = $arr['slug'];  
-        $sqlInsertProduct = "SELECT * from products WHERE slug = :slug";
+        $sqlInsertProduct = "SELECT * FROM tb_products WHERE slug = :slug";
         $check = $db->read($sqlInsertProduct, $arr_slug);
 
         if($check){
@@ -81,7 +81,7 @@ Class Product{
 
     public function readAll($data = ""){
         $db = Database::newInstance();
-        return $db->read("SELECT * FROM products ORDER BY description ASC");
+        return $db->read("SELECT * FROM tb_products ORDER BY description ASC");
     }
 
     public function update($data, $files, $imageClass = null){
@@ -114,7 +114,7 @@ Class Product{
         }
        
         $arr_slug['slug'] = $arr['slug'];
-        $sqlCheckSlugExists = "SELECT * from products WHERE slug = ':slug'"; 
+        $sqlCheckSlugExists = "SELECT * FROM tb_products WHERE slug = ':slug'"; 
         $check = $db->read($sqlCheckSlugExists, $arr_slug);
 
         if($check){
@@ -160,7 +160,7 @@ Class Product{
         }
  
         if(!isset($_SESSION['error']) || $_SESSION['error'] == ""){ 
-            $sqlUpdateProduct = "UPDATE products SET " . $sqlArguments . $img_string . " WHERE id = :id"; 
+            $sqlUpdateProduct = "UPDATE tb_products SET " . $sqlArguments . $img_string . " WHERE id = :id"; 
             $check = $db->write($sqlUpdateProduct, $arr);
         
             if($check){
@@ -175,7 +175,7 @@ Class Product{
     public function delete($id){ 
         $db = Database::newInstance();
         $id = (int)$id;
-        $sqlDeleteProduct = "DELETE FROM products WHERE id = '$id' LIMIT 1";
+        $sqlDeleteProduct = "DELETE FROM tb_products WHERE id = '$id' LIMIT 1";
         return $db->write($sqlDeleteProduct);
     }
 

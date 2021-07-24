@@ -23,7 +23,7 @@ Class Admin extends Controller{
         }
 
         $db = Database::newInstance();
-        $categories = $db->read("SELECT * FROM categories ORDER BY category ASC");
+        $categories = $db->read("SELECT * FROM tb_categories ORDER BY category ASC");
 
         $category = $this->load_model("Category");
         $tableRows = $category->make_table($categories);
@@ -49,15 +49,15 @@ Class Admin extends Controller{
         }
 
         $db = Database::newInstance();
-        $products = $db->read("SELECT * FROM products ORDER BY description ASC");
+        $products = $db->read("SELECT * FROM tb_products ORDER BY description ASC");
         $product = $this->load_model("Product");
-        $categories = $db->read("SELECT * FROM categories where status = 1 ORDER BY category ASC");
+        $categories = $db->read("SELECT * FROM tb_categories where status = 1 ORDER BY category ASC");
         $category = $this->load_model("Category");
 
         $tableRows = $product->make_table($products, $category);
 
         $selectCategories = $category->make_select($categories);
-        $allCategories = $db->read("SELECT * FROM categories ORDER BY category ASC");
+        $allCategories = $db->read("SELECT * FROM tb_categories ORDER BY category ASC");
         $selectEditCategories = $category->make_select_edit_product($allCategories);
         $data['dropdownEditCategories'] = $selectEditCategories;
 
@@ -77,9 +77,9 @@ Class Admin extends Controller{
         }
 
         $db = Database::newInstance();
-        $suppliers = $db->read("SELECT * FROM suppliers ORDER BY id ASC");
+        $suppliers = $db->read("SELECT * FROM tb_suppliers ORDER BY id ASC");
         $supplier = $this->load_model("Supplier"); 
-        $adresses = $db->read("SELECT * FROM address ORDER BY id ASC"); 
+        $adresses = $db->read("SELECT * FROM tb_address ORDER BY id ASC"); 
         $address = $this->load_model("Address");
 
         $tableRows = $supplier->make_table($suppliers, $address); 
@@ -98,9 +98,9 @@ Class Admin extends Controller{
         }
 
         $db = Database::newInstance();
-        $suppliers = $db->read("SELECT * FROM suppliers ORDER BY id ASC");
+        $suppliers = $db->read("SELECT * FROM tb_suppliers ORDER BY id ASC");
         $supplier = $this->load_model("Supplier"); 
-        $adresses = $db->read("SELECT * FROM address ORDER BY id ASC"); 
+        $adresses = $db->read("SELECT * FROM tb_address ORDER BY id ASC"); 
         $address = $this->load_model("Address");
 
         $tableRows = $supplier->make_table($suppliers, $address); 
@@ -119,12 +119,12 @@ Class Admin extends Controller{
         }
 
         $db = Database::newInstance();  
-        $products = $db->read("SELECT * FROM products LIMIT 24");
+        $products = $db->read("SELECT * FROM tb_products LIMIT 24");
         $product = $this->load_model("Product");
-        $categories = $db->read("SELECT * FROM categories where status = 1 ORDER BY category ASC");
+        $categories = $db->read("SELECT * FROM tb_categories where status = 1 ORDER BY category ASC");
         $category = $this->load_model("Category");
 
-        $stock_quantity = $db->read("SELECT SUM(quantity) as stock_quantity FROM products LIMIT 1"); 
+        $stock_quantity = $db->read("SELECT SUM(quantity) as stock_quantity FROM tb_products LIMIT 1"); 
         $tableRows = $product->make_table($products, $category); 
 
         $data['tableRows'] = $tableRows; 
@@ -143,7 +143,7 @@ Class Admin extends Controller{
         }
 
         $db = Database::newInstance(); 
-        $users = $db->read("SELECT * FROM users ORDER BY id ASC"); 
+        $users = $db->read("SELECT * FROM tb_users ORDER BY id ASC"); 
         $user = $this->load_model("User");
 
         $tableRows = $user->make_table($users); 
@@ -162,9 +162,9 @@ Class Admin extends Controller{
         }
 
         $db = Database::newInstance();
-        $products = $db->read("SELECT * FROM products ORDER BY id ASC");
+        $products = $db->read("SELECT * FROM tb_products ORDER BY id ASC");
         $product = $this->load_model("Product"); 
-        $categories = $db->read("SELECT * FROM categories ORDER BY id ASC"); 
+        $categories = $db->read("SELECT * FROM tb_categories ORDER BY id ASC"); 
         $category = $this->load_model("Category");
 
         //$tableRows = $product->make_table($products, $category); 

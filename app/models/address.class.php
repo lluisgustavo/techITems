@@ -34,7 +34,7 @@ Class Address{
         }
 
         $arr_slug['slug'] = $arr['slug'];  
-        $sqlInsertProduct = "SELECT * from products WHERE slug = :slug";
+        $sqlInsertProduct = "SELECT * FROM tb_products WHERE slug = :slug";
         $check = $db->read($sqlInsertProduct, $arr_slug);
 
         if($check){
@@ -85,7 +85,7 @@ Class Address{
 
     public function readAll($data = ""){
         $db = Database::newInstance();
-        return $db->read("SELECT * FROM address ORDER BY id ASC");
+        return $db->read("SELECT * FROM tb_address ORDER BY id ASC");
     }
 
     public function update($data){
@@ -118,7 +118,7 @@ Class Address{
         }
        
         $arr_slug['slug'] = $arr['slug'];
-        $sqlCheckSlugExists = "SELECT * from products WHERE slug = ':slug'"; 
+        $sqlCheckSlugExists = "SELECT * FROM tb_products WHERE slug = ':slug'"; 
         $check = $db->read($sqlCheckSlugExists, $arr_slug);
 
         if($check){
@@ -164,7 +164,7 @@ Class Address{
         }
  
         if(!isset($_SESSION['error']) || $_SESSION['error'] == ""){ 
-            $sqlUpdateProduct = "UPDATE products SET " . $sqlArguments . $img_string . " WHERE id = :id"; 
+            $sqlUpdateProduct = "UPDATE tb_products SET " . $sqlArguments . $img_string . " WHERE id = :id"; 
             $check = $db->write($sqlUpdateProduct, $arr);
         
             if($check){
@@ -179,7 +179,7 @@ Class Address{
     public function delete($id){ 
         $db = Database::newInstance();
         $id = (int)$id;
-        $sqlDeleteProduct = "DELETE FROM products WHERE id = '$id' LIMIT 1";
+        $sqlDeleteProduct = "DELETE FROM tb_products WHERE id = '$id' LIMIT 1";
         return $db->write($sqlDeleteProduct);
     }
 
@@ -188,7 +188,7 @@ Class Address{
         $db = Database::newInstance(); 
 
         $arr['id'] = $id;
-        $sqlGetOne = "SELECT * FROM address WHERE id = :id LIMIT 1";
+        $sqlGetOne = "SELECT * FROM tb_address WHERE id = :id LIMIT 1";
         $address = $db->read($sqlGetOne, $arr);  
         if($address) return $address[0];
         return ""; 

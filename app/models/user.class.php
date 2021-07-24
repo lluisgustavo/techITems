@@ -32,7 +32,7 @@ Class User{
         }
 
         //verificar se e-mail já está cadastrado
-        $sqlEmail = "SELECT * FROM users WHERE email = :email LIMIT 1";
+        $sqlEmail = "SELECT * FROM tb_users WHERE email = :email LIMIT 1";
         $arr['email'] = $data['email'];
         $checkEmail = $db->read($sqlEmail, $arr);
         
@@ -44,7 +44,7 @@ Class User{
         $arr = false;
         $data['url_address'] = $this->get_random_string_max(60);
 
-        $sqlUrl = "SELECT * FROM users WHERE url_address = :url_address LIMIT 1";
+        $sqlUrl = "SELECT * FROM tb_users WHERE url_address = :url_address LIMIT 1";
         $arr['url_address'] = $data['url_address'];
         $checkUrl = $db->read($sqlUrl, $arr);
         
@@ -90,7 +90,7 @@ Class User{
 
         if($this->error == ""){ 
             //confirmar senha
-            $sqlUser = "SELECT * FROM users WHERE email = :email LIMIT 1";
+            $sqlUser = "SELECT * FROM tb_users WHERE email = :email LIMIT 1";
             $arr['email'] = $data['email'];
             $databaseUser = $db->read($sqlUser, $arr);
             if(is_array($databaseUser) && password_verify($data['password'], $databaseUser[0]->password)) {
@@ -141,7 +141,7 @@ Class User{
         $db = Database::getInstance();
         if(count($allowed) > 0){
             $arr['url_address'] = $_SESSION['user_url'];
-            $sqlUser = "SELECT * FROM users WHERE url_address = :url_address LIMIT 1";
+            $sqlUser = "SELECT * FROM tb_users WHERE url_address = :url_address LIMIT 1";
             $result = $db->read($sqlUser, $arr);
 
             if(is_array($result)){
@@ -158,7 +158,7 @@ Class User{
             if(isset($_SESSION['user_url'])){
                 $arr = false;
                 $arr['url_address'] = $_SESSION['user_url'];
-                $query = "SELECT * FROM users WHERE url_address = :url_address LIMIT 1";
+                $query = "SELECT * FROM tb_users WHERE url_address = :url_address LIMIT 1";
                 $result = $db->read($query, $arr);
 
                 if(is_array($result)){

@@ -46,7 +46,7 @@ Class Supplier{
         $arrCheckAddress['complement'] = ucwords($data->complement);
 
         if(!isset($_SESSION['error']) || $_SESSION['error'] == ""){
-            $sqlCheckAddress = "SELECT * FROM address WHERE street = :street AND number = :number AND complement = :complement AND city = :city LIMIT 1";
+            $sqlCheckAddress = "SELECT * FROM tb_address WHERE street = :street AND number = :number AND complement = :complement AND city = :city LIMIT 1";
             $checkAddress = $db->read($sqlCheckAddress, $arrCheckAddress);
 
             if(isset($checkAddress) && !empty($checkAddress)){  
@@ -78,7 +78,7 @@ Class Supplier{
 
     public function readAll($data = ""){
         $db = Database::newInstance();
-        return $db->read("SELECT * FROM suppliers ORDER BY supplier_name ASC");
+        return $db->read("SELECT * FROM tb_suppliers ORDER BY supplier_name ASC");
     }
 
     public function getOne($id){
@@ -86,7 +86,7 @@ Class Supplier{
         $db = Database::newInstance(); 
 
         $arr['id'] = $id;
-        $sqlGetOne = "SELECT * FROM suppliers WHERE id = :id LIMIT 1";
+        $sqlGetOne = "SELECT * FROM tb_suppliers WHERE id = :id LIMIT 1";
         $category = $db->read($sqlGetOne, $arr);  
         if($category) return $category[0];
         return "";
@@ -135,10 +135,10 @@ Class Supplier{
         }  
 
         if(!isset($_SESSION['error']) || $_SESSION['error'] == ""){
-            $sqlUpdateAddress = "UPDATE address SET street = :street, number = :number, complement = :complement, district = :district, city = :city, state = :state, postalcode = :postalcode, country = :country, ref = :ref WHERE id = :address_id";  
+            $sqlUpdateAddress = "UPDATE tb_address SET street = :street, number = :number, complement = :complement, district = :district, city = :city, state = :state, postalcode = :postalcode, country = :country, ref = :ref WHERE id = :address_id";  
             $db->write($sqlUpdateAddress, $arr_address); 
              
-            $sqlSupplier = "UPDATE suppliers SET supplier_name = :supplier_name, CNPJ = :CNPJ, contact_name = :contact_name , contact_mail = :contact_mail, contact_phone = :contact_phone WHERE id = :id";
+            $sqlSupplier = "UPDATE tb_suppliers SET supplier_name = :supplier_name, CNPJ = :CNPJ, contact_name = :contact_name , contact_mail = :contact_mail, contact_phone = :contact_phone WHERE id = :id";
  
             $check = $db->write($sqlSupplier, $arr_supplier); 
 
@@ -153,7 +153,7 @@ Class Supplier{
     public function delete($id){
         $db = Database::newInstance();
         $arr['id'] = (int)$id;
-        $sqlDeleteCategory = "DELETE FROM suppliers WHERE id = :id LIMIT 1"; 
+        $sqlDeleteCategory = "DELETE FROM tb_suppliers WHERE id = :id LIMIT 1"; 
         return $db->write($sqlDeleteCategory, $arr);
     }
 

@@ -48,7 +48,7 @@ Class AjaxSupplier extends Controller{
                 echo json_encode($arr);
             } else if($data->data_type == "toggle-status"){
                 $sqlArr['id'] = $data->id;
-                $sqlStatusUpdate = "UPDATE suppliers SET status = IF(status = 1, 0, 1) WHERE id = :id LIMIT 1";
+                $sqlStatusUpdate = "UPDATE tb_suppliers SET status = IF(status = 1, 0, 1) WHERE id = :id LIMIT 1";
                 $db->write($sqlStatusUpdate, $sqlArr);
                 
                 $arr['message_type'] = "info";

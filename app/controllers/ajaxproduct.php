@@ -51,7 +51,7 @@ Class AjaxProduct extends Controller{
                 echo 'a';//json_encode($arr);
             } else if($data->data_type == "toggle-status"){
                 $id = $data->id;
-                $sqlStatusUpdate = "UPDATE products SET status = IF(status = 1, 0, 1) WHERE id = '$id' LIMIT 1";
+                $sqlStatusUpdate = "UPDATE tb_products SET status = IF(status = 1, 0, 1) WHERE id = '$id' LIMIT 1";
                 $db->write($sqlStatusUpdate);
                 
                 $arr['message_type'] = "info";

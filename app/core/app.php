@@ -6,9 +6,8 @@ Class App{
     protected $params;
 
     public function __construct(){ 
-        $this->hsts(); 
-        $url = $this->parseURL();
-  
+        //$this->hsts(); 
+        $url = $this->parseURL();  
         if(file_exists("../app/controllers/" . strtolower($url[0]) . ".php")){
             $this->controller = strtolower($url[0]); 
             unset($url[0]);

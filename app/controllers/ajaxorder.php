@@ -42,7 +42,7 @@ Class AjaxOrder extends Controller{
                 echo json_encode($arr);
             } else if($data->data_type == "toggle-status"){
                 $id = $data->id;
-                $sqlStatusUpdate = "UPDATE categories SET status = IF(status = 1, 0, 1) WHERE id = '$id' LIMIT 1";
+                $sqlStatusUpdate = "UPDATE tb_categories SET status = IF(status = 1, 0, 1) WHERE id = '$id' LIMIT 1";
                 $db->write($sqlStatusUpdate);
                 
                 $arr['message_type'] = "info";

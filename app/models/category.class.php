@@ -26,7 +26,7 @@ Class Category{
 
     public function readAll($data = ""){
         $db = Database::newInstance();
-        return $db->read("SELECT * FROM categories ORDER BY category ASC");
+        return $db->read("SELECT * FROM tb_categories ORDER BY category ASC");
     }
 
     public function getOne($id){
@@ -34,7 +34,7 @@ Class Category{
         $db = Database::newInstance(); 
 
         $arr['id'] = $id;
-        $sqlGetOne = "SELECT * FROM categories WHERE id = :id LIMIT 1";
+        $sqlGetOne = "SELECT * FROM tb_categories WHERE id = :id LIMIT 1";
         $category = $db->read($sqlGetOne, $arr);  
         if($category) return $category[0];
         return ""; 
@@ -46,14 +46,14 @@ Class Category{
         $arr['category'] = $data->category;
         $arr['parent'] = $data->parent; 
   
-        $sqlUpdateCategory = "UPDATE categories SET category = :category, parent = :parent WHERE id = :id";
+        $sqlUpdateCategory = "UPDATE tb_categories SET category = :category, parent = :parent WHERE id = :id";
         $db->write($sqlUpdateCategory, $arr);
     }
 
     public function delete($id){
         $db = Database::newInstance();
         $id = (int)$id;
-        $sqlDeleteCategory = "DELETE FROM categories WHERE id = '$id' LIMIT 1";
+        $sqlDeleteCategory = "DELETE FROM tb_categories WHERE id = '$id' LIMIT 1";
         return $db->write($sqlDeleteCategory);
     }
 
