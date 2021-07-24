@@ -137,7 +137,7 @@
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-lg-4 text-center mb-5 mb-lg-0">
                         <i class="bi-phone fs-2 mb-3 text-muted"></i>
-                        <div>+55 (41) 3123-4567</div>
+                        <div>+55 (41) 1234-5678</div>
                     </div>
                 </div>
             </div>
