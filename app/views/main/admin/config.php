@@ -9,7 +9,7 @@
 			<div class="col-sm-4 mr-5">
 				<form method="POST" class="card p-4">
 					<div class="image d-flex flex-column justify-content-center align-items-center">
-						<img id="profile-image-holder" class="m-2" src="<?= ASSETS . THEME . $user_data->avatar?>" height="100" width="100" />
+						<img id="profile-image-holder" class="m-2" src="<?= ROOT . $user_data->avatar?>" height="100" width="100" />
 						<div class="col mb-2">
 							<input type="hidden" value="<?= $user_data->id ?>" id="id-editar-imagem" name="id-editar-imagem">
 							<input onchange="DisplayImage(this.files[0], 'edit-image-holder')" name="editar-imagem-perfil" id="editar-imagem-perfil" type="file" class="form-control">
@@ -20,31 +20,26 @@
 						<h4 class="name mt-3"><?=$user_data->name ?></h4>  
 						Entrou em <?= date_format(new DateTime($user_data->created_at), "d/m/Y") ?>  
 						<div class="mt-3">
-							<button onclick="toggleActive(this); return false" type="submit" class="btn btn-danger">Deletar Conta</button>
+							<button onclick="toggleActive(<?= $user_data->id ?>); return false" type="submit" class="btn btn-danger">Deletar Conta</button>
 						</div> 
 					</div>
 				</form>
 			</div>
 			<div class="col-sm-8">
-				<form class="card p-4"> 
+				<form method="POST" class="card p-4"> 
 					<div class="form-group row">
-						<label for="email-config" class="col-sm-2 col-form-label">Email</label>
-						<div class="col-sm-10">
-						<input type="text" readonly class="form-control-plaintext" id="email-config" value="<?= $user_data->email ?>">
+						<label for="email-config" class="col-sm-3 col-form-label">Email</label>
+						<div class="col-sm-9">
+							<input type="text" readonly class="form-control-plaintext" name="email-usuario" id="email-config" value="<?= $user_data->email ?>">
 						</div>
 					</div>
 					<div class="form-group row">
-						<label for="senha-config" class="col-sm-2 col-form-label">Senha</label>
-						<div class="col-sm-10">
-						<input type="password" class="form-control" id="inputPassword" placeholder="Senha">
+						<label for="senha-config" class="col-sm-3 col-form-label">Senha</label>
+						<div class="col-sm-9">
+							<input type="password" class="form-control" id="senha-usuario" name="senha-usuario" placeholder="Senha">
 						</div>
-					</div>
-					
-					<div class="form-group row justify-content-end">
-						<div class="col-auto mt-2">
-							<button class="btn btn-primary" type="submit">Alterar Senha</button>
-						</div>
-					</div>
+					</div> 
+					<button onclick="updatePass(<?= $user_data->id ?>); return false" type="submit" class="mt-2 align-self-end col-4 btn btn-primary">Alterar Senha</button>
 				</form>
 			</div>
 		</div>  
@@ -148,6 +143,20 @@
 		});   
 	}
  
+	function toggleActive(id){
+		sendDataFiles({
+			data_type: 'toggle-active',
+			id: id
+		});
+	}
+
+	function updatePass(id){ 
+		sendDataFiles({
+			data_type: 'update-pass',
+			id: id
+		});
+	}
+		
 	function sendDataFiles(data = {}){
  		var ajax = new XMLHttpRequest();
  
@@ -159,8 +168,7 @@
 
 		ajax.open("POST","<?=ROOT?>ajaxuser", true);
 		ajax.send(data);
-	}
-
+	} 
 
 	function handleResult(result){
 		if(result != ""){      

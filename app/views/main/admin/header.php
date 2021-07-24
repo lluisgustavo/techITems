@@ -39,16 +39,16 @@
         </p>
         <![endif]-->
 
-        <!-- Preloader 
-        <div class="preloader">
+        <!-- Preloader -->
+        <!--<div class="preloader">
             <div class="preloader-inner">
                 <div class="preloader-icon">
                     <span></span>
                     <span></span>
                 </div>
             </div>
-        </div>
-        /End Preloader -->
+        </div>-->
+        <!-- /End Preloader -->
 
         <section id="container" class="min-vh-100 d-flex flex-column h-100">
             <!-- **********************************************************************************************************************************************************
