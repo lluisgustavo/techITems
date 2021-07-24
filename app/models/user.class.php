@@ -54,10 +54,11 @@ Class User{
 
         if($this->error == ""){ 
             $data['rank'] = "customer";
-            $data['date'] = date("Y-m-d H:i:s");
+            $data['created_at'] = date("Y-m-d H:i:s");
+            $data['avatar'] = 'images/avatar/customer.png';
             $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
 
-            $query = "INSERT INTO users (url_address, name, email, password, date, rank) values (:url_address, :username, :email, :password, :date, :rank)";
+            $query = "INSERT INTO users (url_address, name, email, password, rank, avatar, created_at) values (:url_address, :username, :email, :password, :rank, :avatar, :created_at)";
         
             $result = $db->write($query, $data);
 
@@ -115,8 +116,7 @@ Class User{
        die;
     }
 
-    public function getUser($user){
-
+    public function getUser($user){ 
     }
 
     private function get_random_string_max($length){
@@ -174,4 +174,39 @@ Class User{
 
         return false;
     } 
+
+    public function update($data, $files){
+        $db = Database::newInstance();
+        $arr['id'] = $data->id;
+        
+        $size = (5 * 1024 * 1024);
+        $allowed[] = "image/jpeg";
+        $allowed[] = "image/png";
+        $allowed[] = "image/gif";
+        $folder = "uploads/avatar/";
+        $image = $_FILES['image'];
+ 
+        if(!file_exists($folder)){
+            mkdir($folder, 0777, true);
+        }
+ 
+        if($image['error'] == 0 && in_array($image['type'], $allowed)){
+            if($image['size'] < $size){
+                $destination = $folder . $image['name'];
+                move_uploaded_file($image['tmp_name'], $destination);
+                $arr['avatar'] = $destination;  
+            } else {
+                $_SESSION['error'] .= "Imagem " . $key .  " é maior do que o tamanho permitido.";
+            }
+        } 
+
+        if(!isset($_SESSION['error']) || $_SESSION['error'] == ""){ 
+            $sqlUpdateUser = "UPDATE tb_users SET avatar = :avatar WHERE id = :id"; 
+            $check = $db->write($sqlUpdateUser, $arr);
+        
+            if($check){
+                return true;
+            }
+        }
+    }
 }

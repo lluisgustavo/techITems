@@ -12,10 +12,10 @@ Class AjaxUser extends Controller{
  
         if(is_object($data) && isset($data->data_type)){
             $db = Database::newInstance();
-            $user = $this->load_model('Usre'); 
+            $user = $this->load_model('User'); 
 
             if($data->data_type == "edit-image"){
-                $check = $user->create($data, $_FILES, $imageClass); 
+                $check = $user->update($data, $_FILES); 
 
                 if(isset($_SESSION['error']) && $_SESSION['error'] != ""){
                     $arr['message'] = $_SESSION['error'];
@@ -24,7 +24,7 @@ Class AjaxUser extends Controller{
                     $arr['data'] = "";
                     $arr['data_type'] = "edit-image";
 
-                    echo json_encode($arr);
+                    echo json_encode($arr); 
                 } else {
                     $arr['message'] = "Imagem editada.";
                     $arr['message_type'] = "info";

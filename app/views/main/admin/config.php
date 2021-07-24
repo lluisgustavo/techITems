@@ -7,22 +7,21 @@
 	<div class="container min-h-100">
 		<div class="row justify-content-center"> 
 			<div class="col-sm-4 mr-5">
-				<form class="card p-4">
+				<form method="POST" class="card p-4">
 					<div class="image d-flex flex-column justify-content-center align-items-center">
-						<img id="profile-image-holder" class="m-2" src="<?= ASSETS . THEME . $data['user_data']->avatar?>" height="100" width="100" />
+						<img id="profile-image-holder" class="m-2" src="<?= ASSETS . THEME . $user_data->avatar?>" height="100" width="100" />
 						<div class="col mb-2">
+							<input type="hidden" value="<?= $user_data->id ?>" id="id-editar-imagem" name="id-editar-imagem">
 							<input onchange="DisplayImage(this.files[0], 'edit-image-holder')" name="editar-imagem-perfil" id="editar-imagem-perfil" type="file" class="form-control">
 						</div>
 						<div class="col">
 							<button onclick="collectImageData(this); return false" type="submit" class="btn btn-primary">Alterar Imagem</button>
 						</div>
-						<h4 class="name mt-3"><?=$data['user_data']->name ?></h4> 
-						<div class="px-2 rounded mt-2"> 
-							<span class="join">Entrou em <?= $data['user_data']->created_at ?></span>
-						</div>
+						<h4 class="name mt-3"><?=$user_data->name ?></h4>  
+						Entrou em <?= date_format(new DateTime($user_data->created_at), "d/m/Y") ?>  
 						<div class="mt-3">
 							<button onclick="toggleActive(this); return false" type="submit" class="btn btn-danger">Deletar Conta</button>
-						</div>
+						</div> 
 					</div>
 				</form>
 			</div>
@@ -57,24 +56,16 @@
 		image.src = URL.createObjectURL(file); 
 	}  
  
-	function collectImageData(file){ 
-		sendData({
-			supplier_name: supplierName,
-			CNPJ: supplierCNPJ,
-			contact_name: supplierContact,
-			contact_mail: supplierEmail,
-			contact_phone: supplierPhone,
-			street: supplierAddressStreet,
-			number: supplierAddressNumber,
-			complement: supplierAddressComplement,
-			district: supplierAddressDistrict,
-			city: supplierAddressCity,
-			state: supplierAddressState,
-			postalcode: supplierAddressPC,
-			country: supplierAddressCountry,
-			ref: supplierAddressRef,
-			data_type: 'add-supplier'
-		});
+	function collectImageData(file){  
+		var id_imagem_perfil = document.querySelector("#id-editar-imagem");
+		var imagem = document.querySelector("#editar-imagem-perfil");
+		var data = new FormData(); 
+
+		data.append('id', id_imagem_perfil.value.trim()); 
+		data.append('image', imagem.files[0]); 
+		data.append('data_type', 'edit-image'); 
+
+		sendDataFiles(data);
 	}
 	
 	function collectEditData(element){
@@ -156,19 +147,20 @@
 			data_type: 'edit-supplier'
 		});   
 	}
-
-	function sendData(data = {}){
-		var ajax = new XMLHttpRequest();
-
+ 
+	function sendDataFiles(data = {}){
+ 		var ajax = new XMLHttpRequest();
+ 
 		ajax.addEventListener('readystatechange', function(){
-			if(ajax.readyState == 4 && ajax.status == 200){
-				handleResult(ajax.responseText);
+			if(ajax.readyState == 4 && ajax.status == 200){ 
+				handleResult(ajax.responseText); 
 			}
 		});
 
-		ajax.open("POST","<?=ROOT?>ajaxsupplier", true);
-		ajax.send(JSON.stringify(data));
+		ajax.open("POST","<?=ROOT?>ajaxuser", true);
+		ajax.send(data);
 	}
+
 
 	function handleResult(result){
 		if(result != ""){      
