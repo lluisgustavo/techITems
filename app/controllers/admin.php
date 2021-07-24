@@ -142,11 +142,10 @@ Class Admin extends Controller{
             $data['user_data'] = $user_data;
         }
 
-        $db = Database::newInstance(); 
-        $users = $db->read("SELECT * FROM tb_users ORDER BY id ASC"); 
-        $user = $this->load_model("User");
-
-        $tableRows = $user->make_table($users); 
+        $db = Database::getInstance();
+        var_dump($db); 
+        $users = $db->read("SELECT * FROM tb_users ORDER BY id ASC");  
+        $tableRows = $User->make_table($users); 
 
         $data['tableRows'] = $tableRows; 
         $data['page_title'] = "Usuários";
@@ -172,5 +171,19 @@ Class Admin extends Controller{
         $data['rows'] = $products;   
         $data['page_title'] = "Comprar";
         $this->view('admin/buy', $data);
+    }
+
+    public function config(){
+        $User = $this->load_model('User');
+        $user_data = $User->check_login(true, ["admin", "employee", "customer"]);
+
+        if(is_object($user_data)){
+            $data['user_data'] = $user_data;
+        }
+
+        $db = Database::newInstance();
+ 
+        $data['page_title'] = "Configurações";
+        $this->view('admin/config', $data);
     }
 }

@@ -39,7 +39,7 @@
         </p>
         <![endif]-->
 
-        <!-- Preloader -->
+        <!-- Preloader 
         <div class="preloader">
             <div class="preloader-inner">
                 <div class="preloader-icon">
@@ -48,7 +48,7 @@
                 </div>
             </div>
         </div>
-        <!-- /End Preloader -->
+        /End Preloader -->
 
         <section id="container" class="min-vh-100 d-flex flex-column h-100">
             <!-- **********************************************************************************************************************************************************

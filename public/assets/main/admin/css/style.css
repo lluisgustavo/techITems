@@ -123,3 +123,12 @@
 .buy-product-card{
     height: 150px;
 } 
+
+/* Form */
+
+.form-outline{
+  border: gray 1px solid;
+  border-radius: 10px;
+  padding: 5px;
+  margin: 5px;
+}

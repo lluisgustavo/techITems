@@ -49,8 +49,7 @@ Class Product{
         $folder = "uploads/";
 
         if(!file_exists($folder)){
-            mkdir($folder, 0777, true);
-
+            mkdir($folder, 0777, true); 
         }
 
         foreach($_FILES as $key => $img_row){
