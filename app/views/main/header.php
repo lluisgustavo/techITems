@@ -13,11 +13,7 @@
         <meta name="google-site-verification" content="mnuFStcEqTMz5HuLaJfHP0Yshjjf2ju4JiXFtIwiecM" />
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="<?= ASSETS . THEME ?>images/favicon.png"/>
-        <!-- Bootstrap Icons-->
-        <link type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-        <!-- Google fonts-->
-        <link type="text/css" href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css" />
+       
     </head>
     <body id="page-top">
         <!--[if lte IE 9]>
