@@ -10,7 +10,7 @@
 	  <div class="container h-100">
 		  	<?php if($user_data->rank == "admin"): ?>
 		  	<div class="row justify-content-around align-items-center">
-				<div class="col-3 text-center">
+				<div class="col-12 col-sm-6 col-md-3 text-center">
 					<a href="<?= ROOT ?>admin/suppliers">
 						<button class="btn btn-primary btn-lg size-btn"> 
 							<i class="fa-2x fa fa-people-arrows"></i>
@@ -18,7 +18,7 @@
 						</button>
 					</a>
 				</div> 
-				<div class="col-3 text-center">
+				<div class="col-12 col-sm-6 col-md-3 text-center">
 					<a href="<?= ROOT ?>admin/products">
 						<button class="btn btn-danger btn-lg size-btn"> 
 							<i class="fa-2x fa fa-barcode"></i>  
@@ -26,7 +26,7 @@
 						</button>
 					</a>
 				</div> 
-				<div class="col-3 text-center">
+				<div class="col-12 col-sm-6 col-md-3 text-center">
 					<a href="<?= ROOT ?>admin/categories">
 						<button class="btn btn-success btn-lg size-btn"> 
 							<i class="fa-2x fa fa-list-alt"></i>  
@@ -34,7 +34,7 @@
 						</button>
 					</a>
 				</div> 
-				<div class="col-3 text-center">
+				<div class="col-12 col-sm-6 col-md-3 text-center">
 					<a href="<?= ROOT ?>admin/users">
 						<button class="btn btn-warning btn-lg size-btn text-white"> 
 							<i class="fa-2x fa fa-reorder"></i>  
@@ -44,7 +44,7 @@
 				</div>
 			</div>   
 			<div class="row justify-content-around align-items-center">
-				<div class="col-3 text-center">
+				<div class="col-12 col-sm-6 col-md-3 text-center">
 					<a href="<?= ROOT ?>admin/users">
 						<button class="btn btn-outline-dark btn-lg size-btn"> 
 							<i class="fa-2x fas fa-boxes"></i>  
@@ -52,7 +52,7 @@
 						</button>
 					</a>
 				</div> 
-				<div class="col-3 text-center">
+				<div class="col-12 col-sm-6 col-md-3 text-center">
 					<a href="<?= ROOT ?>admin/users">
 						<button class="btn btn-info btn-lg size-btn text-white"> 
 							<i class="fa-2x fas fa-user"></i>  
@@ -60,7 +60,7 @@
 						</button>
 					</a>
 				</div> 
-				<div class="col-3 text-center">
+				<div class="col-12 col-sm-6 col-md-3 text-center">
 					<a href="<?= ROOT ?>admin/reports">
 						<button class="btn btn-dark btn-lg size-btn text-white"> 
 							<i class="fa-2x fas fa-scroll"></i>  
@@ -68,7 +68,7 @@
 						</button>
 					</a>
 				</div> 
-				<div class="col-3 text-center">
+				<div class="col-12 col-sm-6 col-md-3 text-center">
 					<a href="<?= ROOT ?>admin/analytics">
 						<button class="btn btn-secondary btn-lg size-btn text-white"> 
 							<i class="fa-2x fas fa-chart-line"></i>
@@ -79,7 +79,7 @@
 			</div>   
 		  	<?php else: ?>
 		  	<div class="row justify-content-around align-items-center">
-				<div class="col-3 text-center">
+				<div class="col-12 col-sm-6 col-md-3 text-center">
 					<a href="<?= ROOT ?>admin/buy">
 						<button class="btn btn-primary btn-lg size-btn"> 
 							<i class="fa-2x fas fa-shopping-bag"></i>

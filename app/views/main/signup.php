@@ -3,9 +3,9 @@
 <?php
 	$this->view("header", $data);  
 ?>
-	<div id="signup-page" class="">
-		<div class="container px-4 px-lg-5 h-100">
-			<div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center"> 
+	<div id="signup-page">
+		<div class="container px-4 px-lg-5">
+			<div class="row gx-4 gx-lg-5 align-items-center justify-content-center text-center"> 
 				<div class="col-sm-12 col-md-6">
 					<div class="card">
 						<div class="card-header">
