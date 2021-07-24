@@ -7,7 +7,7 @@
       MAIN CONTENT
       *********************************************************************************************************************************************************** -->
 
-	  <div class="container h-100">
+	  <div class="h-100">
 		  	<?php if($user_data->rank == "admin"): ?>
 		  	<div class="row justify-content-around align-items-center">
 				<div class="col-12 col-sm-6 col-md-3 text-center">

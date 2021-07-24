@@ -6,17 +6,11 @@
             
                 <p class="centered"><a href="profile.html"><img src="<?= ASSETS . THEME . $data['user_data']->avatar ?>" class="img-circle" width="60"></a></p>
                 <h5 class="centered"><?= $data['user_data']->name ?></h5>
-
-                <li class="sub-menu">
-                    <a href="<?= ROOT ?>">
-                        <i class="fa fa-home"></i>
-                        <span>Página Inicial</span>
-                    </a>
-                </li>
+ 
                 <?php if($data['user_data']->rank == 'admin'): ?>
                 <li class="sub-menu">
                     <a href="<?= ROOT ?>admin" >
-                        <i class="fa fa-desktop"></i>
+                        <i class="fa fa-home"></i>
                         <span>Início</span>
                     </a>
                 </li>
