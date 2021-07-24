@@ -2,20 +2,18 @@
 
 Class AjaxUser extends Controller{
     public function index(){
-	    
+	     
         if(count($_POST) > 0){
             $data = (object) $_POST;
         }else{
-            $data = file_get_contents("php://input");
-            $data = json_decode($data);
-        }  
-   
-        show($data);
+            $data = file_get_contents("php://input"); 
+            $data = json_decode($data); 
+        }   
+
         if(is_object($data) && isset($data->data_type)){
             $db = Database::newInstance();
             $user = $this->load_model('User'); 
-
-            show($user);
+ 
             if($data->data_type == "edit-image"){
                 $check = $user->update($data, $_FILES); 
 
@@ -35,12 +33,11 @@ Class AjaxUser extends Controller{
                     echo json_encode($arr);
                 }
             } else if($data->data_type == "update-pass"){
-                $arr['id'] = $data->id; 
+                $arr['id'] = $data->id;  
                 $arr['newPassword'] = password_hash($data->new_password, PASSWORD_DEFAULT);
 
-                $sqlPasswordUpdate = "UPDATE tb_user SET password = :newPassword WHERE id = :id LIMIT 1";
-                show($arr); show($sqlPasswordUpdate); die;
-                $db->write($sqlStatusUpdate, $arr);
+                $sqlPasswordUpdate = "UPDATE tb_users SET password = :newPassword WHERE id = :id LIMIT 1"; 
+                $db->write($sqlPasswordUpdate, $arr);
                 
                 $arr['message_type'] = "info";
                 $arr['data_type'] = "update-pass"; 

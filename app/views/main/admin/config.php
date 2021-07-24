@@ -39,7 +39,7 @@
 							<input type="password" class="form-control" id="senha-usuario" name="senha-usuario" placeholder="Senha">
 						</div>
 					</div> 
-					<button onclick="updatePass(<?= $user_data->id ?>); return false" type="submit" class="mt-2 align-self-end col-4 btn btn-primary">Alterar Senha</button>
+					<button onclick="updatePass(event, <?= $user_data->id ?>)" type="submit" class="mt-2 align-self-endcol-4 btn btn-primary">Alterar Senha</button>
 				</form>
 			</div>
 		</div>  
@@ -150,11 +150,18 @@
 		});
 	}
 
-	function updatePass(id){ 
-		sendDataFiles({
-			data_type: 'update-pass',
-			id: id
-		});
+	function updatePass(e, id){ 
+		e.preventDefault();
+
+		var password = document.querySelector('#senha-usuario');
+
+		var data = new FormData(); 
+
+		data.append('id', id); 
+		data.append('new_password', password.value.trim()); 
+		data.append('data_type', 'update-pass'); 
+
+		sendDataFiles(data);
 	}
 		
 	function sendDataFiles(data = {}){
