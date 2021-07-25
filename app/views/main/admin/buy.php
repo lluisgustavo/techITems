@@ -1,7 +1,7 @@
 
 <?php
 	$this->view("admin/header", $data);
-	$this->view("admin/sidebar", $data);
+	$this->view("admin/sidebar", $data); 
 ?>      
 	<div class="container h-100"> 
 		<div class="row justify-content-center align-items-center">
@@ -74,24 +74,26 @@ var root = '<?= ROOT ?>';
 function collectData(element){  
 	var arrayIds = [];
 	var arrayQtd = [];
-	$.each($('#cart_table [name^="product"]'), function(){   
-		console.log()
-		let id = $(this).val();  
-		arrayIds.push(id); 
+	$.each($('#cart_table tr'), function(){     
+		var inputs = $(this).find('input');
+
+		inputs.each(function(){ 
+			if($(this).prop('name').indexOf("product") == 0){
+				arrayIds.push($(this).val()); 
+			}
+
+			if($(this).prop('name').indexOf("qtdProduto") == 0){
+				arrayQtd.push($(this).val()); 
+			}
+		})  
 	}) 
-	$.each($('#cart_table [name^="qtdProduto"]'), function(){   
-		let qtd = $(this).val();  
-		arrayQtd.push(qtd); 
-	}) 
-	 
-	debugger;
-	sendData({
+
+	sendData({ 
+		customer_id: <?= $user_data->id_customer ?>,
 		product_IDs: arrayIds,
 		product_Qtd: arrayQtd,
 		data_type: 'add-order'
 	});
-
-	removeEveryRowCart();
 }
 
 function sendData(data = {}){
@@ -112,12 +114,11 @@ function handleResult(result){
 			console.log(result);
 			var obj = JSON.parse(result);
 			if(typeof(obj.data_type) != 'undefined'){
-				if(obj.data_type == "add-order"){
+				if(obj.data_type == "add-new"){
 					if(obj.message_type == 'info'){
 						alert(obj.message); 
 					
-						var table_body = document.querySelector("#table-body");
-						table_body.innerHTML = obj.data;
+						removeEveryRowCart(); 
 					} else {
 						alert(obj.message);
 					}    
@@ -135,13 +136,13 @@ function addToCart(element){
 	var item = `<tr id="row_produto_` + product_id +`"> 
 					<td>
 						<img style="max-height:100px" class="w-100 h-100" src="` + root + product_image + `" alt="">
+						<input class="form-control" name="product[` + product_id +`]" value="` + product_id +`" type="hidden">
 					</td>
 					<td>
 						` + product_name + `
 						<small><a class="text-muted" onclick="removeFromCart(` + product_id +`)"><i class="cursor-pointer fa fa-times"></i></a></small>
-						<div class="col-md-2">
-							<input class="form-control" name="product[` + product_id +`]" value="` + product_id +`" type="hidden">
-							<input onChange="totalVlrProduto(` + product_id +`, ` + product_price + `, this)" class="form-control" name="qtdProduto[` + product_id +`]" value="1" type="number" min="1" max="999" step="1">
+						<div class="col-2">
+							<input onChange="totalVlrProduto(` + product_id +`, ` + product_price + `, this)" class="col-2 form-control" name="qtdProduto[` + product_id +`]" value="1" type="number" min="1" max="999" step="1">
 						</div>
 					</td>
 					<td>
@@ -174,7 +175,11 @@ function removeFromCart(id){
 } 
 
 function removeEveryRowCart(){  
-	$('#cart_table').children( 'tr:not(:first)' ).remove();
+	$.each($('#cart_table [id^="row_produto_"]'), function(){
+		$(this).remove();
+	})
+
+	$('#vlrTotal').text(Number(0).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}));
 } 
 
 function calcTotal(){ 

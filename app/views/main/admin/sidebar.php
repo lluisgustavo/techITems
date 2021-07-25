@@ -121,6 +121,14 @@
                         <span>Comprar</span>
                     </a>
                 </li>
+                
+
+                <li class="sub-menu">
+                    <a href="<?= ROOT ?>admin/orders">
+                        <i class="fa fa-reorder"></i>
+                        <span>Meus pedidos</span>
+                    </a>
+                </li>
                 <?php endif; ?> 
 
                 <li class="sub-menu">

@@ -3,19 +3,29 @@
 Class Order{
     public function create($data = []){
         $db = Database::newInstance(); 
+        $order['customer_id'] = $data->customer_id;
+        $order['ordered_at'] = date("Y-m-d H:i:s");
+        
 
-        $arr['product_list'] = implode(', ', $data->product_IDs);
-        $arr['qty_product_list'] = implode(', ', $data->product_Qtd);
-        $arr['customer_id'] = $_SESSION['user_url']; 
-        $arr['ordered_at'] = date("Y-m-d H:i:s");
+        $sqlNewOrder = "INSERT INTO tb_orders (customer_id, ordered_at) VALUES (:customer_id, :ordered_at)";
+        $newOrder = $db->write($sqlNewOrder, $order);
 
-        $sqlCategory = "INSERT INTO orders (product_list, qty_product_list, customer_id, ordered_at) VALUES (:product_list, :qty_product_list, :customer_id, :ordered_at)";
-
-        $check = $db->write($sqlCategory, $arr);
-
-        if($check){
+        $sqlGetOrder = "SELECT LAST_INSERT_ID() as order_id";
+        $order_id = $db->read($sqlGetOrder);
+        $order_id = $order_id[0]->order_id;
+ 
+        $products_order['order_id'] = $order_id;
+        foreach($data->product_IDs as $keyPro => $product_id){
+            $products_order['product_id'] = $product_id;
+            $products_order['product_quantity'] = $data->product_Qtd[$keyPro];  
+            
+            $sqlNewProductOrder = "INSERT INTO tb_orders_products (order_id, product_id, product_quantity) VALUES (:order_id, :product_id, :product_quantity)";
+            $newProductOrder = $db->write($sqlNewProductOrder, $products_order);
+        }
+         
+        if($newProductOrder){
             return true;
-        } 
+        }
 
         return false;
     }

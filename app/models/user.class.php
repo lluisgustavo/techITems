@@ -187,8 +187,9 @@ Class User{
         $db = Database::getInstance();
         if(count($allowed) > 0){
             $arr['url_address'] = $_SESSION['user_url'];
-            $sqlUser = "SELECT * FROM tb_users AS u 
+            $sqlUser = "SELECT u.id as user_id, u.url_address, u.email, u.rank, u.avatar, u.created_at, p.id as id_person, p.address_id, p.name, p.CPF, p.phone, p.birth, c.id as id_customer, c.person_id FROM tb_users AS u 
                         INNER JOIN tb_people p ON u.id = p.user_id 
+                        INNER JOIN tb_customers c ON p.id = c.person_id 
                         WHERE url_address = :url_address
                         LIMIT 1";
 
