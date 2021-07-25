@@ -25,16 +25,16 @@
         </p>
         <![endif]-->
 
-        <!-- Preloader -->
-        <!--<div class="preloader">
+        <!-- Preloader 
+        <div class="preloader">
             <div class="preloader-inner">
                 <div class="preloader-icon">
                     <span></span>
                     <span></span>
                 </div>
             </div>
-        </div> -->
-        <!-- /End Preloader -->
+        </div>
+         /End Preloader -->
 
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
@@ -47,7 +47,6 @@
                         <li class="nav-item"><a class="fs-5 nav-link text-uppercase text-dark" href="#func">Funcionalidades</a></li>
                         <li class="nav-item"><a class="fs-5 nav-link text-uppercase text-dark" href="#contato">Contato</a></li>
                 
-                        
                         <?php if(isset($data['user_data'])): ?>
                         <li class="nav-item">  
                             <a class="fs-5 nav-link text-uppercase text-success" href="<?= ROOT ?>admin">

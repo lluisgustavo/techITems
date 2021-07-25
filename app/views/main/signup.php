@@ -3,49 +3,172 @@
 <?php
 	$this->view("header", $data);  
 ?>
-	<div id="signup-page">
-		<div class="container px-4 px-lg-5">
-			<div class="row gx-4 gx-lg-5 align-items-center justify-content-center text-center"> 
-				<div class="col-sm-12 col-md-6">
-					<div class="card">
-						<div class="card-header">
-							<h2>Entre na sua conta</h2>
-						</div>
-						<div class="card-body"> 
-							<div class="row justify-content-center text-center">
-								<span style="font-size: 1.5em; font-weight: bold; color: red"><?php check_error() ?></span>
-								<div class="col-md-4" style="display: inline-block; float: none">
-								</div>
-							</div> 
-							<form method="POST">
-								<div class="mb-3">
-									<label for="name">Nome</label>
-									<input class="form-control" name="name" value="<?= isset($_POST['name']) ? $_POST['name'] : ''?>" type="text" placeholder="Name"/>
-								</div>
-								<div class="mb-3">
-									<label for="email" class="form-label">E-mail</label>
-									<input class="form-control" name="email" value="<?= isset($_POST['email']) ? $_POST['email'] : ''?>" type="email" placeholder="Email Address"/>
-									<div id="emailHelp" class="form-text">Não compartilharemos seu e-mail com ninguém.</div>
-								</div>
-								<div class="mb-3">
-									<label for="password" class="form-label">Senha</label>
-									<input class="form-control" name="password" type="password" placeholder="Senha" />
-								</div>
-								<div class="mb-3">
-									<label for="password-retype" class="form-label">Confirme a senha</label>
-									<input class="form-control" name="password-retype" type="password" placeholder="Confirme a Senha" />
-								</div> 
-								<button type="submit" class="btn btn-primary mb-3">Entrar</button>
-							</form>  
-						</div>
-						<div class="card-footer">
-							<p>Não tem uma conta? <a href="<?= ROOT ?>signup">Registre-se</a>
-						</div>
+	<div id="signup-page" class="min-h-100"> 
+		<div class="container min-h-100">
+			<div class="row min-h-100 justify-content-center align-items-center">
+				<div class="mt-5"></div>
+				<div class="card mt-5">
+					<div class="card-header">
+						<h2>Registre-se</h2>
 					</div>
-				</div> 
+					<div class="card-body">
+						<div class="row justify-content-center text-center">
+							<span style="font-size: 1.5em; font-weight: bold; color: red"><?php check_error() ?></span>
+							<div class="col-md-4" style="display: inline-block; float: none">
+							</div>
+						</div> 
+						<form method="POST">
+							<div class="row justify-content-center">
+								<div class="col-md-6">
+									<h4>Conta</h4>
+									<div class="mb-3">
+										<label for="email" class="form-label">E-mail</label>
+										<input class="form-control" name="register-email" value="<?= isset($_POST['email']) ? $_POST['email'] : ''?>" type="email" placeholder="Email" required/>
+										<div id="emailHelp" class="form-text">Não compartilharemos seu e-mail com ninguém.</div>
+									</div>
+									<div class="mb-3">
+										<label for="password" class="form-label">Senha</label>
+										<input class="form-control" name="password" type="password" placeholder="Senha" required/>
+									</div>
+									<div class="mb-3">
+										<label for="password-retype" class="form-label">Confirme a senha</label>
+										<input class="form-control" name="password-retype" type="password" placeholder="Confirme a Senha" required/>
+									</div> 
+								</div>
+								<div class="col-md-6"> 
+									<h4>Dados Pessoais</h4>
+									<div class="row">
+										<div class="col-md-8 mb-3"> 
+											<input class="form-control" name="register-name" value="<?= isset($_POST['name']) ? $_POST['name'] : ''?>" type="text" placeholder="Nome" required/>
+										</div>
+										<div class="col-md-4 mb-3"> 
+											<input class="form-control" id="register-tel" name="register-tel" type="text" placeholder="Telefone" required/>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-4 mb-3"> 
+											<input class="form-control" id="register-CPF" name="register-CPF" type="text" placeholder="CPF" required/>
+										</div>
+										<div class="col-md-8 mb-3"> 
+											<input class="form-control" name="register-birth" value="" type="date" placeholder="Data de Nascimento" required/>
+										</div>
+									</div>
+									<h5>Endereço</h5>
+									<div class="row">
+										<div class="col-md-3 mb-3">  
+											<input onblur="pesquisacep(this.value)" class="form-control" id="register-CEP" name="register-CEP" type="text" placeholder="CEP" required/>
+										</div>
+										<div class="col-md-9 mb-3"> 
+											<input class="form-control" id="register-street" name="register-street" value="" type="text" placeholder="Nome da Rua" required/> 
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-3 mb-3"> 
+											<input class="form-control" id="register-number" name="register-number" type="text" placeholder="Número da casa" required/>
+										</div>
+										<div class="col-md-6 mb-3"> 
+											<input class="form-control" id="register-complement" name="register-complement" value="" type="email" placeholder="Complemento"/> 
+										</div>
+										<div class="col-md-3 mb-3"> 
+											<input class="form-control" id="register-district" name="register-district" type="text" placeholder="Bairro" required/>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-4 mb-3"> 
+											<input class="form-control" id="register-city" name="register-city" type="text" placeholder="Cidade" required/>
+										</div>
+										<div class="col-md-4 mb-3"> 
+											<input class="form-control" id="register-state" name="register-state" type="text" placeholder="Estado" required/>
+										</div> 
+										<div class="col-md-4 mb-3"> 
+											<input class="form-control" id="register-country" name="register-country" type="text" placeholder="País" required/>
+										</div>
+									</div> 
+									<div class="row"> 
+										<div class="col-md-12 mb-3"> 
+											<input class="form-control" id="register-ref" name="register-ref" type="text" placeholder="Referência"/>
+										</div>
+									</div> 
+								</div>
+							</div>		 
+							<button class="btn btn-primary justify-self-center" type="submit">Registrar</button>
+						</form>  
+					</div>
+				</div>
 			</div>
-		</div>  
+		</div> 
 	</div>	
+
+	<script>  
+	function limpa_formulário_cep() {
+            //Limpa valores do formulário de cep.
+            document.getElementById('register-street').value=("");
+            document.getElementById('register-district').value=("");
+            document.getElementById('register-city').value=("");
+            document.getElementById('register-state').value=("");
+            document.getElementById('register-country').value=("");
+    }
+
+    function meu_callback(conteudo) {
+        if (!("erro" in conteudo)) {
+            //Atualiza os campos com os valores.
+            document.getElementById('register-street').value=(conteudo.logradouro);
+            document.getElementById('register-district').value=(conteudo.bairro);
+            document.getElementById('register-city').value=(conteudo.localidade);
+            document.getElementById('register-state').value=(conteudo.uf);
+            document.getElementById('register-country').value= "Brasil";
+        } //end if.
+        else {
+            //CEP não Encontrado.
+            limpa_formulário_cep();
+            alert("CEP não encontrado.");
+        }
+    }
+        
+    function pesquisacep(valor) {
+
+        //Nova variável "cep" somente com dígitos.
+        var cep = valor.replace(/\D/g, '');
+
+        //Verifica se campo cep possui valor informado.
+        if (cep != "") {
+
+            //Expressão regular para validar o CEP.
+            var validacep = /^[0-9]{8}$/;
+
+            //Valida o formato do CEP.
+            if(validacep.test(cep)) {
+
+                //Preenche os campos com "..." enquanto consulta webservice.
+                document.getElementById('register-street').value="...";
+                document.getElementById('register-district').value="...";
+                document.getElementById('register-city').value="...";
+                document.getElementById('register-state').value="...";
+                document.getElementById('register-country').value="...";
+
+                //Cria um elemento javascript.
+                var script = document.createElement('script');
+
+                //Sincroniza com o callback.
+                script.src = 'https://viacep.com.br/ws/'+ cep + '/json/?callback=meu_callback';
+
+                //Insere script no documento e carrega o conteúdo.
+                document.body.appendChild(script);
+
+            } //end if.
+            else {
+                //cep é inválido.
+                limpa_formulário_cep();
+                alert("Formato de CEP inválido.");
+            }
+        } //end if.
+        else {
+            //cep sem valor, limpa formulário.
+            limpa_formulário_cep();
+        }
+    }; 
+</script>
+	</script>
 <?php
 	$this->view("footer");
 ?> 

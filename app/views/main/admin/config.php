@@ -41,7 +41,7 @@
 					</div> 
 					<button onclick="updatePass(event, <?= $user_data->id ?>)" type="submit" class="mt-2 align-self-endcol-4 btn btn-primary">Alterar Senha</button>
 				</form>
-			</div>
+			</div> 
 		</div>  
 	</div> 
 

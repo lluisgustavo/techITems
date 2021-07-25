@@ -75,6 +75,7 @@ function collectData(element){
 	var arrayIds = [];
 	var arrayQtd = [];
 	$.each($('#cart_table [name^="product"]'), function(){   
+		console.log()
 		let id = $(this).val();  
 		arrayIds.push(id); 
 	}) 
@@ -83,6 +84,7 @@ function collectData(element){
 		arrayQtd.push(qtd); 
 	}) 
 	 
+	debugger;
 	sendData({
 		product_IDs: arrayIds,
 		product_Qtd: arrayQtd,
@@ -107,7 +109,7 @@ function sendData(data = {}){
 
 function handleResult(result){
 		if(result != ""){      
-			//console.log(result);
+			console.log(result);
 			var obj = JSON.parse(result);
 			if(typeof(obj.data_type) != 'undefined'){
 				if(obj.data_type == "add-order"){
@@ -136,7 +138,7 @@ function addToCart(element){
 					</td>
 					<td>
 						` + product_name + `
-						<small><button class="btn btn-secondary" onclick="removeFromCart(` + product_id +`)">Remover</button></small>
+						<small><a class="text-muted" onclick="removeFromCart(` + product_id +`)"><i class="cursor-pointer fa fa-times"></i></a></small>
 						<div class="col-md-2">
 							<input class="form-control" name="product[` + product_id +`]" value="` + product_id +`" type="hidden">
 							<input onChange="totalVlrProduto(` + product_id +`, ` + product_price + `, this)" class="form-control" name="qtdProduto[` + product_id +`]" value="1" type="number" min="1" max="999" step="1">

@@ -5,35 +5,54 @@ Class User{
     
     public function signUp($POST){
         $data = array();
-        $db = Database::getInstance();
-        $data['username'] = trim($POST['name']);
-        $data['email'] = trim($POST['email']);
-        $data['password'] = trim($POST['password']);
+        $db = Database::getInstance(); 
+        $user['email'] = trim($POST['register-email']);
+        $user['password'] = trim($POST['password']);
         $passwordretype = trim($POST['password-retype']);
+        $person['name'] = trim($POST['register-name']);
+        $person['phone'] = trim($POST['register-tel']);
+        $person['CPF'] = trim($POST['register-CPF']);
+        $person['birth'] = trim($POST['register-birth']);
+        $address['postalcode'] = trim($POST['register-CEP']);
+        $address['street'] = trim($POST['register-street']);
+        $address['number'] = trim($POST['register-number']);
+
+        if($POST['register-complement']){
+            $address['complement'] = trim($POST['register-complement']);
+        } else {
+            $address['complement'] = "";
+        }
+
+        $address['district'] = trim($POST['register-district']);
+        $address['state'] = trim($POST['register-state']);
+        $address['city'] = trim($POST['register-city']);
+        $address['country'] = trim($POST['register-country']);
+
+        if($POST['register-ref']){
+            $address['ref'] = trim($POST['register-ref']);
+        } else {
+            $address['ref'] = "";
+        }
 
         $regex = '/^[^0-9][_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/';
 
-        if (empty($data['email']) || !preg_match($regex, $data['email'])) {
+        if (empty($user['email']) || !preg_match($regex, $user['email'])) {
             $this->error .= "Digite um e-mail válido <br>";
         }
 
         $regex = "/^[a-zA-Z]+$/";
 
-        if(empty($data['username']) || !preg_match($regex, $data['username'])){
-            $this->error .= "Digite um usuário válido <br>";
-        }
-
-        if($data['password'] !== $passwordretype){
+        if($user['password'] !== $passwordretype){
             $this->error .= "Senhas não são iguais <br>";
         }
 
-        if(strlen($data['password']) < 8){
+        if(strlen($user['password']) < 8){
             $this->error .= "Senha deve ter pelo menos 8 caracteres <br>";
         }
 
         //verificar se e-mail já está cadastrado
         $sqlEmail = "SELECT * FROM tb_users WHERE email = :email LIMIT 1";
-        $arr['email'] = $data['email'];
+        $arr['email'] = $user['email'];
         $checkEmail = $db->read($sqlEmail, $arr);
         
         if(is_array($checkEmail)){
@@ -42,30 +61,57 @@ Class User{
 
         //verificar se a url_address não existe
         $arr = false;
-        $data['url_address'] = $this->get_random_string_max(60);
+        $user['url_address'] = $this->get_random_string_max(60);
 
         $sqlUrl = "SELECT * FROM tb_users WHERE url_address = :url_address LIMIT 1";
-        $arr['url_address'] = $data['url_address'];
+        $arr['url_address'] = $user['url_address'];
         $checkUrl = $db->read($sqlUrl, $arr);
         
         if(is_array($checkEmail)){
-            $data['url_address'] = $this->get_random_string_max(60);
+            $user['url_address'] = $this->get_random_string_max(60);
         }
 
+        $arr = false;
+        //Criar o usuário -> criar o endereço da pessoa -> criar a pessoa -> criar um customer
         if($this->error == ""){ 
-            $data['rank'] = "customer";
-            $data['created_at'] = date("Y-m-d H:i:s");
-            $data['avatar'] = 'images/avatar/customer.png';
-            $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+            $user['rank'] = "customer";
+            $user['created_at'] = date("Y-m-d H:i:s");
+            $user['avatar'] = 'images/avatar/customer.png'; 
+            $user['password'] = password_hash($user['password'], PASSWORD_DEFAULT);
+ 
+            $query = "INSERT INTO tb_users (url_address, email, password, rank, avatar, created_at) values (:url_address, :email, :password, :rank, :avatar, :created_at)";
+            $result = $db->write($query, $user);
 
-            $query = "INSERT INTO users (url_address, name, email, password, rank, avatar, created_at) values (:url_address, :username, :email, :password, :rank, :avatar, :created_at)";
-        
-            $result = $db->write($query, $data);
+            $query = "SELECT LAST_INSERT_ID() AS user_id";
+            $user_id = $db->read($query);
+            $user_id = $user_id[0]->user_id;
+ 
+            $query = "INSERT INTO tb_address (street, number, complement, district, city, state, postalcode, country, ref) values (:street, :number, :complement, :district, :city, :state, :postalcode, :country, :ref)";
+            $result = $db->write($query, $address);
 
-            if($result){
+            $query = "SELECT LAST_INSERT_ID() AS address_id";
+            $address_id = $db->read($query);
+            $address_id = $address_id[0]->address_id;
+
+            $person['user_id'] = $user_id;
+            $person['address_id'] = $address_id;
+
+            $query = "INSERT INTO tb_people (user_id, address_id, name, CPF, phone, birth) values (:user_id, :address_id, :name, :CPF, :phone, :birth)";
+            $result = $db->write($query, $person);
+
+            $query = "SELECT LAST_INSERT_ID() AS person_id";
+            $person_id = $db->read($query);
+            $person_id = $person_id[0]->person_id;
+
+            $customer['person_id'] = $person_id;
+
+            $query = "INSERT INTO tb_customers (person_id) values (:person_id)";
+            $result = $db->write($query, $customer);
+
+            if($result){ 
                 header("Location: " . ROOT . "login");
                 die;
-            } 
+            }  
         }
 
         $_SESSION['error'] = $this->error;

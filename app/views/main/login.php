@@ -40,10 +40,6 @@
 				</div> 
 			</div>
 		</div> 
-		<section id="form"><!--form-->
-			<div class="container">
-			</div>
-		</section><!--/form-->
 	</div>	
 <?php
 	$this->view("footer");
