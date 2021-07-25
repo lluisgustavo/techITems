@@ -153,15 +153,17 @@
 	function updatePass(e, id){ 
 		e.preventDefault();
 
-		var password = document.querySelector('#senha-usuario');
+		if(confirm("Tem certeza que deseja mudar a sua senha?")){
+			var password = document.querySelector('#senha-usuario');
 
-		var data = new FormData(); 
+			var data = new FormData(); 
 
-		data.append('id', id); 
-		data.append('new_password', password.value.trim()); 
-		data.append('data_type', 'update-pass'); 
+			data.append('id', id); 
+			data.append('new_password', password.value.trim()); 
+			data.append('data_type', 'update-pass'); 
 
-		sendDataFiles(data);
+			sendDataFiles(data);
+		}
 	}
 		
 	function sendDataFiles(data = {}){

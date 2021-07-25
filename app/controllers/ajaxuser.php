@@ -35,14 +35,23 @@ Class AjaxUser extends Controller{
             } else if($data->data_type == "update-pass"){
                 $arr['id'] = $data->id;  
                 $arr['newPassword'] = password_hash($data->new_password, PASSWORD_DEFAULT);
-
-                $sqlPasswordUpdate = "UPDATE tb_users SET password = :newPassword WHERE id = :id LIMIT 1"; 
-                $db->write($sqlPasswordUpdate, $arr);
+                $arr['updated_at'] = date("Y-m-d H:i:s");
                 
-                $arr['message_type'] = "info";
-                $arr['data_type'] = "update-pass"; 
+                $sqlUser = "SELECT * FROM tb_users WHERE id = {$data->id} LIMIT 1";
+                $databaseUser = $db->read($sqlUser);  
 
-                echo json_encode($arr);
+                if(is_array($databaseUser) && password_verify($data->new_password, $databaseUser[0]->password)){
+                    $arr['message'] = 'A senha não pode ser a mesma.'; 
+                } else{ 
+                    $sqlPasswordUpdate = "UPDATE tb_users SET password = :newPassword, updated_at = :updated_at WHERE id = :id LIMIT 1"; 
+                    $db->write($sqlPasswordUpdate, $arr);
+                    
+                    $arr['message_type'] = "info";
+                    $arr['data_type'] = "update-pass"; 
+    
+                    echo json_encode($arr); 
+                }
+
             } else if($data->data_type == "toggle-active"){
                 $arr['id'] = $data->id;
 
