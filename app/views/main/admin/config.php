@@ -1,7 +1,7 @@
 
 <?php
 	$this->view("admin/header", $data);
-	$this->view("admin/sidebar", $data);
+	$this->view("admin/sidebar", $data);   
 ?>      
 
 	<div class="container min-h-100">
@@ -11,7 +11,7 @@
 					<div class="image d-flex flex-column justify-content-center align-items-center">
 						<img id="profile-image-holder" class="m-2" src="<?= ROOT . $user_data->avatar?>" height="100" width="100" />
 						<div class="col mb-2">
-							<input type="hidden" value="<?= $user_data->id ?>" id="id-editar-imagem" name="id-editar-imagem">
+							<input type="hidden" value="<?= $user_data->user_id ?>" id="id-editar-imagem" name="id-editar-imagem">
 							<input onchange="DisplayImage(this.files[0], 'edit-image-holder')" name="editar-imagem-perfil" id="editar-imagem-perfil" type="file" class="form-control">
 						</div>
 						<div class="col">
@@ -20,12 +20,39 @@
 						<h4 class="name mt-3"><?=$user_data->name ?></h4>  
 						Entrou em <?= date_format(new DateTime($user_data->created_at), "d/m/Y") ?>  
 						<div class="mt-3">
-							<button onclick="toggleActive(<?= $user_data->id ?>); return false" type="submit" class="btn btn-danger">Deletar Conta</button>
+							<button onclick="toggleActive(<?= $user_data->user_id ?>); return false" type="submit" class="btn btn-danger">Deletar Conta</button>
 						</div> 
 					</div>
 				</form>
 			</div>
 			<div class="col-sm-8">
+				<form method="POST" class="card p-4 mb-2"> 
+					<div class="form-group row">
+						<label for="name-config" class="col-sm-6 col-form-label">Nome</label>
+						<div class="col-sm-6 mb-2">
+							<input type="text" class="form-control" name="name-config" id="name-config" value="<?= $user_data->name ?>">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="cpf-config" class="col-sm-6 col-form-label">CPF</label>
+						<div class="col-sm-6 mb-2">
+							<input type="text" class="form-control" name="cpf-config" id="cpf-config" value="<?= $user_data->CPF ?>">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="tel-config" class="col-sm-6 col-form-label">Telefone</label>
+						<div class="col-sm-6 mb-2">
+							<input type="tel" class="form-control" name="tel-config" id="tel-config" value="<?= $user_data->phone ?>">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="birth-config" class="col-sm-6 col-form-label">Data de Nascimento</label>
+						<div class="col-sm-6 mb-2">
+							<input type="date" class="form-control" id="birth-config" name="birth-cofnig" value="<?= $user_data->birth ?>">
+						</div>
+					</div> 
+					<button onclick="updatePersonalData(event, <?= $user_data->user_id ?>)" type="submit" class="col-4 mt-2 align-self-end col-4 btn btn-primary">Alterar Dados</button>
+				</form>
 				<form method="POST" class="card p-4"> 
 					<div class="form-group row">
 						<label for="email-config" class="col-sm-3 col-form-label">Email</label>
@@ -39,7 +66,7 @@
 							<input type="password" class="form-control" id="senha-usuario" name="senha-usuario" placeholder="Senha">
 						</div>
 					</div> 
-					<button onclick="updatePass(event, <?= $user_data->id ?>)" type="submit" class="mt-2 align-self-endcol-4 btn btn-primary">Alterar Senha</button>
+					<button onclick="updatePass(event, <?= $user_data->user_id ?>)" type="submit" class="col-4 mt-2 align-self-end col-4 btn btn-primary">Alterar Senha</button>
 				</form>
 			</div> 
 		</div>  
@@ -150,21 +177,45 @@
 		});
 	}
 
-	function updatePass(e, id){ 
-		e.preventDefault();
+function updatePass(e, id){ 
+	e.preventDefault();
 
-		if(confirm("Tem certeza que deseja mudar a sua senha?")){
-			var password = document.querySelector('#senha-usuario');
+	if(confirm("Tem certeza que deseja mudar a sua senha?")){
+		var password = document.querySelector('#senha-usuario');
 
-			var data = new FormData(); 
+		var data = new FormData(); 
 
-			data.append('id', id); 
-			data.append('new_password', password.value.trim()); 
-			data.append('data_type', 'update-pass'); 
+		data.append('id', id); 
+		data.append('new_password', password.value.trim()); 
+		data.append('data_type', 'update-pass'); 
 
-			sendDataFiles(data);
-		}
+		sendDataFiles(data);
 	}
+}
+
+function updatePersonalData(e, id){ 
+	e.preventDefault();
+
+	if(confirm("Tem certeza que deseja mudar suas informações?")){
+		var name = document.querySelector('#name-config');
+		var cpf = document.querySelector('#cpf-config');
+		var phone = document.querySelector('#tel-config');
+		var birth = document.querySelector('#birth-config');
+
+		var data = new FormData(); 
+
+		data.append('id', id); 
+
+		if(name.value.trim() !== "") data.append('name', name.value.trim()); 
+		if(cpf.value.trim() !== "") data.append('cpf', cpf.value.trim()); 
+		if(phone.value.trim() !== "") data.append('phone', phone.value.trim()); 
+		if(birth.value.trim() !== "") data.append('birth', birth.value.trim()); 
+
+		data.append('data_type', 'update-personal'); 
+
+		sendDataFiles(data);
+	}
+}
 		
 	function sendDataFiles(data = {}){
  		var ajax = new XMLHttpRequest();

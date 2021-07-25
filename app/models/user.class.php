@@ -76,7 +76,7 @@ Class User{
         if($this->error == ""){ 
             $user['rank'] = "customer";
             $user['created_at'] = date("Y-m-d H:i:s");
-            $user['avatar'] = 'images/avatar/customer.png'; 
+            $user['avatar'] = 'uploads/avatar/customer.png'; 
             $user['password'] = password_hash($user['password'], PASSWORD_DEFAULT);
  
             $query = "INSERT INTO tb_users (url_address, email, password, rank, avatar, created_at) values (:url_address, :email, :password, :rank, :avatar, :created_at)";
@@ -187,9 +187,13 @@ Class User{
         $db = Database::getInstance();
         if(count($allowed) > 0){
             $arr['url_address'] = $_SESSION['user_url'];
-            $sqlUser = "SELECT * FROM tb_users WHERE url_address = :url_address LIMIT 1";
-            $result = $db->read($sqlUser, $arr);
+            $sqlUser = "SELECT * FROM tb_users AS u 
+                        INNER JOIN tb_people p ON u.id = p.user_id 
+                        WHERE url_address = :url_address
+                        LIMIT 1";
 
+            $result = $db->read($sqlUser, $arr); 
+ 
             if(is_array($result)){
                 $result = $result[0];
                 if(in_array($result->rank, $allowed)){
@@ -221,7 +225,7 @@ Class User{
         return false;
     } 
 
-    public function update($data, $files){
+    public function updateImage($data, $files){
         $db = Database::newInstance();
         $arr['id'] = $data->id;
         

@@ -15,7 +15,7 @@ Class AjaxUser extends Controller{
             $user = $this->load_model('User'); 
  
             if($data->data_type == "edit-image"){
-                $check = $user->update($data, $_FILES); 
+                $check = $user->updateImage($data, $_FILES); 
 
                 if(isset($_SESSION['error']) && $_SESSION['error'] != ""){
                     $arr['message'] = $_SESSION['error'];
@@ -55,12 +55,23 @@ Class AjaxUser extends Controller{
             } else if($data->data_type == "toggle-active"){
                 $arr['id'] = $data->id;
 
-                $sqlPasswordUpdate = "UPDATE tb_user SET active = IF(active = 1, 0, 1)  WHERE id = :id LIMIT 1";
+                $sqlPasswordUpdate = "UPDATE tb_users SET active = IF(active = 1, 0, 1)  WHERE id = :id LIMIT 1";
                 $db->write($sqlStatusUpdate, $arr);
                 
                 $arr['message_type'] = "info";
                 $arr['data_type'] = "toggle-active"; 
 
+                echo json_encode($arr);
+            } else if($data->data_type == "update-personal"){
+                $arr['user_id'] = $data->id;
+                $arr['name'] = $data->name;
+                $arr['CPF'] = $data->cpf;
+                $arr['phone'] = $data->phone;
+                $arr['birth'] = $data->birth;
+                
+                $sqlPersonUpdate = "UPDATE tb_people SET name = :name, CPF = :CPF, phone = :phone, birth = :birth WHERE user_id = :user_id";
+                $person = $db->write($sqlPersonUpdate, $arr); 
+ 
                 echo json_encode($arr);
             }
         }
