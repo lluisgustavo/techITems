@@ -1,6 +1,6 @@
 <?php
 
-Class AjaxCategory extends Controller{
+Class AjaxBrand extends Controller{
     public function index(){
         $data = file_get_contents("php://input");
         $data = json_decode($data);

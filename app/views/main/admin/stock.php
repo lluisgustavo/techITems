@@ -4,55 +4,14 @@
 	$this->view("admin/sidebar", $data);
 ?>      
 
-	<div class="container h-100">
-		<div class="row justify-content-center align-items-center">
-			<div class="col-md-3">
-				<div class="card">
-					<div class="card-header">
-						Estoque
-					</div>
-					<div class="card-body">  
-						<div class="row justify-content-center">
-							<img class="w-50 h-auto" src="<?= ASSETS . THEME ?>admin/images/stockicon.png" alt="">
-						</div>
-						<div class="row">
-							<div class="col-md-12">
-								O estoque tem <?= $stock_quantity ?> itens.
-							</div>
-							<div class="col-md-12">
-								<small>Confira alguns itens abaixo.</small>
-							</div>
-						</div> 
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="row justify-content-around  align-items-center">
-			<?php foreach($rows as $row): ?>
-				<div class="col-md-2"> 
-					<img class="w-100 h-auto" src="<?= ROOT . $row->image ?>" alt="">  
-				</div>
-			<?php endforeach; ?>
-		</div>
-	</div>
-	<!--<div class="row mt">
+	<div class="row mt">
 		<div class="col-md-12">
 			<div class="content-panel">
-				<table class="table table-striped table-advance table-hover">
-					<h4><i class="fa fa-angle-right"></i> Fornecedores
-					<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-new-supplier">
-						<i class="fa fa-plus"></i>Adicionar
-					</button></h4> 
-					<hr>
+				<table class="table table-striped table-advance table-hover"> 
 					<thead>
-						<tr>
-							<th><i class="fa fa-bullhorn"></i> ID</th>
-							<th><i class="fa fa-table"></i> Fornecedor</th>
-							<th><i class=" fa fa-edit"></i> Contato </th>
-							<th><i class=" fa fa-edit"></i> E-Mail </th>
-							<th><i class=" fa fa-edit"></i> Telefone </th>
-							<th><i class=" fa fa-edit"></i> Endereço </th>
-							<th><i class=" fa fa-edit"></i> Status</th> 
+						<tr> 
+							<th><i class="fa fa-bullhorn"></i> Produto</th>
+							<th><i class="fa fa-table"></i> Quantidade</th>  
 							<th><i class=" fa fa-edit"></i> Ação</th> 
 						</tr>
 					</thead>
@@ -64,7 +23,7 @@
 				</table>
 			</div>  
 		</div>
-	</div> /row -->
+	</div> <!-- /row -->
 
 <script type="text/javascript">       
 	function hideEditModal(){ 

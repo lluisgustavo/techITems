@@ -35,6 +35,13 @@
                 </li>
 
                 <li class="sub-menu">
+                    <a href="<?= ROOT ?>admin/brands">
+                        <i class="fa fa-copyright"></i>
+                        <span>Marcas</span>
+                    </a>
+                </li>
+
+                <li class="sub-menu">
                     <a href="<?= ROOT ?>admin/categories">
                         <i class="fa fa-list-alt"></i>
                         <span>Categorias</span>
@@ -84,6 +91,14 @@
                         <span>Produtos</span>
                     </a>
                 </li>
+
+                <li class="sub-menu">
+                    <a href="<?= ROOT ?>admin/brands">
+                        <i class="fa fa-copyright"></i>
+                        <span>Marcas</span>
+                    </a>
+                </li>
+
                 <li class="sub-menu">
                     <a href="<?= ROOT ?>admin/orders">
                         <i class="fa fa-reorder"></i>

@@ -23,18 +23,11 @@ Class Admin extends Controller{
         }
 
         $db = Database::newInstance();
-        $categories = $db->read("SELECT * FROM tb_categories ORDER BY category ASC");
+        $brands = $db->read("SELECT * FROM tb_brands ORDER BY id ASC");
 
-        $category = $this->load_model("Category");
-        $tableRows = $category->make_table($categories);
-
-        /*$selectCategories = $category->make_select_parent($categories);
-        $data['dropdownCategories'] = $selectCategories;
-
-        $selectEditCategories = $category->make_select_edit_category($categories);
-        $data['dropdownEditCategories'] = $selectEditCategories;
-
-        $data['tableRows'] = $tableRows;*/
+        $brand = $this->load_model("Brand");
+        $tableRows = $brand->make_table($brands); 
+        $data['tableRows'] = $tableRows;
 
         $data['page_title'] = "Marcas";
         $this->view('admin/brands', $data);
@@ -131,7 +124,9 @@ Class Admin extends Controller{
         $product = $this->load_model("Product");
 
         $db = Database::newInstance();
+    
         $arr['customer_id'] = $user_data->id_customer;
+
         if($user_data->rank === "customer"){  
             $sqlOrders = "SELECT o.*, op.product_id ,GROUP_CONCAT(CONCAT(p.title, ' x ', op.product_quantity) SEPARATOR '<br>') as products, 
                             SUM(p.price_sell * op.product_quantity)as total_value FROM tb_orders o
@@ -142,6 +137,7 @@ Class Admin extends Controller{
                             ORDER BY o.id ASC";
             $orders = $db->read($sqlOrders, $arr); 
             $tableRows = $order->make_table_customer($orders); 
+
         } else {
             $sqlOrders = "SELECT o.*, op.product_id ,GROUP_CONCAT(CONCAT(p.title, ' x ', op.product_quantity) SEPARATOR '<br>') as products, 
                             SUM(p.price_sell * op.product_quantity)as total_value FROM tb_orders o
@@ -151,15 +147,18 @@ Class Admin extends Controller{
                             ORDER BY o.id ASC";
             $orders = $db->read($sqlOrders);
             $tableRows = $order->make_table($orders); 
+
         }
         
 
         $data['tableRows'] = $tableRows; 
+
         if($user_data->rank === "customer"){
             $data['page_title'] = "Meus Pedidos";
         } else {
             $data['page_title'] = "Pedidos";
         }
+
         $this->view('admin/orders', $data);
     }
 
@@ -172,17 +171,14 @@ Class Admin extends Controller{
         }
 
         $db = Database::newInstance();  
-        $products = $db->read("SELECT * FROM tb_products LIMIT 24");
-        $product = $this->load_model("Product");
-        $categories = $db->read("SELECT * FROM tb_categories where status = 1 ORDER BY category ASC");
-        $category = $this->load_model("Category");
+        $stocks = $db->read("SELECT s.id, s.product_id, SUM(s.movement) as quantity, p.title 
+                                    FROM tb_stock as s
+                                    INNER JOIN tb_products p ON s.id = p.stock_id");
+        $stock = $this->load_model("Stock");  
+ 
+        $tableRows = $stock->make_table($stocks); 
 
-        $stock_quantity = $db->read("SELECT SUM(quantity) as stock_quantity FROM tb_products LIMIT 1"); 
-        $tableRows = $product->make_table($products, $category); 
-
-        $data['tableRows'] = $tableRows; 
-        $data['stock_quantity'] = $stock_quantity[0]->stock_quantity; 
-        $data['rows'] = $products;
+        $data['tableRows'] = $tableRows;   
         $data['page_title'] = "Estoque";
         $this->view('admin/stock', $data);
     }

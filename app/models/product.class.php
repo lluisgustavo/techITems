@@ -89,8 +89,7 @@ Class Product{
         $arr['user_url'] = $_SESSION['user_url'];
         $arr['id'] = $data->id;
         $arr['title'] = $data->title;
-        $arr['description'] = $data->description;
-        $arr['quantity'] = $data->quantity; 
+        $arr['description'] = $data->description; 
         $arr['category'] = $data->category;
         $arr['price'] = $data->price;  
         $_SESSION['error'] = "";
@@ -100,11 +99,7 @@ Class Product{
         } else {
             $arr['slug'] = $this->str_to_url($data->description); 
         }
-
-        if(!is_numeric($arr['quantity'])){
-            $_SESSION['error'] .= "Digite uma quantidade válida";
-        }
-
+ 
         if(!is_numeric($arr['category'])){
             $_SESSION['error'] .= "Digite uma categoria válida";
         }
@@ -237,7 +232,7 @@ Class Product{
                  
                 $result .= '<td>  
                                 <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#edit-product" 
-                                    data-bs-id="' . $Product->id . '" data-bs-title="' . $Product->title . '" data-bs-description="' . $Product->description . '" data-bs-quantity="' . $Product->quantity . '"
+                                    data-bs-id="' . $Product->id . '" data-bs-title="' . $Product->title . '" data-bs-description="' . $Product->description . '" 
                                     data-bs-price_buy="' . $Product->price_buy . '" data-bs-price_sell="' . $Product->price_sell . '" data-bs-category="' . $Product->category . '" data-bs-slug="' . $Product->slug . '"
                                     data-bs-image="' . $Product->image . '"';
                                     if(!empty($Product->image2)) $result .= ' data-bs-image2="' . $Product->image2 . '"'; 

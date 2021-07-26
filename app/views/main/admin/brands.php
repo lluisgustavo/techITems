@@ -8,7 +8,7 @@
 		<div class="col-md-12">
 			<div class="content-panel">
 				<table class="table table-striped table-advance table-hover">  
-					<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-new-category">
+					<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-new-brand">
 						<i class="fa fa-plus"></i>Adicionar
 					</button></h4>
 					
@@ -23,7 +23,7 @@
 								<form class="form-inline" role="form">
 									<div class="modal-body">
 										<div class="form-group"> 
-											<input name="brand" id="brand" type="text" class="form-control" placeholder="Nome da Marca" autofocus required>
+											<input name="marca" id="marca" type="text" class="form-control" placeholder="Nome da Marca" autofocus required>
 										</div> 
 									</div>
 									<div class="modal-footer">
@@ -37,7 +37,7 @@
 					<!-- adicionar categoria -->
 
 					<!-- editar categoria -->
-					<div class="modal fade" id="edit-brand" tabindex="-1" aria-labelledby="edit-category" aria-hidden="true">
+					<div class="modal fade" id="edit-brand" tabindex="-1" aria-labelledby="edit-brand" aria-hidden="true">
 						<div class="modal-dialog">
 							<div class="modal-content">
 								<form class="form-inline" id="edit-product-form" role="form">
@@ -110,9 +110,8 @@
 	})
  
 	function collectData(element){
-		var brand_input = document.querySelector("#brand");  
-
-		var brand = capitalize(brand_input.value.trim());v 
+		var brand_input = document.querySelector("#marca");  
+		var brand = capitalize(brand_input.value.trim());
 
 		sendData({
 			brand: brand, 
@@ -146,7 +145,7 @@
 
 	function handleResult(result){
 		if(result != ""){      
-			//console.log(result);
+			console.log(result);
 			var obj = JSON.parse(result);
 			if(typeof(obj.data_type) != 'undefined'){
 				if(obj.data_type == "add-new"){
@@ -175,7 +174,7 @@
 	}
 
 	function deleteRow(id){
-		if(!confirm("Tem certeza que quer deletar esta categoria?")){
+		if(!confirm("Tem certeza que quer deletar esta marca?")){
 			return;
 		}
 

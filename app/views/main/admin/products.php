@@ -114,12 +114,14 @@
 						<div class="form-group col-md-12"> 
 							<textarea name="editar-descricao-produto" id="editar-descricao-produto" placeholder="Descrição do Produto" rows="3" class="form-control"></textarea>
 						</div>
-						<div class="row">
+						<div class="row"> 
 							<div class="form-group col-md-6"> 
-								<input name="editar-quantidade-produto" id="editar-quantidade-produto" type="number" class="form-control" value="1" placeholder="0" min='1' step='1' required>
+								<label class="form-control-label" for="preco-compra">Preço de Compra</label>
+								<input name="editar-preco-compra" id="preco-compra" type="number" class="form-control" value="0.00" placeholder="0.00" min="0.01" step="0.01" required>
 							</div>
 							<div class="form-group col-md-6"> 
-								<input name="editar-preco-produto" id="editar-preco-produto" type="number" class="form-control" value="0.00" placeholder="0.00" min="0.01" step="0.01" required>
+								<label class="form-control-label" for="preco-venda">Preço de Venda</label>
+								<input name="editar-preco-venda" id="preco-venda" type="number" class="form-control" value="0.00" placeholder="0.00" min="0.01" step="0.01" required>
 							</div>
 						</div>
 						<div class="form-group col-md-12"> 
