@@ -16,12 +16,13 @@
 					<tr>
 						<th class="text-right">ID</th>
 						<th><i class="fa fa-copyright"></i> Marca</th>
-						<th><i class="fa fa-bullhorn"></i> Produto</th>
+						<th><i class="fa fa-barcode"></i> Produto</th>
 						<th><i class="fa fa-bullhorn"></i> Descrição </th>
 						<th><i class="fa fa-bullhorn"></i> Imagem</th>
 						<th><i class="fa fa-list-alt"></i> Categoria</th>
 						<th class="text-right"><i class="fa fa-money"></i> Preço de Compra</th>
 						<th class="text-right"><i class="fa fa-money"></i> Preço de Venda</th> 
+						<th class="text-right"><i class="fa fa-people-arrows"></i> Fornecedor</th> 
 						<th><i class="fa fa-star-o"></i> Status</th>
 						<th><i class=" fa fa-edit"></i> Ação</th>
 					</tr>
@@ -65,6 +66,14 @@
 						<div class="form-group col-md-12 mb-2"> 
 							<?php echo $dropdownCategories ?>
 						</div> 
+						<div class="row mb-2">
+							<div class="form-group col-md-6 mb-2"> 
+								<?php echo $dropdownSuppliers ?>
+							</div> 
+							<div class="form-group col-md-6 mb-2"> 
+								<?php echo $dropdownBrands ?>
+							</div> 
+						</div>
 						<div class="form-group col-md-12 mb-2">
 							<label class="control-label" for="imagem-produto-1">Imagem</label>
 							<input onchange="DisplayImage(this.files[0], 1, 'image-holder')" name="imagem-produto-1" id="imagem-produto-1" type="file" class="form-control">
@@ -109,26 +118,34 @@
 					</div>
 					<div class="modal-body">
 						<input name="editar-id-produto" type="hidden" id="editar-id-produto" class="form-control">
-						<div class="form-group col-md-12"> 
+						<div class="form-group col-md-12 mb-2"> 
 							<input name="editar-nome-produto" type="text" id="editar-nome-produto" class="form-control" placeholder="Nome do Produto" autofocus required>
 						</div>
-						<div class="form-group col-md-12"> 
+						<div class="form-group col-md-12 mb-2"> 
 							<textarea name="editar-descricao-produto" id="editar-descricao-produto" placeholder="Descrição do Produto" rows="3" class="form-control"></textarea>
 						</div>
-						<div class="row"> 
-							<div class="form-group col-md-6"> 
-								<label class="form-control-label" for="preco-compra">Preço de Compra</label>
-								<input name="editar-preco-compra" id="preco-compra" type="number" class="form-control" value="0.00" placeholder="0.00" min="0.01" step="0.01" required>
+						<div class="row mb-2"> 
+							<div class="form-group col-md-6 mb-2"> 
+								<label class="form-control-label" for="editar-preco-compra">Preço de Compra</label>
+								<input name="editar-preco-compra" id="editar-preco-compra" type="number" class="form-control" value="0.00" placeholder="0.00" min="0.01" step="0.01" required>
 							</div>
-							<div class="form-group col-md-6"> 
-								<label class="form-control-label" for="preco-venda">Preço de Venda</label>
-								<input name="editar-preco-venda" id="preco-venda" type="number" class="form-control" value="0.00" placeholder="0.00" min="0.01" step="0.01" required>
+							<div class="form-group col-md-6 mb-2"> 
+								<label class="form-control-label" for="editar-preco-venda">Preço de Venda</label>
+								<input name="editar-preco-venda" id="editar-preco-venda" type="number" class="form-control" value="0.00" placeholder="0.00" min="0.01" step="0.01" required>
 							</div>
 						</div>
-						<div class="form-group col-md-12"> 
+						<div class="form-group col-md-12 mb-2"> 
 							<?php echo $dropdownEditCategories ?>
 						</div>
-						<div class="form-group col-md-12"> 
+						<div class="row mb-2">
+							<div class="form-group col-md-6"> 
+								<?php echo $dropdownEditSuppliers ?>
+							</div>
+							<div class="form-group col-md-6"> 
+								<?php echo $dropdownEditBrands ?>
+							</div>
+						</div>
+						<div class="form-group col-md-12 mb-2"> 
 							<input name="editar-slug-produto" id="editar-slug-produto" type="text" class="form-control"  placeholder="Slug do produto">
 						</div>
 						<div class="form-group col-md-12">
@@ -217,6 +234,8 @@
 		var quantity = button.getAttribute('data-bs-quantity');
 		var price = button.getAttribute('data-bs-price');
 		var category = button.getAttribute('data-bs-category');
+		var category = button.getAttribute('data-bs-supplier');
+		var category = button.getAttribute('data-bs-brand');
 		var slug = button.getAttribute('data-bs-slug');
 		var urlImage1 = button.getAttribute('data-bs-image');  
 		if(button.getAttribute('data-bs-image2')) urlImage2 = button.getAttribute('data-bs-image2');
@@ -232,6 +251,8 @@
 		var quantityInput = editModal.querySelector('#editar-quantidade-produto');
 		var priceInput = editModal.querySelector('#editar-preco-produto');
 		var categoryInput = editModal.querySelector('#editar-categoria-produto');
+		var supplierInput = editModal.querySelector('#editar-supplier-produto');
+		var brandInput = editModal.querySelector('#editar-brand-produto');
 		var slugInput = editModal.querySelector('#editar-slug-produto');
 		var idInput = editModal.querySelector('#editar-id-produto');
   
@@ -241,6 +262,8 @@
 		quantityInput.value = quantity;
 		priceInput.value = price;
 		categoryInput.value = category;
+		supplierInput.value = supplier;
+		brandInput.value = brand;
 		slugInput.value = slug;
 		idInput.value = id;
 
@@ -275,21 +298,26 @@
 			return;
 		}
 
-		var product_category = document.querySelector("#categoria-produto");
-		
-		if(product_category.value.trim() == "" || isNaN(product_category.value.trim())){
-			alert("Selecione uma categoria válida.");
+		var product_category = document.querySelector("#categoria-produto"); 
+
+		var product_supplier = document.querySelector("#supplier-produto"); 
+
+		var product_brand = document.querySelector("#brand-produto"); 
+
+		var product_price_sell = document.querySelector("#preco-venda");
+
+		var product_price_buy = document.querySelector("#preco-compra");
+
+		if(product_price_buy.value.trim() == "" || isNaN(product_price_buy.value.trim())){
+			alert("Digite um preço de compra válido.");
 			return;
 		}
 
-		var product_price = document.querySelector("#preco-produto");
-
-		if(product_price.value.trim() == "" || isNaN(product_price.value.trim())){
-			alert("Digite um preço válido.");
+		if(product_price_sell.value.trim() == "" || isNaN(product_price_sell.value.trim())){
+			alert("Digite um preço de venda válido.");
 			return;
 		}
-
-		
+ 
 		var product_slug = document.querySelector("#slug-produto");
 		var produto_imagem_1 = document.querySelector("#imagem-produto-1");
 		var produto_imagem_2 = document.querySelector("#imagem-produto-2");
@@ -307,7 +335,10 @@
 		data.append('description', product_description.value.trim());
 		data.append('quantity', product_quantity.value.trim());
 		data.append('category', product_category.value.trim());
-		data.append('price', product_price.value.trim());
+		data.append('supplier', product_supplier.value.trim());
+		data.append('brand', product_brand.value.trim());
+		data.append('price_sell', product_price_sell.value.trim());
+		data.append('price_buy', product_price_buy.value.trim());
 		data.append('data_type', 'add-product');
 		data.append('image_1', produto_imagem_1.files[0]); 
 		

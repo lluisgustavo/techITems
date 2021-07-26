@@ -186,6 +186,7 @@ Class Product{
                 $empty = "''";
                 $result .= '<tr> 
                                 <td class="text-right">' . $Product->id . '</td>
+                                <td>' . $Product->brand_name . '</a></td>
                                 <td>' . $Product->title . '</a></td>
                                 <td>' . $Product->description . '</a></td>
                                 <td style="width:100px; height:100px"> 
@@ -226,15 +227,16 @@ Class Product{
                                 </td> 
                                 <td class="text-right">' . $categoryColumn .  '</td>
                                 <td class="text-right"> R$ ' . $Product->price_buy . '</td>
-                                <td class="text-right"> R$ ' . $Product->price_sell . '</td>'; 
+                                <td class="text-right"> R$ ' . $Product->price_sell . '</td>
+                                <td class="text-right">' . $Product->supplier_name . '</td>'; 
                 
                 ($Product->status == 1) ? $result .= '<td><span style="cursor: pointer" onclick="toggleStatus(' . $Product->id . ')" class="badge rounded-pill bg-success">Ativo</span></td>' : $result .= '<td><span style="cursor: pointer" onclick="toggleStatus(' . $Product->id . ')" class="badge rounded-pill bg-warning text-dark">Inativo</span></td>';
                  
                 $result .= '<td>  
                                 <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#edit-product" 
-                                    data-bs-id="' . $Product->id . '" data-bs-title="' . $Product->title . '" data-bs-description="' . $Product->description . '" 
+                                    data-bs-id="' . $Product->id . '" data-bs-title="' . $Product->title . '" data-bs-description="' . $Product->description . '" data-bs-supplier="' . $Product->supplier_id . '" 
                                     data-bs-price_buy="' . $Product->price_buy . '" data-bs-price_sell="' . $Product->price_sell . '" data-bs-category="' . $Product->category . '" data-bs-slug="' . $Product->slug . '"
-                                    data-bs-image="' . $Product->image . '"';
+                                    data-bs-brand="' . $Product->brand_id . '" data-bs-image="' . $Product->image . '"';
                                     if(!empty($Product->image2)) $result .= ' data-bs-image2="' . $Product->image2 . '"'; 
                                     if(!empty($Product->image3)) $result .= ' data-bs-image3="' . $Product->image3 . '"'; 
                                     if(!empty($Product->image4)) $result .= ' data-bs-image4="' . $Product->image4 . '"'; 
@@ -249,6 +251,87 @@ Class Product{
         return $result;
     }
  
+    public function make_select_category($categories){
+        $result = "";
+        
+        if(is_array($categories)){
+            $result .= '<select name="categoria-produto" id="categoria-produto" class="form-control">
+                        <option disabled selected>Selecione uma categoria</option>';
+            foreach($categories as $Category){
+                $result .= '<option value="' . $Category->id . '">' . $Category->category . '</option>';
+            }
+            $result .= '</select>';
+        }
+        return $result;
+    }
+
+    public function make_select_brand($brands){
+        $result = "";
+        
+        if(is_array($brands)){
+            $result .= '<select name="brand-produto" id="brand-produto" class="form-control">
+                <option disabled selected>Selecione uma marca</option>';
+            foreach($brands as $Brand){
+                $result .= '<option value="' . $Brand->id . '">' . $Brand->brand_name . '</option>';
+            }
+            $result .= '</select>';
+        }
+        return $result;
+    }
+
+    public function make_select_supplier($suppliers){
+        $result = "";
+        
+        if(is_array($suppliers)){
+            $result .= '<select name="supplier-produto" id="supplier-produto" class="form-control">
+                    <option disabled selected>Selecione um fornecedor</option>';
+            foreach($suppliers as $Supplier){
+                $result .= '<option value="' . $Supplier->id . '">' . $Supplier->supplier_name . '</option>';
+            }
+            $result .= '</select>';
+        }
+        return $result;
+    }
+
+    public function make_select_edit_category($categories){
+        $result = "";
+        if(is_array($categories)){
+            $result .= '<select name="editar-categoria-produto" id="editar-categoria-produto" class="form-control">
+                <option disabled selected>Selecione uma categoria</option>';
+            foreach($categories as $Category){
+                $result .= '<option value="' . $Category->id . '">' . $Category->category . '</option>';
+            }
+            $result .= '</select>';
+        }
+        return $result;
+    } 
+
+    public function make_select_edit_supplier($suppliers){
+        $result = "";
+        if(is_array($suppliers)){
+            $result .= '<select name="editar-supplier-produto" id="editar-supplier-produto" class="form-control">
+                <option disabled selected>Selecione um fornecedor</option>';
+            foreach($suppliers as $Supplier){
+                $result .= '<option value="' . $Supplier->id . '">' . $Supplier->supplier_name . '</option>';
+            }
+            $result .= '</select>';
+        }
+        return $result;
+    } 
+    
+    public function make_select_edit_brand($brands){
+        $result = "";
+        if(is_array($brands)){
+            $result .= '<select name="editar-brand-produto" id="editar-brand-produto" class="form-control">
+                <option disabled selected>Selecione uma marca</option>';
+            foreach($brands as $Brand){
+                $result .= '<option value="' . $Brand->id . '">' . $Brand->brand_name . '</option>';
+            }
+            $result .= '</select>';
+        }
+        return $result;
+    } 
+
     public function make_select_parent_edit($categories, $id, $productCategory = ""){
         $result = "";
         if(is_array($categories)){

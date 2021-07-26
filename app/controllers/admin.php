@@ -67,22 +67,32 @@ Class Admin extends Controller{
             $data['user_data'] = $user_data;
         }
 
-        $db = Database::newInstance();
-        $brands = $db->read("SELECT * FROM tb_brands");
-        $products = $db->read("SELECT * FROM tb_products ORDER BY description ASC");
-        $product = $this->load_model("Product");
-        $categories = $db->read("SELECT * FROM tb_categories where status = 1 ORDER BY category ASC");
+        $db = Database::newInstance(); 
+        $products = $db->read("SELECT p.*, b.brand_name, b.status, s.supplier_name FROM `tb_products` as p
+                                INNER JOIN tb_brands b ON p.brand_id = b.id
+                                INNER JOIN tb_suppliers s ON p.supplier_id = s.id");
+        $product = $this->load_model("Product"); 
         $category = $this->load_model("Category");
 
         $tableRows = $product->make_table($products, $category);
 
-        $selectCategories = $category->make_select($categories);
-        $allCategories = $db->read("SELECT * FROM tb_categories ORDER BY category ASC");
-        $selectEditCategories = $category->make_select_edit_product($allCategories);
-        $data['dropdownEditCategories'] = $selectEditCategories;
+        $allBrands = $db->read("SELECT b.id, b.brand_name FROM tb_brands AS b ORDER BY brand_name ASC");
+        $allCategories = $db->read("SELECT c.id, c.category FROM tb_categories AS c ORDER BY category ASC");
+        $allSuppliers = $db->read("SELECT s.id, s.supplier_name FROM tb_suppliers AS s ORDER BY supplier_name ASC");
+        $selectCategories = $product->make_select_category($allCategories);
+        $selectSuppliers = $product->make_select_supplier($allSuppliers);
+        $selectBrands = $product->make_select_brand($allBrands);
+        $selectEditCategories = $product->make_select_edit_category($allCategories);
+        $selectEditSuppliers = $product->make_select_edit_supplier($allSuppliers);
+        $selectEditBrands = $product->make_select_edit_brand($allBrands);
 
         $data['tableRows'] = $tableRows;
         $data['dropdownCategories'] = $selectCategories;
+        $data['dropdownSuppliers'] = $selectSuppliers;
+        $data['dropdownBrands'] = $selectBrands;
+        $data['dropdownEditCategories'] = $selectEditCategories;
+        $data['dropdownEditSuppliers'] = $selectEditSuppliers;
+        $data['dropdownEditBrands'] = $selectEditBrands;
 
         $data['page_title'] = "Produtos";
         $this->view('admin/products', $data);

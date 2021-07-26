@@ -127,16 +127,4 @@ Class Category{
         return $result;
     } 
 
-    public function make_select_edit_product($categories){
-        $result = "";
-        if(is_array($categories)){
-            $result .= '<select name="editar-categoria-produto" id="editar-categoria-produto" class="form-control">
-                <option value="" selected>Selecione uma categoria</option>';
-            foreach($categories as $Category){
-                $result .= '<option value="' . $Category->id . '">' . $Category->category . '</option>';
-            }
-            $result .= '</select>';
-        }
-        return $result;
-    } 
 }
