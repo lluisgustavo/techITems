@@ -4,7 +4,7 @@ Class Admin extends Controller{
     public function index(){
         $User = $this->load_model('User');
         $user_data = $User->check_login(true, ["admin", "employee", "customer"]); 
-        
+
         if(is_object($user_data)){
             $data['user_data'] = $user_data;
         }
@@ -16,7 +16,7 @@ Class Admin extends Controller{
 
     public function categories(){
         $User = $this->load_model('User');
-        $user_data = $User->check_login(true, ["admin"]);
+        $user_data = $User->check_login(true, ["admin", "employee"]);
 
         if(is_object($user_data)){
             $data['user_data'] = $user_data;
@@ -42,7 +42,7 @@ Class Admin extends Controller{
 
     public function products(){
         $User = $this->load_model('User');
-        $user_data = $User->check_login(true, ["admin"]);
+        $user_data = $User->check_login(true, ["admin", "employee"]);
 
         if(is_object($user_data)){
             $data['user_data'] = $user_data;
@@ -70,19 +70,23 @@ Class Admin extends Controller{
 
     public function suppliers(){
         $User = $this->load_model('User');
-        $user_data = $User->check_login(true, ["admin"]);
+        $user_data = $User->check_login(true, ["admin", "employee"]);
 
         if(is_object($user_data)){
             $data['user_data'] = $user_data;
         }
 
-        $db = Database::newInstance();
-        $suppliers = $db->read("SELECT * FROM tb_suppliers ORDER BY id ASC");
-        $supplier = $this->load_model("Supplier"); 
-        $adresses = $db->read("SELECT * FROM tb_address ORDER BY id ASC"); 
+        $db = Database::newInstance(); 
         $address = $this->load_model("Address");
 
+        $supplier = $this->load_model("Supplier"); 
+        $suppliers = $db->read("SELECT * FROM tb_suppliers ORDER BY id ASC");
         $tableRows = $supplier->make_table($suppliers, $address); 
+
+        if($user_data->rank === "employee"){  
+            $suppliers = $db->read("SELECT * FROM tb_suppliers WHERE status = 1 ORDER BY id ASC");
+            $tableRows = $supplier->make_table_employee($suppliers, $address); 
+        }
 
         $data['tableRows'] = $tableRows; 
         $data['page_title'] = "Fornecedores";
@@ -135,7 +139,7 @@ Class Admin extends Controller{
 
     public function stock(){
         $User = $this->load_model('User');
-        $user_data = $User->check_login(true, ["admin"]);
+        $user_data = $User->check_login(true, ["admin", "employee"]);
 
         if(is_object($user_data)){
             $data['user_data'] = $user_data;
@@ -177,7 +181,7 @@ Class Admin extends Controller{
     
     public function buy(){
         $User = $this->load_model('User');
-        $user_data = $User->check_login(true, ["admin", "customer"]);
+        $user_data = $User->check_login(true, ["admin", "employee", "customer"]);
 
         if(is_object($user_data)){
             $data['user_data'] = $user_data;

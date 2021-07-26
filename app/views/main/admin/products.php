@@ -6,11 +6,10 @@
 <div class="row mt">
 	<div class="col-md-12">
 		<div class="content-panel">
-			<table class="table table-striped table-advance table-hover">
-				<h4><i class="fa fa-angle-right"></i> Produtos 
+			<table class="table table-striped table-advance table-hover"> 
 				<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-new-product">
 					<i class="fa fa-plus"></i>Adicionar
-				</button></h4>
+				</button>
 				
 				<hr>
 				<thead>
@@ -48,38 +47,37 @@
 				</div>
 				<form class="form-inline" role="form">
 					<div class="modal-body">
-						<div class="form-group col-md-12"> 
+						<div class="form-group col-md-12 mb-2"> 
 							<input name="nome-produto" type="text" id="nome-produto" class="form-control" placeholder="Nome do Produto" autofocus required>
 						</div>
-						<div class="form-group col-md-12"> 
+						<div class="form-group col-md-12 mb-2"> 
 							<textarea name="descricao-produto" id="descricao-produto" placeholder="Descrição do Produto" rows="3" class="form-control"></textarea>
 						</div>
-						<div class="row">
+						<div class="row mb-2"> 
 							<div class="form-group col-md-6"> 
-								<input name="quantidade-produto" id="quantidade-produto" type="number" class="form-control" value="1" placeholder="0" min='1' step='1' required>
+								<label class="form-control-label" for="preco-compra">Preço de Compra</label>
+								<input name="preco-compra" id="preco-compra" type="number" class="form-control" value="0.00" placeholder="0.00" min="0.01" step="0.01" required>
 							</div>
 							<div class="form-group col-md-6"> 
-								<input name="preco-produto" id="preco-produto" type="number" class="form-control" value="0.00" placeholder="0.00" min="0.01" step="0.01" required>
-							</div>
-							<div class="form-group col-md-6"> 
-								<input name="preco-produto" id="preco-produto" type="number" class="form-control" value="0.00" placeholder="0.00" min="0.01" step="0.01" required>
+								<label class="form-control-label" for="preco-venda">Preço de Venda</label>
+								<input name="preco-venda" id="preco-venda" type="number" class="form-control" value="0.00" placeholder="0.00" min="0.01" step="0.01" required>
 							</div>
 						</div>
-						<div class="form-group col-md-12"> 
+						<div class="form-group col-md-12 mb-2"> 
 							<?php echo $dropdownCategories ?>
 						</div>
-						<div class="form-group col-md-12"> 
+						<div class="form-group col-md-12 mb-2"> 
 							<input name="slug-produto" id="slug-produto" type="text" class="form-control"  placeholder="Slug do produto">
 						</div>
-						<div class="form-group col-md-12">
+						<div class="form-group col-md-12 mb-2">
 							<label class="control-label" for="imagem-produto-1">Imagem</label>
 							<input onchange="DisplayImage(this.files[0], 1, 'image-holder')" name="imagem-produto-1" id="imagem-produto-1" type="file" class="form-control">
 						</div>
-						<div class="form-group col-md-12">
+						<div class="form-group col-md-12 mb-2">
 							<label class="control-label" for="imagem-produto-2">Imagem 2</label>
 							<input onchange="DisplayImage(this.files[0], 2, 'image-holder')" name="imagem-produto-2" id="imagem-produto-2" type="file" class="form-control">
 						</div>
-						<div class="form-group col-md-12">
+						<div class="form-group col-md-12 mb-2">
 							<label class="control-label" for="imagem-produto-3">Imagem 3</label>
 							<input onchange="DisplayImage(this.files[0], 3, 'image-holder')" name="imagem-produto-3" id="imagem-produto-3" type="file" class="form-control">
 						</div>

@@ -8,6 +8,7 @@
 		<div class="col-md-12">
 			<div class="content-panel">
 				<table class="table table-striped table-advance table-hover">
+					<?php if($user_data->rank === "admin"): ?>
 					<h4><i class="fa fa-angle-right"></i> Fornecedores
 					<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-new-supplier">
 						<i class="fa fa-plus"></i>Adicionar
@@ -175,6 +176,7 @@
 					</div> 
 					<!-- editar fornecedor -->
 					
+					<?php endif; ?>
 					<hr>
 					<thead>
 						<tr>
@@ -184,8 +186,10 @@
 							<th><i class=" fa fa-edit"></i> E-Mail </th>
 							<th><i class=" fa fa-edit"></i> Telefone </th>
 							<th><i class=" fa fa-edit"></i> Endereço </th>
+							<?php if($user_data->rank === "admin"): ?>
 							<th><i class=" fa fa-edit"></i> Status</th> 
 							<th><i class=" fa fa-edit"></i> Ação</th> 
+							<?php endif; ?>
 						</tr>
 					</thead>
 					<tbody id="table-body">

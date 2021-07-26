@@ -1,15 +1,15 @@
 
 <?php
 	$this->view("admin/header", $data);
-	$this->view("admin/sidebar", $data);
+	$this->view("admin/sidebar", $data); 
 ?>      
       <!-- **********************************************************************************************************************************************************
       MAIN CONTENT
       *********************************************************************************************************************************************************** -->
 
 	  <div class="h-100">
-		  	<?php if($user_data->rank == "admin"): ?>
-		  	<div class="row justify-content-around align-items-center">
+			<?php if($user_data->rank !== "customer"): ?>
+		  	<div class="row justify-content-around align-items-center"> 
 				<div class="col-12 col-sm-6 col-md-3 text-center">
 					<a href="<?= ROOT ?>admin/suppliers">
 						<button class="btn btn-primary btn-lg size-btn"> 
@@ -43,6 +43,7 @@
 					</a>
 				</div>
 			</div>   
+			<?php endif; ?>
 			<div class="row justify-content-around align-items-center">
 				<div class="col-12 col-sm-6 col-md-3 text-center">
 					<a href="<?= ROOT ?>admin/users">
@@ -52,14 +53,17 @@
 						</button>
 					</a>
 				</div> 
+				<?php if($user_data->rank !== "customer"): ?>
 				<div class="col-12 col-sm-6 col-md-3 text-center">
 					<a href="<?= ROOT ?>admin/users">
 						<button class="btn btn-info btn-lg size-btn text-white"> 
 							<i class="fa-2x fas fa-user"></i>  
-							<p>Usuários</p> 
+							<p>Clientes</p> 
 						</button>
 					</a>
 				</div> 
+				<?php endif; ?> 
+				<?php if($user_data->rank === "admin"): ?>
 				<div class="col-12 col-sm-6 col-md-3 text-center">
 					<a href="<?= ROOT ?>admin/reports">
 						<button class="btn btn-dark btn-lg size-btn text-white"> 
@@ -76,9 +80,19 @@
 						</button>
 					</a>
 				</div>  
+				<?php endif; ?>
 			</div>   
-		  	<?php else: ?>
 		  	<div class="row justify-content-around align-items-center">
+				<?php if($user_data->rank === "admin"): ?>
+				<div class="col-12 col-sm-6 col-md-3 text-center">
+					<a href="<?= ROOT ?>admin/users">
+						<button class="btn btn-info btn-lg size-btn text-white"> 
+							<i class="fa-2x fas fa-user"></i>  
+							<p>Usuários</p> 
+						</button>
+					</a>
+				</div> 
+				<?php endif; ?>
 				<div class="col-12 col-sm-6 col-md-3 text-center">
 					<a href="<?= ROOT ?>admin/buy">
 						<button class="btn btn-primary btn-lg size-btn"> 
@@ -87,7 +101,7 @@
 						</button>
 					</a>
 				</div> 
-		  	<?php endif; ?>
+			</div>
 	  </div>
 <?php
 	$this->view("admin/footer", $data);

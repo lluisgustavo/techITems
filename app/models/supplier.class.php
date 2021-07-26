@@ -199,4 +199,31 @@ Class Supplier{
         return $result;
     }
 
+    public function make_table_employee($suppliers, $model = null){
+        $result = "";
+        if(is_array($suppliers)){
+            foreach($suppliers as $Supplier){ 
+                if(null !== $model->getOne($Supplier->address_id) && is_object($model->getOne($Supplier->address_id))) {
+                    $address = $model->getOne($Supplier->address_id);
+                    $address_string = $address->street . ', ' . $address->number;
+                    if(!empty($address->complement)) $address_string .= ' - ' . $address->complement . ' - ';
+                    $address_string .= ' - ' . $address->district . ' - ' . $address->city . ', ' . $address->state . ' - ' . $address->country;
+                }else{
+                    $address = "";
+                }     
+ 
+                $result .= '<tr>
+                                <td>' . $Supplier->id . '</td>
+                                <td>'  . $Supplier->supplier_name . '</td>
+                                <td>'  . $Supplier->contact_name . '</td>
+                                <td>'  . $Supplier->contact_mail . '</td>
+                                <td>'  . $Supplier->contact_phone . '</td>
+                                <td>'  . $address_string . '</td>
+                            </tr>';   
+            }
+        }
+
+        return $result;
+    }
+
 }

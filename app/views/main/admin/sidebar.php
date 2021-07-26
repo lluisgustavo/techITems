@@ -6,22 +6,20 @@
             
                 <p class="centered"><a href="profile.html"><img src="<?= ROOT . $data['user_data']->avatar ?>" class="img-circle" width="60"></a></p>
                 <h5 class="centered"><?= $data['user_data']->name ?></h5>
- 
-                <?php if($data['user_data']->rank == 'admin'): ?>
                 <li class="sub-menu">
                     <a href="<?= ROOT ?>admin" >
                         <i class="fa fa-home"></i>
                         <span>Início</span>
                     </a>
                 </li>
-
                 <li class="sub-menu">
                     <a href="<?= ROOT ?>admin/buy" >
                         <i class="fa fa-desktop"></i>
                         <span>Comprar</span>
                     </a>
-                </li> 
-
+                </li>  
+ 
+                <?php if($data['user_data']->rank == 'admin'): ?>
                 <li class="sub-menu">
                     <a href="<?= ROOT ?>admin/suppliers">
                         <i class="fa fa-people-arrows"></i>
@@ -98,29 +96,9 @@
                     <i class="fas fa-boxes"></i>
                         <span>Estoque</span>
                     </a>
-                </li> 
+                </li>  
 
-                <li class="sub-menu">
-                    <a href="<?= ROOT ?>admin/buy" >
-                        <i class="fa fa-desktop"></i>
-                        <span>Comprar</span>
-                    </a>
-                </li> 
-
-                <li class="sub-menu">
-                    <a href="<?= ROOT ?>admin/config">
-                        <i class="fa fa-cogs"></i>
-                        <span>Configurações</span>
-                    </a>
-                </li>
-
-                <?php elseif($data['user_data']->rank == 'customer'): ?>
-                <li class="sub-menu">
-                    <a href="<?= ROOT ?>admin/buy" >
-                        <i class="fa fa-desktop"></i>
-                        <span>Comprar</span>
-                    </a>
-                </li>
+                <?php elseif($data['user_data']->rank == 'customer'): ?> 
                 
 
                 <li class="sub-menu">

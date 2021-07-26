@@ -31,6 +31,7 @@ Class AjaxSupplier extends Controller{
                     $arr['message_type'] = "info";
                     $arr['data_type'] = "add-supplier";
                     $suppliers = $supplier->readAll();
+                    
                     $arr['data'] = $supplier->make_table($suppliers, $address);
 
                     echo json_encode($arr);
