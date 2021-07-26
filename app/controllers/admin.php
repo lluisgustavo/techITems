@@ -68,6 +68,7 @@ Class Admin extends Controller{
         }
 
         $db = Database::newInstance();
+        $brands = $db->read("SELECT * FROM tb_brands");
         $products = $db->read("SELECT * FROM tb_products ORDER BY description ASC");
         $product = $this->load_model("Product");
         $categories = $db->read("SELECT * FROM tb_categories where status = 1 ORDER BY category ASC");
