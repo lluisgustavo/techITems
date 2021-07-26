@@ -6,10 +6,10 @@ Class AjaxCategory extends Controller{
         $data = json_decode($data);
         if(is_object($data) && isset($data->data_type)){
             $db = Database::getInstance();
-            $category = $this->load_model('Category');
+            $brand = $this->load_model('Brand');
 
-            if($data->data_type == "add-category"){
-                $check = $category->create($data); 
+            if($data->data_type == "add-brand"){
+                $check = $brand->create($data); 
 
                 if(isset($_SESSION['error']) && $_SESSION['error'] != ""){
                     $arr['message'] = $_SESSION['error'];
@@ -20,50 +20,50 @@ Class AjaxCategory extends Controller{
 
                     echo json_encode($arr);
                 } else {
-                    $arr['message'] = "Categoria adicionada.";
+                    $arr['message'] = "Marca adicionada.";
                     $arr['message_type'] = "info";
                     $arr['data_type'] = "add-new";
 
-                    $categories = $category->readAll();
-                    $arr['data'] = $category->make_table($categories);
+                    $brands = $brand->readAll();
+                    $arr['data'] = $brand->make_table($brands);
 
                     echo json_encode($arr);
                 }
             } else if($data->data_type == "delete-row"){
-                $category->delete($data->id);
+                $brand->delete($data->id);
 
-                $arr['message'] = "Categoria deletada.";
+                $arr['message'] = "Marca deletada.";
                 $arr['message_type'] = "info";
                 $arr['data_type'] = "delete-row";
 
-                $categories = $category->readAll();
-                $arr['data'] = $category->make_table($categories);
+                $brands = $brand->readAll();
+                $arr['data'] = $brand->make_table($brands);
 
                 echo json_encode($arr);
             } else if($data->data_type == "toggle-status"){
                 $id = $data->id;
-                $sqlStatusUpdate = "UPDATE tb_categories SET status = IF(status = 1, 0, 1) WHERE id = '$id' LIMIT 1";
+                $sqlStatusUpdate = "UPDATE tb_brands SET status = IF(status = 1, 0, 1) WHERE id = '$id' LIMIT 1";
                 $db->write($sqlStatusUpdate);
                 
                 $arr['message_type'] = "info";
                 $arr['data_type'] = "toggle-status";
 
-                $categories = $category->readAll();
-                $arr['data'] = $category->make_table($categories);
+                $brands = $brand->readAll();
+                $arr['data'] = $brand->make_table($brands);
 
                 echo json_encode($arr);
-            } else if($data->data_type == "edit-category"){ 
+            } else if($data->data_type == "edit-brand"){ 
                 $id = $data->id;
             
-                $category->update($data);
-                $arr['message'] = "Categoria editada.";
+                $brand->update($data);
+                $arr['message'] = "Marca editada.";
                 $arr['message_type'] = "info";
                 $arr['data_type'] = "edit-category";
                 $arr['id'] = $data->id;
                 $arr['category'] = $data->category;
 
-                $categories = $category->readAll();
-                $arr['data'] = $category->make_table($categories);
+                $brands = $brand->readAll();
+                $arr['data'] = $brand->make_table($brands);
 
                 echo json_encode($arr);
             }
