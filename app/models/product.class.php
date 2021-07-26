@@ -5,8 +5,7 @@ Class Product{
         $_SESSION['error'] = "";
         $db = Database::newInstance();
         $arr['title'] = ucwords($data->title);
-        $arr['description'] = ucwords($data->description);
-        $arr['quantity'] = ucwords($data->quantity);
+        $arr['description'] = ucwords($data->description); 
         $arr['category'] = ucwords($data->category);
         $arr['price'] = ucwords($data->price);
         $arr['date'] = date("Y-m-d H:i:s");
@@ -16,11 +15,7 @@ Class Product{
             $arr['slug'] = $this->str_to_url($data->title); 
         }
         $arr['user_url'] = $_SESSION['user_url'];
- 
-        if(!is_numeric($arr['quantity'])){
-            $_SESSION['error'] .= "Digite uma quantidade válida";
-        }
-
+  
         if(!is_numeric($arr['category'])){
             $_SESSION['error'] .= "Digite uma categoria válida";
         }
@@ -67,8 +62,8 @@ Class Product{
         } 
 
         if(!isset($_SESSION['error']) || $_SESSION['error'] == ""){
-            $sqlInsertProduct = "INSERT INTO products (title, description, quantity, category, price, slug, date, user_url, image, image2, image3, image4) VALUES (:title, :description, :quantity, :category, :price, :slug, :date, :user_url, :image_1, :image_2, :image_3, :image_4)";
-            $check = $db->write($sqlInsertProduct, $arr);
+            $sqlInsertProduct = "INSERT INTO products (title, description, category, price, slug, date, user_url, image, image2, image3, image4) VALUES (:title, :description, :category, :price, :slug, :date, :user_url, :image_1, :image_2, :image_3, :image_4)";
+            $check = $db->write($sqlInsertProduct, $arr); 
 
             if($check){
                 return true;
