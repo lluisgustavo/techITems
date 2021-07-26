@@ -65,21 +65,12 @@ Class Order{
 
     public function make_table($orders, $model = null){
         $result = "";
-        if(is_array($orders)){
+        if(is_array($orders)){   
             foreach($orders as $Order){ 
                 $result .= '<tr>
-                                <td><a href="basic_table.html#">' . $Order->id . '</a></td>
-                                <td><a href="basic_table.html#">'  . $parent . '</a></td>';
-                                
-                
-                ($Order->status == 1) ? $result .= '<td><span style="cursor: pointer" onclick="toggleStatus(' . $Category->id . ')" class="badge rounded-pill bg-success">Ativo</span></td>' : $result .= '<td><span style="cursor: pointer" onclick="toggleStatus(' . $Category->id . ')" class="badge rounded-pill bg-warning text-dark">Inativo</span></td>';
-                 
-                $result .= '<td>  
-                                <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#edit-category" 
-                                    data-bs-id="' . $Category->id . '" data-bs-category="' . $Category->category . '" data-bs-parent="' . $Category->parent . '">
-                                    <i class="fa fa-pencil"></i>
-                                </button>
-                                <button onclick="deleteRow(' . $Category->id . ')" class="btn btn-sm btn-danger"><i class="fa fa-trash-o"></i></button>
+                                <td>' . $Order->id . '</td>
+                                <td>' . $Order->products . '</td>
+                                <td>R$ ' . number_format($Order->total_value, 2, ',', '.') . '</td>  
                             </td>
                         </tr>';  
             }

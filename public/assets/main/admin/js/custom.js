@@ -59,15 +59,7 @@ var Script = function () {
 $(document).ready(function(){
 	$(function () {
 		//===== Preloader
-	
-		window.onload = function () {
-			window.setTimeout(fadeout, 500);
-		}
-	
-		function fadeout() {
-			document.querySelector('.preloader').style.opacity = '0';
-			document.querySelector('.preloader').style.display = 'none';
-		}
+	 
 		$.scrollUp({
 	        scrollName: 'scrollUp', // Element ID
 	        scrollDistance: 300, // Distance from top/bottom before showing element (px)

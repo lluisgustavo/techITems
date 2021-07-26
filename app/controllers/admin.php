@@ -14,6 +14,32 @@ Class Admin extends Controller{
         $this->view('admin/index', $data);
     }
 
+    public function brands(){
+        $User = $this->load_model('User');
+        $user_data = $User->check_login(true, ["admin", "employee"]);
+
+        if(is_object($user_data)){
+            $data['user_data'] = $user_data;
+        }
+
+        $db = Database::newInstance();
+        $categories = $db->read("SELECT * FROM tb_categories ORDER BY category ASC");
+
+        $category = $this->load_model("Category");
+        $tableRows = $category->make_table($categories);
+
+        /*$selectCategories = $category->make_select_parent($categories);
+        $data['dropdownCategories'] = $selectCategories;
+
+        $selectEditCategories = $category->make_select_edit_category($categories);
+        $data['dropdownEditCategories'] = $selectEditCategories;
+
+        $data['tableRows'] = $tableRows;*/
+
+        $data['page_title'] = "Marcas";
+        $this->view('admin/brands', $data);
+    }
+
     public function categories(){
         $User = $this->load_model('User');
         $user_data = $User->check_login(true, ["admin", "employee"]);

@@ -233,12 +233,10 @@ Class Product{
                                             </button>';
                                         endif;
                                     $result .= '</div>
-                                </td>
-                                <td class="text-right">' . $Product->quantity . '</td>
+                                </td> 
                                 <td class="text-right">' . $categoryColumn .  '</td>
                                 <td class="text-right"> R$ ' . $Product->price_buy . '</td>
-                                <td class="text-right"> R$ ' . $Product->price_sell . '</td>
-                                <td class="text-right">' . date("d/m/Y H:i:s", strtotime($Product->date)) . '</td>';
+                                <td class="text-right"> R$ ' . $Product->price_sell . '</td>'; 
                 
                 ($Product->status == 1) ? $result .= '<td><span style="cursor: pointer" onclick="toggleStatus(' . $Product->id . ')" class="badge rounded-pill bg-success">Ativo</span></td>' : $result .= '<td><span style="cursor: pointer" onclick="toggleStatus(' . $Product->id . ')" class="badge rounded-pill bg-warning text-dark">Inativo</span></td>';
                  

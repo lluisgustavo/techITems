@@ -25,17 +25,6 @@
         </p>
         <![endif]-->
 
-        <!-- Preloader 
-        <div class="preloader">
-            <div class="preloader-inner">
-                <div class="preloader-icon">
-                    <span></span>
-                    <span></span>
-                </div>
-            </div>
-        </div>
-         /End Preloader -->
-
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
             <div class="container px-4 px-lg-5">

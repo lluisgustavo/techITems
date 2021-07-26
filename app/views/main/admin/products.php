@@ -18,11 +18,9 @@
 						<th><i class="fa fa-bullhorn"></i> Produto</th>
 						<th><i class="fa fa-bullhorn"></i> Descrição </th>
 						<th><i class="fa fa-bullhorn"></i> Imagem</th>
-						<th class="text-right"><i class=""></i> Quantidade</th>
 						<th><i class="fa fa-list-alt"></i> Categoria</th>
 						<th class="text-right"><i class="fa fa-money"></i> Preço de Compra</th>
-						<th class="text-right"><i class="fa fa-money"></i> Preço de Venda</th>
-						<th class="text-right"><i class="fa fa-calendar"></i> Data</th>
+						<th class="text-right"><i class="fa fa-money"></i> Preço de Venda</th> 
 						<th><i class="fa fa-star-o"></i> Status</th>
 						<th><i class=" fa fa-edit"></i> Ação</th>
 					</tr>
@@ -65,10 +63,7 @@
 						</div>
 						<div class="form-group col-md-12 mb-2"> 
 							<?php echo $dropdownCategories ?>
-						</div>
-						<div class="form-group col-md-12 mb-2"> 
-							<input name="slug-produto" id="slug-produto" type="text" class="form-control"  placeholder="Slug do produto">
-						</div>
+						</div> 
 						<div class="form-group col-md-12 mb-2">
 							<label class="control-label" for="imagem-produto-1">Imagem</label>
 							<input onchange="DisplayImage(this.files[0], 1, 'image-holder')" name="imagem-produto-1" id="imagem-produto-1" type="file" class="form-control">
