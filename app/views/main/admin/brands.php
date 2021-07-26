@@ -81,6 +81,12 @@
 	</div><!-- /row -->
 
 <script type="text/javascript">  
+	function hideModal(){ 
+		const edit_modal = document.querySelector('#add-new-brand');
+		const modal = bootstrap.Modal.getInstance(edit_modal);    
+		modal.hide();
+	}
+
 	function hideEditModal(){ 
 		const edit_modal = document.querySelector('#edit-brand');
 		const modal = bootstrap.Modal.getInstance(edit_modal);    
@@ -151,6 +157,7 @@
 				if(obj.data_type == "add-new"){
 					if(obj.message_type == 'info'){
 						alert(obj.message); 
+						hideModal();
 					
 						var table_body = document.querySelector("#table-body");
 						table_body.innerHTML = obj.data;

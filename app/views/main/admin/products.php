@@ -15,6 +15,7 @@
 				<thead>
 					<tr>
 						<th class="text-right">ID</th>
+						<th><i class="fa fa-copyright"></i> Marca</th>
 						<th><i class="fa fa-bullhorn"></i> Produto</th>
 						<th><i class="fa fa-bullhorn"></i> Descrição </th>
 						<th><i class="fa fa-bullhorn"></i> Imagem</th>
