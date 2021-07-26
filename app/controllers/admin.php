@@ -3,8 +3,8 @@
 Class Admin extends Controller{
     public function index(){
         $User = $this->load_model('User');
-        $user_data = $User->check_login(true, ["admin", "customer"]);
-
+        $user_data = $User->check_login(true, ["admin", "employee", "customer"]); 
+        
         if(is_object($user_data)){
             $data['user_data'] = $user_data;
         }
@@ -91,23 +91,46 @@ Class Admin extends Controller{
     
     public function orders(){
         $User = $this->load_model('User');
-        $user_data = $User->check_login(true, ["admin"]);
+        $user_data = $User->check_login(true, ["admin", "employee", "customer"]); 
 
         if(is_object($user_data)){
             $data['user_data'] = $user_data;
         }
+  
+        $order = $this->load_model("Order");  
+        $product = $this->load_model("Product");
 
         $db = Database::newInstance();
-        $suppliers = $db->read("SELECT * FROM tb_suppliers ORDER BY id ASC");
-        $supplier = $this->load_model("Supplier"); 
-        $adresses = $db->read("SELECT * FROM tb_address ORDER BY id ASC"); 
-        $address = $this->load_model("Address");
-
-        $tableRows = $supplier->make_table($suppliers, $address); 
+        $arr['customer_id'] = $user_data->id_customer;
+        if($user_data->rank === "customer"){  
+            $sqlOrders = "SELECT o.*, op.product_id ,GROUP_CONCAT(CONCAT(p.title, ' x ', op.product_quantity) SEPARATOR '<br>') as products, 
+                            SUM(p.price_sell * op.product_quantity)as total_value FROM tb_orders o
+                            INNER JOIN tb_orders_products op ON op.order_id = o.id
+                            INNER JOIN tb_products p ON p.id = op.product_id
+                            WHERE o.customer_id = :customer_id
+                            GROUP BY o.id
+                            ORDER BY o.id ASC";
+            $orders = $db->read($sqlOrders, $arr); 
+            $tableRows = $order->make_table_customer($orders); 
+        } else {
+            $sqlOrders = "SELECT o.*, op.product_id ,GROUP_CONCAT(CONCAT(p.title, ' x ', op.product_quantity) SEPARATOR '<br>') as products, 
+                            SUM(p.price_sell * op.product_quantity)as total_value FROM tb_orders o
+                            INNER JOIN tb_orders_products op ON op.order_id = o.id
+                            INNER JOIN tb_products p ON p.id = op.product_id 
+                            GROUP BY o.id
+                            ORDER BY o.id ASC";
+            $orders = $db->read($sqlOrders);
+            $tableRows = $order->make_table($orders); 
+        }
+        
 
         $data['tableRows'] = $tableRows; 
-        $data['page_title'] = "Fornecedores";
-        $this->view('admin/suppliers', $data);
+        if($user_data->rank === "customer"){
+            $data['page_title'] = "Meus Pedidos";
+        } else {
+            $data['page_title'] = "Pedidos";
+        }
+        $this->view('admin/orders', $data);
     }
 
     public function stock(){

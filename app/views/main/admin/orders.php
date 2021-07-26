@@ -2,17 +2,13 @@
 <?php
 	$this->view("admin/header", $data);
 	$this->view("admin/sidebar", $data);
+ 
 ?>      
 
 	<div class="row mt">
 		<div class="col-md-12">
 			<div class="content-panel">
-				<table class="table table-striped table-advance table-hover">
-					<h4><i class="fa fa-angle-right"></i> Categorias de Produtos  
-					<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-new-category">
-						<i class="fa fa-plus"></i>Adicionar
-					</button></h4>
-					
+				<table class="table table-striped table-advance table-hover">  
 					<!-- adicionar categoria -->
 					<div class="modal fade" id="add-new-category" tabindex="-1" aria-labelledby="add-new" aria-hidden="true">
 						<div class="modal-dialog">
@@ -71,10 +67,12 @@
 					<hr>
 					<thead>
 						<tr>
-							<th><i class="fa fa-bullhorn"></i> Categoria</th>
-							<th><i class="fa fa-table"></i> Pai</th>
-							<th><i class=" fa fa-edit"></i> Status</th>
-							<th><i class=" fa fa-edit"></i> Ação</th> 
+							<th><i class="fa fa-bullhorn"></i> Pedido</th>
+							<th><i class=" fa fa-edit"></i> Produtos</th>
+							<th><i class="fa fa-table"></i> Valor Total</th>
+							<?php if($user_data->rank === "admin" || $user_data->rank === "employee"): ?>
+								<th><i class=" fa fa-edit"></i> Ação</th> 
+							<?php endif; ?>
 						</tr>
 					</thead>
 					<tbody id="table-body">

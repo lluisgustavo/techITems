@@ -83,6 +83,12 @@ Class Product{
         return $db->read("SELECT * FROM tb_products ORDER BY description ASC");
     }
 
+    public function readOne($id){
+        $db = Database::newInstance(); 
+        $arr['id'] = $id;
+        return $db->read("SELECT * FROM tb_products WHERE id = :id ORDER BY description ASC", $arr);
+    }
+
     public function update($data, $files, $imageClass = null){
         $db = Database::newInstance();
         $arr['user_url'] = $_SESSION['user_url'];

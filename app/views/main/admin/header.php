@@ -64,9 +64,6 @@
                                 <img width="100" class="logo" src="<?= ASSETS . THEME ?>images/logo.png" alt=""> <b class="text-white">PAINEL DE CONTROLE</b>
                             </a> 
                             <!--logo end-->
-                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                            </button> 
                                             
                             <div class="top-menu">
                                 <ul class="nav pull-right top-menu">

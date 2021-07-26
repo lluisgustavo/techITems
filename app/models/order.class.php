@@ -63,22 +63,16 @@ Class Order{
         return $db->write($sqlDeleteCategory);
     }
 
-    public function make_table($orders){
+    public function make_table($orders, $model = null){
         $result = "";
         if(is_array($orders)){
-            foreach($oreder as $Order){
-                $edit_args = $Category->id . ", '" . $Category->category . "', " . $Category->parent;
-                $empty = "''";
-                $parent = "Sem pai";
-
-                if(isset($Category->parent) && !empty($Category->parent) && null !== $Category->parent) $parent = $this->getOne($Category->parent)->category;
-   
+            foreach($orders as $Order){ 
                 $result .= '<tr>
-                                <td><a href="basic_table.html#">' . $Category->category . '</a></td>
+                                <td><a href="basic_table.html#">' . $Order->id . '</a></td>
                                 <td><a href="basic_table.html#">'  . $parent . '</a></td>';
                                 
                 
-                ($Category->status == 1) ? $result .= '<td><span style="cursor: pointer" onclick="toggleStatus(' . $Category->id . ')" class="badge rounded-pill bg-success">Ativo</span></td>' : $result .= '<td><span style="cursor: pointer" onclick="toggleStatus(' . $Category->id . ')" class="badge rounded-pill bg-warning text-dark">Inativo</span></td>';
+                ($Order->status == 1) ? $result .= '<td><span style="cursor: pointer" onclick="toggleStatus(' . $Category->id . ')" class="badge rounded-pill bg-success">Ativo</span></td>' : $result .= '<td><span style="cursor: pointer" onclick="toggleStatus(' . $Category->id . ')" class="badge rounded-pill bg-warning text-dark">Inativo</span></td>';
                  
                 $result .= '<td>  
                                 <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#edit-category" 
@@ -94,55 +88,19 @@ Class Order{
         return $result;
     }
 
-    public function make_select($categories){
+    public function make_table_customer($orders, $model = null ){
         $result = "";
-        
-        if(is_array($categories)){
-            $result .= '<select name="categoria-produto" id="categoria-produto" class="form-control">';
-            foreach($categories as $Category){
-                $result .= '<option value="' . $Category->id . '">' . $Category->category . '</option>';
+        if(is_array($orders)){   
+            foreach($orders as $Order){ 
+                $result .= '<tr>
+                                <td>' . $Order->id . '</td>
+                                <td>' . $Order->products . '</td>
+                                <td>R$ ' . number_format($Order->total_value, 2, ',', '.') . '</td>  
+                            </td>
+                        </tr>';  
             }
-            $result .= '</select>';
         }
+
         return $result;
     }
-
-    public function make_select_parent($categories){
-        $result = ""; 
-        if(is_array($categories)){
-            $result .= '<select name="pai-categoria" id="pai-categoria" class="form-control">
-                <option value="" selected>Selecione uma categoria</option>';
-            foreach($categories as $Category){
-                $result .= '<option value="' . $Category->id . '">' . $Category->category . '</option>';
-            }
-            $result .= '</select>';
-        }
-        return $result;
-    } 
-
-    public function make_select_edit_category($categories){
-        $result = "";
-        if(is_array($categories)){
-            $result .= '<select name="editar-pai-categoria" id="editar-pai-categoria" class="form-control">
-                <option value="" selected>Selecione uma categoria</option>';
-            foreach($categories as $Category){
-                $result .= '<option value="' . $Category->id . '">' . $Category->category . '</option>';
-            }
-            $result .= '</select>';
-        }
-        return $result;
-    } 
-
-    public function make_select_edit_product($categories){
-        $result = "";
-        if(is_array($categories)){
-            $result .= '<select name="editar-categoria-produto" id="editar-categoria-produto" class="form-control">
-                <option value="" selected>Selecione uma categoria</option>';
-            foreach($categories as $Category){
-                $result .= '<option value="' . $Category->id . '">' . $Category->category . '</option>';
-            }
-            $result .= '</select>';
-        }
-        return $result;
-    } 
 }
