@@ -37,7 +37,7 @@ Class Brand{
     public function update($data){
         $db = Database::newInstance();
         $arr['id'] = $data->id;
-        $arr['brand_name'] = $data->brand_name; 
+        $arr['brand_name'] = $data->brand; 
   
         $sqlUpdateBrand = "UPDATE tb_brands SET brand_name = :brand_name WHERE id = :id";
         $db->write($sqlUpdateBrand, $arr);
@@ -61,7 +61,7 @@ Class Brand{
                 ($Brand->status == 1) ? $result .= '<td><span style="cursor: pointer" onclick="toggleStatus(' . $Brand->id . ')" class="badge rounded-pill bg-success">Ativo</span></td>' : $result .= '<td><span style="cursor: pointer" onclick="toggleStatus(' . $Brand->id . ')" class="badge rounded-pill bg-warning text-dark">Inativo</span></td>';
                             
                                 $result .= '<td>
-                                <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#edit-product" 
+                                <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#edit-brand" 
                                     data-bs-id="' . $Brand->id . '" data-bs-brand="' . $Brand->brand_name . '"><i class="fa fa-pencil"></i>
                                 </button>
                                     <button onclick="deleteRow(' . $Brand->id . ')" class="btn btn-sm btn-danger"><i class="fa fa-trash-o"></i></button>
@@ -70,58 +70,6 @@ Class Brand{
             }
         }
 
-        return $result;
-    }
-
-    public function make_select($categories){
-        $result = "";
-        
-        if(is_array($categories)){
-            $result .= '<select name="categoria-produto" id="categoria-produto" class="form-control">';
-            foreach($categories as $Category){
-                $result .= '<option value="' . $Category->id . '">' . $Category->category . '</option>';
-            }
-            $result .= '</select>';
-        }
-        return $result;
-    }
-
-    public function make_select_parent($categories){
-        $result = ""; 
-        if(is_array($categories)){
-            $result .= '<select name="pai-categoria" id="pai-categoria" class="form-control">
-                <option value="" selected>Selecione uma categoria</option>';
-            foreach($categories as $Category){
-                $result .= '<option value="' . $Category->id . '">' . $Category->category . '</option>';
-            }
-            $result .= '</select>';
-        }
-        return $result;
-    } 
-
-    public function make_select_edit_category($categories){
-        $result = "";
-        if(is_array($categories)){
-            $result .= '<select name="editar-pai-categoria" id="editar-pai-categoria" class="form-control">
-                <option value="" selected>Selecione uma categoria</option>';
-            foreach($categories as $Category){
-                $result .= '<option value="' . $Category->id . '">' . $Category->category . '</option>';
-            }
-            $result .= '</select>';
-        }
-        return $result;
-    } 
-
-    public function make_select_edit_product($categories){
-        $result = "";
-        if(is_array($categories)){
-            $result .= '<select name="editar-categoria-produto" id="editar-categoria-produto" class="form-control">
-                <option value="" selected>Selecione uma categoria</option>';
-            foreach($categories as $Category){
-                $result .= '<option value="' . $Category->id . '">' . $Category->category . '</option>';
-            }
-            $result .= '</select>';
-        }
         return $result;
     } 
 }

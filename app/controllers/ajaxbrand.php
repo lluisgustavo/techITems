@@ -58,9 +58,9 @@ Class AjaxBrand extends Controller{
                 $brand->update($data);
                 $arr['message'] = "Marca editada.";
                 $arr['message_type'] = "info";
-                $arr['data_type'] = "edit-category";
+                $arr['data_type'] = "edit-brand";
                 $arr['id'] = $data->id;
-                $arr['category'] = $data->category;
+                $arr['brand'] = $data->brand;
 
                 $brands = $brand->readAll();
                 $arr['data'] = $brand->make_table($brands);

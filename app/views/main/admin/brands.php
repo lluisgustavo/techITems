@@ -145,7 +145,7 @@
 
 	function handleResult(result){
 		if(result != ""){      
-			console.log(result);
+			//console.log(result);
 			var obj = JSON.parse(result);
 			if(typeof(obj.data_type) != 'undefined'){
 				if(obj.data_type == "add-new"){
