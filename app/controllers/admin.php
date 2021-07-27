@@ -237,7 +237,8 @@ Class Admin extends Controller{
 
         //$tableRows = $product->make_table($products, $category); 
 
-        $data['rows'] = $products;   
+        $data['pRows'] = $products;   
+        $data['cRows'] = $categories;   
         $data['page_title'] = "Comprar";
         $this->view('admin/buy', $data);
     }
