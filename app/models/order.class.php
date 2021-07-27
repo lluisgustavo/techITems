@@ -67,12 +67,22 @@ Class Order{
         $result = "";
         if(is_array($orders)){   
             foreach($orders as $Order){ 
-                $result .= '<tr>
+                if($Order->status == 0):
+                    $result .= '<tr>
+                                <td><s>' . $Order->id . '</s></td>
+                                <td><s>' . $Order->products . '</s></td>
+                                <td><s>R$ ' . number_format($Order->total_value, 2, ',', '.') . '</s></td>   
+                                <td>Pedido cancelado</td>
+                        </tr>';  
+                else:
+                    $result .= '<tr>
                                 <td>' . $Order->id . '</td>
                                 <td>' . $Order->products . '</td>
                                 <td>R$ ' . number_format($Order->total_value, 2, ',', '.') . '</td>  
+                                <td><button onclick="cancelOrder(' . $Order->id . ')" class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button></td> 
                             </td>
                         </tr>';  
+                endif;
             }
         }
 
@@ -83,12 +93,22 @@ Class Order{
         $result = "";
         if(is_array($orders)){   
             foreach($orders as $Order){ 
-                $result .= '<tr>
+                if($Order->status == 0):
+                    $result .= '<tr>
+                                <td><s>' . $Order->id . '</s></td>
+                                <td><s>' . $Order->products . '</s></td>
+                                <td><s>R$ ' . number_format($Order->total_value, 2, ',', '.') . '</s></td>   
+                                <td>Pedido cancelado</td>
+                        </tr>';  
+                else:
+                    $result .= '<tr>
                                 <td>' . $Order->id . '</td>
                                 <td>' . $Order->products . '</td>
                                 <td>R$ ' . number_format($Order->total_value, 2, ',', '.') . '</td>  
+                                <td><button onclick="cancelOrder(' . $Order->id . ')" class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button></td> 
                             </td>
                         </tr>';  
+                endif;
             }
         }
 

@@ -148,7 +148,6 @@ Class Admin extends Controller{
                             ORDER BY o.id ASC";
             $orders = $db->read($sqlOrders, $arr); 
             $tableRows = $order->make_table_customer($orders); 
-
         } else {
             $sqlOrders = "SELECT o.*, op.product_id ,GROUP_CONCAT(CONCAT(p.title, ' x ', op.product_quantity) SEPARATOR '<br>') as products, 
                             SUM(p.price_sell * op.product_quantity)as total_value FROM tb_orders o
@@ -158,7 +157,6 @@ Class Admin extends Controller{
                             ORDER BY o.id ASC";
             $orders = $db->read($sqlOrders);
             $tableRows = $order->make_table($orders); 
-
         }
         
 

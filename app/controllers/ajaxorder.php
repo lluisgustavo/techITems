@@ -8,62 +8,34 @@ Class AjaxOrder extends Controller{
             $db = Database::getInstance();
             $category = $this->load_model('Order');
 
-            if($data->data_type == "add-order"){
-                $check = $category->create($data); 
-
-                if(isset($_SESSION['error']) && $_SESSION['error'] != ""){
-                    $arr['message'] = $_SESSION['error'];
-                    $_SESSION['error'] = "";
-                    $arr['message_type'] = "error";
-                    $arr['data'] = "";
-                    $arr['data_type'] = "add-new";
-
-                    echo json_encode($arr);
-                } else {
-                    $arr['message'] = "Pedido adicionado.";
-                    $arr['message_type'] = "info";
-                    $arr['data_type'] = "add-new";
-
-                    $categories = $category->readAll();
-                    $arr['data'] = $category->make_table($categories);
-
-                    echo json_encode($arr);
-                }
-            } else if($data->data_type == "delete-row"){
-                $category->delete($data->id);
-
-                $arr['message'] = "Pedido deletado.";
-                $arr['message_type'] = "info";
-                $arr['data_type'] = "delete-row";
-
-                $categories = $category->readAll();
-                $arr['data'] = $category->make_table($categories);
-
-                echo json_encode($arr);
-            } else if($data->data_type == "toggle-status"){
+            if($data->data_type == "toggle-status"){
                 $id = $data->id;
-                $sqlStatusUpdate = "UPDATE tb_categories SET status = IF(status = 1, 0, 1) WHERE id = '$id' LIMIT 1";
+                $sqlStatusUpdate = "UPDATE tb_orders SET status = IF(status = 1, 0, 1) WHERE id = '$id' LIMIT 1";
                 $db->write($sqlStatusUpdate);
                 
                 $arr['message_type'] = "info";
                 $arr['data_type'] = "toggle-status";
 
-                $categories = $category->readAll();
-                $arr['data'] = $category->make_table($categories);
-
-                echo json_encode($arr);
-            } else if($data->data_type == "edit-category"){ 
-                $id = $data->id;
-            
-                $category->update($data);
-                $arr['message'] = "Pedido editado.";
-                $arr['message_type'] = "info";
-                $arr['data_type'] = "edit-category";
-                $arr['id'] = $data->id;
-                $arr['category'] = $data->category;
-
-                $categories = $category->readAll();
-                $arr['data'] = $category->make_table($categories);
+                if($user_data->rank === "customer"){  
+                    $sqlOrders = "SELECT o.*, op.product_id ,GROUP_CONCAT(CONCAT(p.title, ' x ', op.product_quantity) SEPARATOR '<br>') as products, 
+                                    SUM(p.price_sell * op.product_quantity)as total_value FROM tb_orders o
+                                    INNER JOIN tb_orders_products op ON op.order_id = o.id
+                                    INNER JOIN tb_products p ON p.id = op.product_id
+                                    WHERE o.customer_id = :customer_id
+                                    GROUP BY o.id
+                                    ORDER BY o.id ASC";
+                    $orders = $db->read($sqlOrders, $arr); 
+                    $tableRows = $order->make_table_customer($orders); 
+                } else {
+                    $sqlOrders = "SELECT o.*, op.product_id ,GROUP_CONCAT(CONCAT(p.title, ' x ', op.product_quantity) SEPARATOR '<br>') as products, 
+                                    SUM(p.price_sell * op.product_quantity)as total_value FROM tb_orders o
+                                    INNER JOIN tb_orders_products op ON op.order_id = o.id
+                                    INNER JOIN tb_products p ON p.id = op.product_id 
+                                    GROUP BY o.id
+                                    ORDER BY o.id ASC";
+                    $orders = $db->read($sqlOrders);
+                    $tableRows = $order->make_table($orders); 
+                }
 
                 echo json_encode($arr);
             }

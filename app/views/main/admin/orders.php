@@ -58,97 +58,7 @@
 		</div><!-- /col-md-12 -->
 	</div><!-- /row -->
 
-<script type="text/javascript"> 
-
-
-	function hideEditModal(){ 
-		const edit_modal = document.querySelector('#edit-category');
-		const modal = bootstrap.Modal.getInstance(edit_modal);    
-		modal.hide();
-	}
-
-	var editModal = document.getElementById('edit-category')
-
-	editModal.addEventListener('show.bs.modal', function (event) {
-		// Button that triggered the modal
-		var button = event.relatedTarget
-		// Extract info from data-bs-* attributes
-		var id = button.getAttribute('data-bs-id');
-		var category = button.getAttribute('data-bs-category');
-		var parent = button.getAttribute('data-bs-parent');
-		
-		// If necessary, you could initiate an AJAX request here
-		// and then do the updating in a callback.
-		//
-		// Update the modal's content.
-		var modalTitle = editModal.querySelector('.modal-title');
-		var idCategoryInput = editModal.querySelector('#editar-id-categoria'); 
-		var categoryInput = editModal.querySelector('#editar-categoria');
-		var parentCategoryInput = editModal.querySelector('#editar-pai-categoria'); 
-
-		modalTitle.textContent = 'Editar Categoria:' + category;
-		idCategoryInput.value = id;
-		categoryInput.value = category;
-		parentCategoryInput.value = parent; 
-	})
- 
-	function collectData(element){
-		var category_input = document.querySelector("#categoria");
-		var parent_input = document.querySelector("#pai-categoria");
-
-		nameRegex = '/^([a-zA-Zà-úÀ-Ú0-9]|-|_|\s)+$/';
-
-		if(category_input.value.trim().match(nameRegex)){
-			alert("Digite um nome de categoria válido");
-			return false;
-		}
-
-		var category = capitalize(category_input.value.trim());
-		var parent = "";
-
-		if(parent_input.value.trim() !== "" || !isNaN(parent_input.value.trim())){
-			parent = capitalize(parent_input.value.trim());
-		}
-
-		sendData({
-			category: category,
-			parent: parent,
-			data_type: 'add-category'
-		});
-	}
-
-	function collectEditData(element){
-		var category_id = document.querySelector("#editar-id-categoria"); 
-		var category_input = document.querySelector("#editar-categoria");
-		var parent_input = document.querySelector("#editar-pai-categoria");
-
-
-		if(!isNaN(category_input.value.trim())){
-			alert("Digite um nome de categoria válido");
-			return false;
-		}
-
-		var category = capitalize(category_input.value.trim());
-		 
-		if(parent_input.value.trim() == "" || !isNaN(parent_input.value.trim())){
-			var parent = capitalize(parent_input.value.trim());
-
-			sendData({
-				id: category_id.value,
-				category: category,
-				parent: parent,
-				data_type: 'edit-category'
-			});
-		} else {
-			sendData({
-				id: category_id.value,
-				category: category,
-				data_type: 'edit-category'
-			});
-		}
-
-	}
-
+<script type="text/javascript">  
 	function sendData(data = {}){
 		var ajax = new XMLHttpRequest();
 
@@ -191,19 +101,12 @@
 			}
 		}
 	}
-
-	function deleteRow(id){
-		if(!confirm("Tem certeza que quer deletar esta categoria?")){
+ 
+	function cancelOrder(id){
+		if(!confirm("Tem certeza que quer cancelar este pedido?")){
 			return;
 		}
 
-		sendData({
-			data_type: 'delete-row',
-			id: id
-		});
-	}
-
-	function toggleStatus(id){
 		sendData({
 			data_type: 'toggle-status',
 			id: id
