@@ -183,9 +183,11 @@ Class Admin extends Controller{
         $db = Database::newInstance();  
 
         $activeProducts = $db->read("SELECT * FROM tb_products WHERE status = 1");
+        
         $stockMovement = $db->read("SELECT p.title, s.id, s.product_id, s.obs, s.movement
                                     FROM tb_products as p
                                     INNER JOIN tb_stock s ON s.product_id = p.id");
+
         $stockProducts = $db->read("SELECT p.title, SUM(s.movement) as quantity
                                     FROM tb_products as p
                                     INNER JOIN tb_stock s ON s.product_id = p.id

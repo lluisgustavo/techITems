@@ -11,18 +11,36 @@ Class AjaxStock extends Controller{
             if($data->data_type == "add-movement"){  
                 $check = $stock->create($data);  
                 
-                $arr['message_type'] = "info";
-                $arr['data_type'] = "add-new";
-                
-                $stocks = $db->read("SELECT p.title, s.id, s.product_id, s.obs, SUM(s.movement) as quantity
-                                        FROM tb_products as p
-                                        INNER JOIN tb_stock s ON s.product_id = p.id"); 
-                $product = $this->load_model("Product");  
-         
-                $arr['data'] = $stock->make_table_stock($stocks, $product); 
-                $arr['data'] = $stock->make_table_movement($stocks, $product); 
+                if($check){ 
+                    $arr['message'] = "Estoque atualizado.";
+    
+                    $arr['message_type'] = "info";
+                    $arr['data_type'] = "add-new";
+    
+                    $stockProducts s= $db->read("SELECT p.title, s.id, s.product_id, s.obs, s.movement
+                                                FROM tb_products as p
+                                                INNER JOIN tb_stock s ON s.product_id = p.id");
+            
+                    $stockMovement = $db->read("SELECT p.title, SUM(s.movement) as quantity
+                                                FROM tb_products as p
+                                                INNER JOIN tb_stock s ON s.product_id = p.id
+                                                group by s.product_id");
 
-                echo json_encode($arr);
+                    $product = $this->load_model("Product");  
+             
+                    $arr['data'] = $stock->make_table_stock($stockMovement, $product); 
+                    $arr['data'] = $stock->make_table_movement($stockProducts, $product); 
+    
+                    echo json_encode($arr);
+                }else{
+                    $arr['message_type'] = "Ocorreu um erro ao movimentar o estoque.";
+                    $arr['message_type'] = "info";
+                    $arr['data_type'] = "error";
+                    $arr['data'] = $stock->make_table_movement($stockMovement, $product); 
+    
+                    echo json_encode($arr);
+                }
+
             }
         }
     }

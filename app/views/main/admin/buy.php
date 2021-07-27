@@ -123,8 +123,7 @@ function handleResult(result){
 			if(typeof(obj.data_type) != 'undefined'){
 				if(obj.data_type == "add-new"){
 					if(obj.message_type == 'info'){
-						alert(obj.message); 
-					
+						alert(obj.message);  
 						removeEveryRowCart(); 
 					} else {
 						alert(obj.message);
