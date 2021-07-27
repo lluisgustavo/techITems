@@ -231,13 +231,24 @@ Class Admin extends Controller{
 
         $db = Database::newInstance();
         
-        //Only products that have stock
-        $products = $db->read("SELECT p.*, SUM(s.movement) as quantity FROM tb_products AS p
+        //Only products that have stock and are active and have active categories
+        $products = $db->read("SELECT p.id, p.title, p.description, p.price_sell, p.image, p.image2, p.image3, p.image4, p.status, b.brand_name, c.category, c.parent, SUM(s.movement) as quantity FROM tb_products AS p
                                     INNER JOIN tb_stock s ON s.product_id = p.id
+                                    INNER JOIN tb_categories c ON p.category = c.id
+                                    INNER JOIN tb_brands b ON p.brand_id = b.id
+                                    WHERE p.status = 1
+                                    AND c.status = 1
                                     GROUP BY p.id
                                     ORDER BY p.id ASC");
         $product = $this->load_model("Product"); 
-        $categories = $db->read("SELECT * FROM tb_categories ORDER BY id ASC"); 
+        
+        //Only active categories that have products that have stock
+        $categories = $db->read("SELECT c.id, c.category, c.status, c.parent FROM tb_categories c
+                                        INNER JOIN tb_products p ON p.category = c.id
+                                        INNER JOIN tb_stock s ON s.product_id = p.id
+                                        WHERE c.status = 1 
+                                        GROUP BY p.id
+                                        ORDER BY c.id ASC"); 
         $category = $this->load_model("Category");
 
         //$tableRows = $product->make_table($products, $category); 

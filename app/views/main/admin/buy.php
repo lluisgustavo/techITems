@@ -5,15 +5,19 @@
 ?>      
 	<div class="container h-100"> 
 		<div class="row">
-			<?php foreach($cRows as $key => $row): ?>
-				<div class="my-1 col-auto" > 
-					<span class="btn btn-outline-secondary <?= ($key === 0) ? 'active' : ''?>" style="font-size: 0.7em;"> <?= $row->category ?></span>	 
+				<div class="my-1 col-auto" >  
+					<?php if(count($cRows) > 1): ?>
+						<span class="list btn btn-outline-secondary active" data-filter="todas" style="font-size: 0.7em;">Todas</span>	 
+					<?php endif; ?>
+					<?php foreach($cRows as $key => $row): ?>
+						<span class="list btn btn-outline-secondary" data-filter="<?= strtolower($row->category) ?>" style="font-size: 0.7em;"> <?= $row->category ?></span>	 
+					<?php endforeach; ?>
 				</div>
-			<?php endforeach; ?>
 		</div>
 		<div class="row justify-content-center align-items-center">
-			<?php foreach($pRows as $row): ?>
-				<div class="card col-12 col-sm-4 m-2" style="width: 18rem;"> 
+			<?php foreach($pRows as $row): 
+				if($row->quantity > 0):?>
+				<div class="card col-12 col-sm-3 m-2 <?= strtolower($row->category) ?>" style="width: 15rem;"> 
 					<div id="slider-carousel-product-<?= $row->id ?>" class="justify-content-center carousel carousel-dark slide" data-bs-ride="carousel">
 						<div class="carousel-inner"> 
 							<div class="carousel-item active"> 
@@ -41,74 +45,18 @@
 						</button>
 					</div>  
 					<div class="card-body text-center"> 
-						<h5 class="card-text"> <?= $row->title ?> </h5> 
+						<h4 class="card-text"> <?= $row->title ?> </h4> 
+						<h5 class="card-text"> <?= $row->brand_name ?> </h5> 
 						<p class="card-text"> <?= $row->description ?> </p> 
-						<h5 class="card-text">R$ <?= number_format($row->price_sell , 2, '.', '')?></h5>
+						<h4 class="card-text">R$ <?= number_format($row->price_sell , 2, '.', '')?></h4>
 				
 						<button onclick="addToCart(this)" class="btn btn-primary" type="checkbox" data-id="<?= $row->id ?>" data-image="<?= $row->image ?>" data-name="<?= $row->title ?>" data-price="<?= $row->price_sell ?>" id="product_<?=$row->id?>" name="product_<?=$row->id?>">
 						Adicionar ao Carrinho
 						</button>
 						</div>
-				</div>
-				<!--
-				<div class="col-12 my-2">
-					<div class="card">
-						<div class="row">
-							<div class="col-4"></div>
-							</div>
-							<div class="col-8 p-3">
-								<div class="form-check">
-									<!--<input onchange="addToCart(this)"  class="form-check-input" type="checkbox" data-id="<?= $row->id ?>" data-image="<?= $row->image ?>" data-name="<?= $row->title ?>" data-price="<?= $row->price_sell ?>" id="product_<?=$row->id?>" name="product_<?=$row->id?>">-->
-									<!--<label class="form-check-label" for="product_<?=$row->id?>"> R$ <?= number_format($row->price_sell , 2, '.', '')?> </label> -->
-								<!--</div> 
-							</div>
-						</div>
-					</div>
-				</div>--L
-				<!--<div class="col-auto col-sm-4 col-md-3">  
-					<div class="buy-product-card m-1">
-						<div id="slider-carousel-product-<?= $row->id ?>" class="justify-content-center carousel carousel-dark slide" data-bs-ride="carousel">
-							<div class="carousel-inner">
-								<div class="card-header">
-									<p> <?= $row->title ?> </p>
-								</div>
-								<div class="carousel-item active"> 
-									<img class="w-100 h-100" src="<?= ROOT . $row->image ?>" alt="">
-								</div> 
-								<?php if(!empty($row->image2)): ?>
-									<div class="carousel-item"> 
-										<img class="w-100" src="<?= ROOT . $row->image2 ?>" alt="">
-									</div>
-								<?php endif; ?>	
-								<?php if(!empty($row->image3)): ?> 
-									<div class="carousel-item"> 
-										<img class="w-100" src="<?= ROOT . $row->image3 ?>" alt="">
-									</div>
-								<?php endif; ?>
-								<?php if(!empty($row->image4)): ?>
-									<div class="carousel-item"> 
-										<img class="w-100" src="<?= ROOT . $row->image4 ?>" alt="">
-									</div>
-								<?php endif; ?>
-							</div>
-							<button class="carousel-control-prev" type="button" data-bs-target="#slider-carousel-product-<?= $row->id ?>" data-bs-slide="prev">
-								<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-								<span class="visually-hidden">Anterior</span>
-							</button>
-							<button class="carousel-control-next" type="button" data-bs-target="#slider-carousel-product-<?= $row->id ?>" data-bs-slide="next">
-								<span class="carousel-control-next-icon" aria-hidden="true"></span>
-								<span class="visually-hidden">Próximo</span>
-							</button>
-						</div>
-						<div class="card-footer">
-							<div class="form-check">
-								<input onchange="addToCart(this)"  class="form-check-input" type="checkbox" data-id="<?= $row->id ?>" data-image="<?= $row->image ?>" data-name="<?= $row->title ?>" data-price="<?= $row->price_sell ?>" id="product_<?=$row->id?>" name="product_<?=$row->id?>">
-								<label class="form-check-label" for="product_<?=$row->id?>"> R$ <?= number_format($row->price_sell , 2, '.', '')?> </label>
-							</div>
-						</div>
-					</div>
-				</div>-->
-			<?php endforeach; ?>
+				</div> 
+			<?php endif;
+		endforeach; ?>
 		</div>
 		<div class="row justify-content-center align-items-center my-5"> 
 			<div class="col-md-12" id="cart">
@@ -200,8 +148,8 @@ function addToCart(element){
 					<td>
 						` + product_name + `
 						<small><a class="text-muted" onclick="removeFromCart(` + product_id +`)"><i class="cursor-pointer fa fa-times"></i></a></small>
-						<div class="col-2" style="width: 2em;">
-							<input onChange="totalVlrProduto(` + product_id +`, ` + product_price + `, this)" class="form-control" name="qtdProduto[` + product_id +`]" value="1" type="number" min="1" max="999" step="1">
+						<div class="col-2">
+							<input style="width: 5em;" onChange="totalVlrProduto(` + product_id +`, ` + product_price + `, this)" class="form-control" name="qtdProduto[` + product_id +`]" value="1" type="number" min="1" max="999" step="1">
 						</div>
 					</td>
 					<td>
