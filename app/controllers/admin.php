@@ -230,7 +230,12 @@ Class Admin extends Controller{
         }
 
         $db = Database::newInstance();
-        $products = $db->read("SELECT * FROM tb_products ORDER BY id ASC");
+        
+        //Only products that have stock
+        $products = $db->read("SELECT p.*, SUM(s.movement) as quantity FROM tb_products AS p
+                                    INNER JOIN tb_stock s ON s.product_id = p.id
+                                    GROUP BY p.id
+                                    ORDER BY p.id ASC");
         $product = $this->load_model("Product"); 
         $categories = $db->read("SELECT * FROM tb_categories ORDER BY id ASC"); 
         $category = $this->load_model("Category");

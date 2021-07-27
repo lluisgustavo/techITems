@@ -200,8 +200,8 @@ function addToCart(element){
 					<td>
 						` + product_name + `
 						<small><a class="text-muted" onclick="removeFromCart(` + product_id +`)"><i class="cursor-pointer fa fa-times"></i></a></small>
-						<div class="col-2">
-							<input onChange="totalVlrProduto(` + product_id +`, ` + product_price + `, this)" class="col-2 form-control" name="qtdProduto[` + product_id +`]" value="1" type="number" min="1" max="999" step="1" style="min-width: 2em;">
+						<div class="col-2" style="width: 2em;">
+							<input onChange="totalVlrProduto(` + product_id +`, ` + product_price + `, this)" class="form-control" name="qtdProduto[` + product_id +`]" value="1" type="number" min="1" max="999" step="1">
 						</div>
 					</td>
 					<td>
