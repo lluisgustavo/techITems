@@ -13,12 +13,10 @@ Class AjaxStock extends Controller{
                 
                 $arr['message_type'] = "info";
                 $arr['data_type'] = "add-new";
-  
-                $activeProducts = $db->read("SELECT * FROM tb_products WHERE status = 1");
+                
                 $stocks = $db->read("SELECT p.title, s.id, s.product_id, s.obs, SUM(s.movement) as quantity
                                         FROM tb_products as p
-                                        INNER JOIN tb_stock s ON s.product_id = p.id");
-                $stock = $this->load_model("Stock");  
+                                        INNER JOIN tb_stock s ON s.product_id = p.id"); 
                 $product = $this->load_model("Product");  
          
                 $arr['data'] = $stock->make_table($stocks, $product); 

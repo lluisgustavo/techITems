@@ -139,17 +139,6 @@
 					} else {
 						alert(obj.message);
 					}   
-				} else if(obj.data_type == "delete-row"){
-					alert(obj.message);
-					var table_body = document.querySelector("#table-body");
-					table_body.innerHTML = obj.data;
-				} else if(obj.data_type == "toggle-status"){
-					var table_body = document.querySelector("#table-body");
-					table_body.innerHTML = obj.data;
-				} else if(obj.data_type == "edit-supplier"){
-					hideEditModal();
-					var table_body = document.querySelector("#table-body");
-					table_body.innerHTML = obj.data;
 				}
 			}
 		}
