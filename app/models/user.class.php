@@ -235,7 +235,7 @@ Class User{
         $allowed[] = "image/png";
         $allowed[] = "image/gif";
         $folder = "uploads/avatar/";
-        $image = $_FILES['image'];
+        $image = $files['image'];
  
         if(!file_exists($folder)){
             mkdir($folder, 0777, true);
@@ -259,5 +259,35 @@ Class User{
                 return true;
             }
         }
+    }
+    
+    public function make_table($users, $model = null){
+        $result = "";
+        if(is_array($users)){   
+            foreach($users as $User){   
+                if($User->rank === "admin"){
+                    $rank = "Administrador";
+                } elseif($User->rank === "employee"){
+                    $rank = "Colaborador";
+                } elseif($User->rank === "customer"){
+                    $rank = "Cliente"; 
+                }
+
+                $result .= '<tr>
+                            <td>' . $User->id . '</td>
+                            <td>' . $User->email . '</td>
+                            <td>' . $rank . '</td>    
+                            <td>' . date('d-m-Y', strtotime($User->created_at)) . '</td>    
+                            <td>
+                                <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#edit-user" 
+                                data-bs-id="' . $User->id . '" data-bs-email="' . $User->email . '"><i class="fa fa-cogs"></i>
+                                </button>
+                            </td> 
+                            
+                    </tr>';    
+            }
+        }
+
+        return $result;
     }
 }

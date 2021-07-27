@@ -212,12 +212,11 @@ Class Admin extends Controller{
             $data['user_data'] = $user_data;
         }
 
-        $db = Database::getInstance();
-        var_dump($db); 
-        $users = $db->read("SELECT * FROM tb_users ORDER BY id ASC");  
+        $db = Database::newInstance(); 
+        $users = $db->read("SELECT * FROM tb_users ORDER BY email ASC");  
         $tableRows = $User->make_table($users); 
 
-        $data['tableRows'] = $tableRows; 
+        $data['tableRows'] = $tableRows;  
         $data['page_title'] = "Usuários";
         $this->view('admin/users', $data);
     }
