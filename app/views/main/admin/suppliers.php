@@ -8,10 +8,9 @@
 		<div class="col-md-12">
 			<div class="content-panel">
 				<table class="table table-striped table-advance table-hover">
-					<?php if($user_data->rank === "admin"): ?>
-					<h4><i class="fa fa-angle-right"></i> Fornecedores
+					<?php if($user_data->rank === "admin"): ?> 
 					<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-new-supplier">
-						<i class="fa fa-plus"></i>Adicionar
+						<i class="fa fa-plus"></i>Adicionar Fornecedor
 					</button></h4>
 					
 					<!-- adicionar fornecedor -->

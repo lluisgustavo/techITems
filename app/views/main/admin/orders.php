@@ -8,41 +8,14 @@
 	<div class="row mt">
 		<div class="col-md-12">
 			<div class="content-panel">
-				<table class="table table-striped table-advance table-hover">  
-					<!-- adicionar categoria -->
-					<div class="modal fade" id="add-new-category" tabindex="-1" aria-labelledby="add-new" aria-hidden="true">
-						<div class="modal-dialog">
-							<div class="modal-content">
-								<div class="modal-header">
-									<h5 class="modal-title" id="addNewLabel">Adicionar Produto</h5>
-									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-								</div>
-								<form class="form-inline" role="form">
-									<div class="modal-body">
-										<div class="form-group"> 
-											<input name="categoria" id="categoria" type="text" class="form-control" placeholder="Nome da Categoria" autofocus required>
-										</div>
-										<div class="form-group"> 
-											<?php echo $dropdownCategories; ?>
-										</div>
-									</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button> 
-										<button type="submit" onclick="collectData(event); return false;" class="btn btn-theme text-right">Adicionar</button>	
-									</div> 
-								</form>
-							</div>		
-						</div>
-					</div>  
-					<!-- adicionar categoria -->
-
+				<table class="table table-striped table-advance table-hover">   
 					<!-- editar categoria -->
-					<div class="modal fade" id="edit-category" tabindex="-1" aria-labelledby="edit-category" aria-hidden="true">
+					<div class="modal fade" id="edit-category" tabindex="-1" aria-labelledby="edit-order" aria-hidden="true">
 						<div class="modal-dialog">
 							<div class="modal-content">
 								<form class="form-inline" id="edit-product-form" role="form">
 									<div class="modal-header">
-										<h5 class="modal-title" id="editProductLabel">Editar Produto</h5>
+										<h5 class="modal-title" id="editProductLabel">Editar Pedido</h5>
 										<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 									</div>
 									<div class="modal-body">

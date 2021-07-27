@@ -6,22 +6,31 @@ Class Product{
         $db = Database::newInstance();
         $arr['title'] = ucwords($data->title);
         $arr['description'] = ucwords($data->description); 
-        $arr['category'] = ucwords($data->category);
-        $arr['price'] = ucwords($data->price);
+        $arr['category'] = $data->category;
+        $arr['supplier_id'] = $data->supplier;
+        $arr['brand_id'] = $data->brand;
+        $arr['price_sell'] = $data->price_sell;
+        $arr['price_buy'] = $data->price_buy;
         $arr['date'] = date("Y-m-d H:i:s");
+
         if(!empty($data->slug)){ 
             $arr['slug'] = $data->slug;
         } else {
             $arr['slug'] = $this->str_to_url($data->title); 
         }
+
         $arr['user_url'] = $_SESSION['user_url'];
   
         if(!is_numeric($arr['category'])){
             $_SESSION['error'] .= "Digite uma categoria válida";
         }
 
-        if(!is_numeric($arr['price'])){
-            $_SESSION['error'] .= "Digite um preço válido";
+        if(!is_numeric($arr['price_sell'])){
+            $_SESSION['error'] .= "Digite um preço de venda válido";
+        }
+
+        if(!is_numeric($arr['price_buy'])){
+            $_SESSION['error'] .= "Digite um preço de compra válido";
         }
 
         $arr_slug['slug'] = $arr['slug'];  
@@ -53,16 +62,15 @@ Class Product{
                     $destination = $folder . $img_row['name'];
                     move_uploaded_file($img_row['tmp_name'], $destination);
                     $arr[$key] = $destination;
-
-                    //$imageClass->resize_image($destination, $destination, 1000, 1000);
                 } else {
                     $_SESSION['error'] .= "Imagem " . $key .  " é maior do que o tamanho permitido.";
                 }
             }
         } 
 
+
         if(!isset($_SESSION['error']) || $_SESSION['error'] == ""){
-            $sqlInsertProduct = "INSERT INTO products (title, description, category, price, slug, date, user_url, image, image2, image3, image4) VALUES (:title, :description, :category, :price, :slug, :date, :user_url, :image_1, :image_2, :image_3, :image_4)";
+            $sqlInsertProduct = "INSERT INTO tb_products (title, description, category, price_sell, price_buy, slug, date, user_url, image, image2, image3, image4, supplier_id, brand_id) VALUES (:title, :description, :category, :price_sell, :price_buy, :slug, :date, :user_url, :image_1, :image_2, :image_3, :image_4, :supplier_id, :brand_id)";
             $check = $db->write($sqlInsertProduct, $arr); 
 
             if($check){
@@ -91,7 +99,10 @@ Class Product{
         $arr['title'] = $data->title;
         $arr['description'] = $data->description; 
         $arr['category'] = $data->category;
-        $arr['price'] = $data->price;  
+        $arr['price_sell'] = $data->price_sell;  
+        $arr['price_buy'] = $data->price_buy;  
+        $arr['supplier_id'] = $data->supplier_id;
+        $arr['brand_id'] = $data->brand_id;
         $_SESSION['error'] = "";
 
         if(isset($data->slug)){ 
@@ -104,10 +115,14 @@ Class Product{
             $_SESSION['error'] .= "Digite uma categoria válida";
         }
 
-        if(!is_numeric($arr['price'])){
-            $_SESSION['error'] .= "Digite um preço válido";
+        if(!is_numeric($arr['price_sell'])){
+            $_SESSION['error'] .= "Digite um preço de venda válido";
         }
-       
+
+        if(!is_numeric($arr['price_buy'])){
+            $_SESSION['error'] .= "Digite um preço de compra válido";
+        }
+
         $arr_slug['slug'] = $arr['slug'];
         $sqlCheckSlugExists = "SELECT * FROM tb_products WHERE slug = ':slug'"; 
         $check = $db->read($sqlCheckSlugExists, $arr_slug);
@@ -115,7 +130,7 @@ Class Product{
         if($check){
             $arr['slug'] .= "-" . rand(0,99999);
         } 
-
+ 
         $size = (5 * 1024 * 1024);
         $allowed[] = "image/jpeg";
         $allowed[] = "image/png";
@@ -148,7 +163,7 @@ Class Product{
         $sqlArguments = '';
 
         foreach($arr as $key => $column){  
-            if($key != "image_1" && $key != "image_2" && $key != "image_3" && $key != "image_4"){
+            if($key != "id" && $key != "image_1" && $key != "image_2" && $key != "image_3" && $key != "image_4"){
                 $sqlArguments .= ($key == 'user_url') ? $key . ' = :' . $key : ', ' . $key . ' = :' . $key; 
             }
         }

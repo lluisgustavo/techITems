@@ -9,7 +9,7 @@
 			<div class="content-panel">
 				<table class="table table-striped table-advance table-hover">  
 					<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-new-brand">
-						<i class="fa fa-plus"></i>Adicionar
+						<i class="fa fa-plus"></i>Adicionar Marca
 					</button></h4>
 					
 					<!-- adicionar marca -->

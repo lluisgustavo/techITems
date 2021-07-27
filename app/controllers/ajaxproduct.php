@@ -32,7 +32,9 @@ Class AjaxProduct extends Controller{
                     $arr['message'] = "Produto adicionado.";
                     $arr['message_type'] = "info";
                     $arr['data_type'] = "add-new";
-                    $products = $product->readAll();
+                    $products = $db->read("SELECT p.*, b.brand_name, b.status, s.supplier_name FROM `tb_products` as p
+                                            INNER JOIN tb_brands b ON p.brand_id = b.id
+                                            INNER JOIN tb_suppliers s ON p.supplier_id = s.id");
                     $arr['data'] = $product->make_table($products, $category);
 
                     echo json_encode($arr);
@@ -45,8 +47,10 @@ Class AjaxProduct extends Controller{
                 $arr['message_type'] = "info";
                 $arr['data_type'] = "delete-row";
 
-                $products = $product->readAll();
-                $arr['data'] = $product->make_table($products);
+                $products = $db->read("SELECT p.*, b.brand_name, b.status, s.supplier_name FROM `tb_products` as p
+                                        INNER JOIN tb_brands b ON p.brand_id = b.id
+                                        INNER JOIN tb_suppliers s ON p.supplier_id = s.id");
+                $arr['data'] = $product->make_table($products, $category);
 
                 echo 'a';//json_encode($arr);
             } else if($data->data_type == "toggle-status"){
@@ -57,23 +61,27 @@ Class AjaxProduct extends Controller{
                 $arr['message_type'] = "info";
                 $arr['data_type'] = "toggle-status";
 
-                $products = $product->readAll();
-                $arr['data'] = $product->make_table($products);
+                $products = $db->read("SELECT p.*, b.brand_name, b.status, s.supplier_name FROM `tb_products` as p
+                                        INNER JOIN tb_brands b ON p.brand_id = b.id
+                                        INNER JOIN tb_suppliers s ON p.supplier_id = s.id");
+                $arr['data'] = $product->make_table($products, $category);
 
                 echo json_encode($arr);
             } else if($data->data_type == "edit-product"){
                 $id = $data->id;
                
-                $product->update($data, $_FILES, $imageClass);
+                $product->update($data, $_FILES);
  
                 $arr['message'] = "Produto editado.";
                 $arr['message_type'] = "info";
                 $arr['data_type'] = "edit-product";
                 $arr['id'] = $data->id;
                 if(isset($data->product)) $arr['product'] = $data->product;
-                if(isset($data->description)) $arr['description'] = $data->description;
+                if(isset($data->description)) $arr['title'] = $data->title;
 
-                $products = $product->readAll();
+                $products = $db->read("SELECT p.*, b.brand_name, b.status, s.supplier_name FROM `tb_products` as p
+                                        INNER JOIN tb_brands b ON p.brand_id = b.id
+                                        INNER JOIN tb_suppliers s ON p.supplier_id = s.id");
                 $arr['data'] = $product->make_table($products, $category);
 
                 echo json_encode($arr);

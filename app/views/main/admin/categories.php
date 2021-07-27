@@ -10,7 +10,7 @@
 				<table class="table table-striped table-advance table-hover">
 					<h4><i class="fa fa-angle-right"></i> Categorias de Produtos  
 					<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-new-category">
-						<i class="fa fa-plus"></i>Adicionar
+						<i class="fa fa-plus"></i>Adicionar Categoria
 					</button></h4>
 					
 					<!-- adicionar categoria -->
