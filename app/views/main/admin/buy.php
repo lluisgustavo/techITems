@@ -12,8 +12,9 @@
 			<?php endforeach; ?>
 		</div>
 		<div class="row justify-content-center align-items-center">
-			<?php foreach($pRows as $row): ?>
-				<div class="card col-12 col-sm-4 m-2" style="width: 18rem;"> 
+			<?php foreach($pRows as $row):
+				show($row); die; ?>
+				<div class="card col-12 col-sm-4 m-2 <?= $row->category ?>" style="width: 18rem;"> 
 					<div id="slider-carousel-product-<?= $row->id ?>" class="justify-content-center carousel carousel-dark slide" data-bs-ride="carousel">
 						<div class="carousel-inner"> 
 							<div class="carousel-item active"> 
