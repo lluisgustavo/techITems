@@ -27,10 +27,11 @@ Class AjaxOrder extends Controller{
                     $orders = $db->read($sqlOrders, $arr); 
                     $tableRows = $order->make_table_customer($orders); 
                 } else {
-                    $sqlOrders = "SELECT o.*, op.product_id ,GROUP_CONCAT(CONCAT(p.title, ' x ', op.product_quantity) SEPARATOR '<br>') as products, 
-                                    SUM(p.price_sell * op.product_quantity)as total_value FROM tb_orders o
+                    $sqlOrders = "SELECT o.*, pe.name, op.product_id ,GROUP_CONCAT(CONCAT(p.title, ' x ', op.product_quantity) SEPARATOR '<br>') as products, SUM(p.price_sell * op.product_quantity)as total_value FROM tb_orders o
                                     INNER JOIN tb_orders_products op ON op.order_id = o.id
-                                    INNER JOIN tb_products p ON p.id = op.product_id 
+                                    INNER JOIN tb_products p ON p.id = op.product_id
+                                    INNER JOIN tb_customers c ON c.id = o.customer_id
+                                    INNER JOIN tb_people pe ON pe.id = c.person_id 
                                     GROUP BY o.id
                                     ORDER BY o.id ASC";
                     $orders = $db->read($sqlOrders);

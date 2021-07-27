@@ -41,6 +41,9 @@
 					<thead>
 						<tr>
 							<th><i class="fa fa-bullhorn"></i> Pedido</th>
+							<?php if($user_data->rank === "admin" || $user_data->rank === "employee"): ?>
+								<th><i class=" fa fa-user"></i> Pessoa</th> 
+							<?php endif; ?>
 							<th><i class=" fa fa-edit"></i> Produtos</th>
 							<th><i class="fa fa-table"></i> Valor Total</th>
 							<?php if($user_data->rank === "admin" || $user_data->rank === "employee"): ?>
