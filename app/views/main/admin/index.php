@@ -81,7 +81,7 @@
 				<div class="col-12 col-sm-6 col-md-3 text-center">
 					<a href="<?= ROOT ?>admin/brands">
 						<button class="btn btn-primary btn-lg size-btn"> 
-							<i class="fa-2x fas fa-shopping-bag"></i>
+							<i class="fa-2x fas fa-copyright"></i>
 							<p style="font-size: 0.8em">Marcas</p> 
 						</button>
 					</a>
@@ -89,7 +89,7 @@
 				<div class="col-12 col-sm-6 col-md-3 text-center">
 					<a href="<?= ROOT ?>admin/config">
 						<button class="btn btn-secondary btn-lg size-btn"> 
-							<i class="fa-2x fas fa-shopping-bag"></i>
+							<i class="fa-2x fas fa-cogs"></i>
 							<p style="font-size: 0.8em">Configurações</p> 
 						</button>
 					</a>
@@ -211,7 +211,7 @@
 				<div class="col-12 col-sm-6 col-md-3 text-center">
 					<a href="<?= ROOT ?>admin/config">
 						<button class="btn btn-warning btn-lg size-btn"> 
-							<i class="fa-2x fas fa-shopping-bag"></i>
+							<i class="fa-2x fas fa-cogs"></i>
 							<p style="font-size: 0.8em">Configurações</p> 
 						</button>
 					</a>
