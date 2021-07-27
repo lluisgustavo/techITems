@@ -247,7 +247,7 @@ Class Admin extends Controller{
                                         INNER JOIN tb_products p ON p.category = c.id
                                         INNER JOIN tb_stock s ON s.product_id = p.id
                                         WHERE c.status = 1 
-                                        GROUP BY p.id
+                                        GROUP BY c.category
                                         ORDER BY c.id ASC"); 
         $category = $this->load_model("Category");
 
