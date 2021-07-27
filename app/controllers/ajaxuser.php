@@ -55,7 +55,7 @@ Class AjaxUser extends Controller{
             } else if($data->data_type == "toggle-active"){
                 $arr['id'] = $data->id;
 
-                $sqlPasswordUpdate = "UPDATE tb_users SET active = IF(active = 1, 0, 1)  WHERE id = :id LIMIT 1";
+                $sqlStatusUpdate = "UPDATE tb_users SET active = IF(active = 1, 0, 1)  WHERE id = :id LIMIT 1";
                 $db->write($sqlStatusUpdate, $arr);
                 
                 $arr['message_type'] = "info";
@@ -72,7 +72,30 @@ Class AjaxUser extends Controller{
                 $sqlPersonUpdate = "UPDATE tb_people SET name = :name, CPF = :CPF, phone = :phone, birth = :birth WHERE user_id = :user_id";
                 $person = $db->write($sqlPersonUpdate, $arr); 
  
+                $arr['message_type'] = "info";
+                $arr['data_type'] = "update-personal"; 
+                
                 echo json_encode($arr);
+            } else if($data->data_type == "change-permission"){ 
+                $check = $user->updateRank($data);
+
+                if(isset($_SESSION['error']) && $_SESSION['error'] != ""){
+                    $arr['message'] = $_SESSION['error'];
+                    $_SESSION['error'] = "";
+                    $arr['message_type'] = "error";
+                    $arr['data'] = "";
+                    $arr['data_type'] = "change-permission";
+
+                    echo json_encode($arr); 
+                } else {
+                    $users = $db->read("SELECT * FROM tb_users ORDER BY email ASC");  
+                    $arr['data'] = $user->make_table($users); 
+                    $arr['message'] = "Usuário modificado.";
+                    $arr['message_type'] = "info";
+                    $arr['data_type'] = "change-permission"; 
+
+                    echo json_encode($arr);
+                } 
             }
         }
     }

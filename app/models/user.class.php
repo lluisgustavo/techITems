@@ -162,8 +162,16 @@ Class User{
        die;
     }
 
-    public function getUser($user){ 
-    }
+    public function getUser($user){  
+        $id = (int)$user;
+        $db = Database::newInstance(); 
+
+        $arr['id'] = $id;
+        $sqlGetOne = "SELECT * FROM tb_users WHERE id = :id LIMIT 1";
+        $user = $db->read($sqlGetOne, $arr);  
+        if($user) return $user[0];
+        return ""; 
+    } 
 
     private function get_random_string_max($length){
         $array = array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 
@@ -247,7 +255,7 @@ Class User{
                 move_uploaded_file($image['tmp_name'], $destination);
                 $arr['avatar'] = $destination;  
             } else {
-                $_SESSION['error'] .= "Imagem " . $key .  " é maior do que o tamanho permitido.";
+                $_SESSION['error'] .= "Imagem é maior do que o tamanho permitido.";
             }
         } 
 
@@ -259,6 +267,30 @@ Class User{
                 return true;
             }
         }
+    }
+
+    public function updateRank($data){
+        $db = Database::newInstance();
+        
+        $user_data = $this->getUser($data->id);
+
+        if($user_data->rank == $data->rank){
+            $_SESSION['error'] = "O usuário já tem essa permissão.";
+        }
+
+        if(!isset($_SESSION['error']) || $_SESSION['error'] == ""){ 
+            $arr = false;
+            $arr['id'] = $data->id;
+            $arr['rank'] = $data->rank;
+            $sqlUpdateUser = "UPDATE tb_users SET rank = :rank WHERE id = :id";
+            $check = $db->write($sqlUpdateUser, $arr);
+ 
+            if($check){  
+                return true;
+            } 
+        }
+
+        return false;       
     }
     
     public function make_table($users, $model = null){
