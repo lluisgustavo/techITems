@@ -8,41 +8,13 @@
 	<div class="row mt">
 		<div class="col-md-12">
 			<div class="content-panel">
-				<table class="table table-striped table-advance table-hover">   
-					<!-- editar categoria -->
-					<div class="modal fade" id="edit-category" tabindex="-1" aria-labelledby="edit-order" aria-hidden="true">
-						<div class="modal-dialog">
-							<div class="modal-content">
-								<form class="form-inline" id="edit-product-form" role="form">
-									<div class="modal-header">
-										<h5 class="modal-title" id="editProductLabel">Editar Pedido</h5>
-										<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-									</div>
-									<div class="modal-body">
-										<input name="editar-id-categoria" type="hidden" id="editar-id-categoria" class="form-control">
-										<div class="form-group"> 
-											<input name="editar-categoria" id="editar-categoria" type="text" class="form-control" placeholder="Nome da Categoria" autofocus required>
-										</div>
-										<div class="form-group"> 
-											<?php echo $dropdownEditCategories; ?>
-										</div>
-									</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button> 
-										<button id="btn-collect-edit-data" type="submit" onclick="collectEditData(this); return false;" class="btn btn-theme text-right">Salvar</button>	
-									</div>
-								</form>
-							<div>
-						</div>
-					</div> 
-					<!-- editar categoria -->
-					
+				<table class="table table-striped table-advance table-hover">     					
 					<hr>
 					<thead>
 						<tr>
 							<th><i class="fa fa-bullhorn"></i> Pedido</th>
 							<?php if($user_data->rank === "admin" || $user_data->rank === "employee"): ?>
-								<th><i class=" fa fa-user"></i> Pessoa</th> 
+								<th><i class=" fa fa-edit"></i> Pessoa</th> 
 							<?php endif; ?>
 							<th><i class=" fa fa-edit"></i> Produtos</th>
 							<th><i class="fa fa-table"></i> Valor Total</th>

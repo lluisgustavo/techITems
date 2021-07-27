@@ -181,13 +181,25 @@ Class Admin extends Controller{
         }
 
         $db = Database::newInstance();  
-        $stocks = $db->read("SELECT s.id, s.product_id, SUM(s.movement) as quantity
-                                    FROM tb_stock as s");
-        $stock = $this->load_model("Stock");  
- 
-        $tableRows = $stock->make_table($stocks); 
 
-        $data['tableRows'] = $tableRows;   
+        $activeProducts = $db->read("SELECT * FROM tb_products WHERE status = 1");
+        $stockMovement = $db->read("SELECT p.title, s.id, s.product_id, s.obs, s.movement
+                                    FROM tb_products as p
+                                    INNER JOIN tb_stock s ON s.product_id = p.id");
+        $stockProducts = $db->read("SELECT p.title, SUM(s.movement) as quantity
+                                    FROM tb_products as p
+                                    INNER JOIN tb_stock s ON s.product_id = p.id
+                                    group by s.product_id");
+        
+        $stock = $this->load_model("Stock");   
+ 
+        $tableRowsMovement = $stock->make_table_movement($stockMovement); 
+        $tableRowsStock = $stock->make_table_stock($stockProducts); 
+        $selectProducts = $stock->make_select_products($activeProducts);
+ 
+        $data['tableRowsMovement'] = $tableRowsMovement;   
+        $data['tableRowsStock'] = $tableRowsStock;   
+        $data['dropdownProducts'] = $selectProducts;   
         $data['page_title'] = "Estoque";
         $this->view('admin/stock', $data);
     }
