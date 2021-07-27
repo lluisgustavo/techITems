@@ -19,7 +19,8 @@ Class AjaxStock extends Controller{
                                         INNER JOIN tb_stock s ON s.product_id = p.id"); 
                 $product = $this->load_model("Product");  
          
-                $arr['data'] = $stock->make_table($stocks, $product); 
+                $arr['data'] = $stock->make_table_stock($stocks, $product); 
+                $arr['data'] = $stock->make_table_movement($stocks, $product); 
 
                 echo json_encode($arr);
             }
