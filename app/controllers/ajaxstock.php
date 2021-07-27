@@ -17,7 +17,7 @@ Class AjaxStock extends Controller{
                     $arr['message_type'] = "info";
                     $arr['data_type'] = "add-new";
     
-                    $stockProducts s= $db->read("SELECT p.title, s.id, s.product_id, s.obs, s.movement
+                    $stockProducts = $db->read("SELECT p.title, s.id, s.product_id, s.obs, s.movement
                                                 FROM tb_products as p
                                                 INNER JOIN tb_stock s ON s.product_id = p.id");
             
