@@ -23,7 +23,7 @@ Class Admin extends Controller{
         }
 
         $db = Database::newInstance();
-        $brands = $db->read("SELECT * FROM tb_brands ORDER BY id ASC");
+        $brands = $db->read("SELECT * FROM tb_brands ORDER BY brand_name ASC");
 
         $brand = $this->load_model("Brand");
         $tableRows = $brand->make_table($brands); 
@@ -242,7 +242,7 @@ Class Admin extends Controller{
                                     WHERE p.status = 1
                                     AND c.status = 1
                                     GROUP BY p.id
-                                    ORDER BY p.brand_name ASC");
+                                    ORDER BY p.title ASC");
         $product = $this->load_model("Product"); 
         
         //Only active categories that have products that have stock
