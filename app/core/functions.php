@@ -16,3 +16,8 @@ function check_error(){
 function esc($data){
     return addslashes($data);
 }
+
+function replace_spaces_with_dashes($string) { 
+    $string = str_replace(" ", "-", $string);
+    return $string; 
+}
