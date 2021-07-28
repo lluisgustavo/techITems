@@ -118,7 +118,7 @@ Class Category{
         $result = "";
         if(is_array($categories)){
             $result .= '<select name="editar-pai-categoria" id="editar-pai-categoria" class="form-control">
-                <option value="" selected>Selecione uma categoria</option>';
+                <option value="" selected>Selecione uma categoria pai</option>';
             foreach($categories as $Category){
                 $result .= '<option value="' . $Category->id . '">' . $Category->category . '</option>';
             }

@@ -51,7 +51,7 @@
 									</div>
 									<div class="modal-body">
 										<input name="editar-id-categoria" type="hidden" id="editar-id-categoria" class="form-control">
-										<div class="form-group"> 
+										<div class="form-group mb-2"> 
 											<input name="editar-categoria" id="editar-categoria" type="text" class="form-control" placeholder="Nome da Categoria" autofocus required>
 										</div>
 										<div class="form-group"> 
@@ -197,7 +197,7 @@
 
 	function handleResult(result){
 		if(result != ""){      
-			console.log(result);
+			//console.log(result);
 			var obj = JSON.parse(result);
 			if(typeof(obj.data_type) != 'undefined'){
 				if(obj.data_type == "add-new"){
