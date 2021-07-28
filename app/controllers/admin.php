@@ -70,7 +70,8 @@ Class Admin extends Controller{
         $db = Database::newInstance(); 
         $products = $db->read("SELECT p.*, b.brand_name, b.status, s.supplier_name FROM `tb_products` as p
                                 INNER JOIN tb_brands b ON p.brand_id = b.id
-                                INNER JOIN tb_suppliers s ON p.supplier_id = s.id");
+                                INNER JOIN tb_suppliers s ON p.supplier_id = s.id
+                                ORDER BY p.title");
         $product = $this->load_model("Product"); 
         $category = $this->load_model("Category");
 
@@ -183,7 +184,7 @@ Class Admin extends Controller{
         $db = Database::newInstance();  
 
         $activeProducts = $db->read("SELECT * FROM tb_products WHERE status = 1");
-        
+
         $stockMovement = $db->read("SELECT p.title, s.id, s.product_id, s.obs, s.movement
                                     FROM tb_products as p
                                     INNER JOIN tb_stock s ON s.product_id = p.id");
@@ -241,7 +242,7 @@ Class Admin extends Controller{
                                     WHERE p.status = 1
                                     AND c.status = 1
                                     GROUP BY p.id
-                                    ORDER BY p.id ASC");
+                                    ORDER BY p.brand_name ASC");
         $product = $this->load_model("Product"); 
         
         //Only active categories that have products that have stock
