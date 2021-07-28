@@ -12,7 +12,7 @@ Class Category{
         }
 
         if(!isset($_SESSION['error']) || $_SESSION['error'] == ""){
-            $sqlCategory = "INSERT INTO categories (category, parent) VALUES (:category, :parent)";
+            $sqlCategory = "INSERT INTO tb_categories (category, parent) VALUES (:category, :parent)";
  
             $check = $db->write($sqlCategory, $arr);
 
@@ -105,7 +105,7 @@ Class Category{
         $result = ""; 
         if(is_array($categories)){
             $result .= '<select name="pai-categoria" id="pai-categoria" class="form-control">
-                <option value="" selected>Selecione uma categoria</option>';
+                <option value="" selected>Selecione uma categoria pai (opcional)</option>';
             foreach($categories as $Category){
                 $result .= '<option value="' . $Category->id . '">' . $Category->category . '</option>';
             }

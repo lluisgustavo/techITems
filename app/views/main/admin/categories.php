@@ -23,7 +23,7 @@
 								</div>
 								<form class="form-inline" role="form">
 									<div class="modal-body">
-										<div class="form-group"> 
+										<div class="form-group mb-2"> 
 											<input name="categoria" id="categoria" type="text" class="form-control" placeholder="Nome da Categoria" autofocus required>
 										</div>
 										<div class="form-group"> 
@@ -193,7 +193,7 @@
 
 	function handleResult(result){
 		if(result != ""){      
-			//console.log(result);
+			console.log(result);
 			var obj = JSON.parse(result);
 			if(typeof(obj.data_type) != 'undefined'){
 				if(obj.data_type == "add-new"){
