@@ -10,14 +10,14 @@
 						<span class="list btn btn-outline-secondary active" data-filter="todas" style="font-size: 0.7em;">Todas</span>	 
 					<?php endif; ?>
 					<?php foreach($cRows as $key => $row): ?>
-						<span class="list btn btn-outline-secondary" data-filter="<?= strtolower($row->category) ?>" style="font-size: 0.7em;"> <?= $row->category ?></span>	 
+						<span class="list btn btn-outline-secondary" data-filter="<?= replace_spaces_with_dashes(strtolower($row->category)) ?>" style="font-size: 0.7em;"> <?= $row->category ?></span>	 
 					<?php endforeach; ?>
 				</div>
 		</div>
 		<div class="row justify-content-center align-items-center">  
-			<?php foreach($pRows as $row): 
+			<?php foreach($pRows as $row):   
 				if($row->quantity > 0):?>
-				<div class="card col-12 col-sm-3 m-2 <?= strtolower($row->category) ?>" style="width: 15rem;">  
+				<div class="card col-12 col-sm-3 m-2 <?= strtolower(replace_spaces_with_dashes($row->category)) ?>" style="width: 15rem;">  
 					<div id="slider-carousel-product-<?= $row->id ?>" class="justify-content-center carousel carousel-dark slide" data-bs-ride="carousel">
 						<div class="carousel-inner"> 
 							<div class="carousel-item active"> 
