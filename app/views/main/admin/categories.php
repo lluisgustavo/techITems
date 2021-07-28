@@ -88,7 +88,11 @@
 	</div><!-- /row -->
 
 <script type="text/javascript"> 
-
+	function hideModal(){ 
+		const edit_modal = document.querySelector('#add-new-category');
+		const modal = bootstrap.Modal.getInstance(edit_modal);    
+		modal.hide();
+	}
 
 	function hideEditModal(){ 
 		const edit_modal = document.querySelector('#edit-category');
@@ -200,6 +204,7 @@
 					if(obj.message_type == 'info'){
 						alert(obj.message); 
 					
+						hideModal();
 						var table_body = document.querySelector("#table-body");
 						table_body.innerHTML = obj.data;
 					} else {
