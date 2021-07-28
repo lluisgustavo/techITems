@@ -56,7 +56,7 @@
 									<th><i class="fa fa-table"></i> Quantidade</th>    
 								</tr>
 							</thead>
-							<tbody id="table-body">
+							<tbody id="table-body-stock">
 								<?php 
 									echo $tableRowsStock;
 								?>
@@ -75,7 +75,7 @@
 									<th><i class="fa fa-table"></i> Observação</th>  
 								</tr>
 							</thead>
-							<tbody id="table-body">
+							<tbody id="table-body-movement">
 								<?php 
 									echo $tableRowsMovement;
 								?>
@@ -88,7 +88,7 @@
 	</div> <!-- /row -->
 
 <script type="text/javascript">       
-	function hideEditModal(){ 
+	function hideModal(){ 
 		const edit_modal = document.querySelector('#add-new-stock-movement');
 		const modal = bootstrap.Modal.getInstance(edit_modal);    
 		modal.hide();
@@ -133,9 +133,11 @@
 					if(obj.message_type == 'info'){
 						alert(obj.message); 
 					
-						hideEditModal();
-						var table_body = document.querySelector("#table-body");
-						table_body.innerHTML = obj.data;
+						var table_body_movement = document.querySelector("#table-body-movement");
+						var table_body_stock = document.querySelector("#table-body-stock");
+						table_body_movement.innerHTML = obj.data-movement;
+						table_body_movement.innerHTML = obj.data-stock;
+						hideModal();
 					} else {
 						alert(obj.message);
 					}   

@@ -187,12 +187,13 @@ Class Admin extends Controller{
 
         $stockMovement = $db->read("SELECT p.title, s.id, s.product_id, s.obs, s.movement
                                     FROM tb_products as p
-                                    INNER JOIN tb_stock s ON s.product_id = p.id");
+                                    INNER JOIN tb_stock s ON s.product_id = p.id
+                                    ORDER BY s.created_at DESC");
 
         $stockProducts = $db->read("SELECT p.title, SUM(s.movement) as quantity
                                     FROM tb_products as p
-                                    INNER JOIN tb_stock s ON s.product_id = p.id
-                                    group by s.product_id");
+                                    INNER JOIN tb_stock s ON s.product_id = p.id 
+                                    GROUP BY s.product_id");
         
         $stock = $this->load_model("Stock");   
  
