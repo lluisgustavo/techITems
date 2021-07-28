@@ -80,7 +80,8 @@ Class AjaxProduct extends Controller{
 
                 $products = $db->read("SELECT p.*, b.brand_name, b.status, s.supplier_name FROM `tb_products` as p
                                         INNER JOIN tb_brands b ON p.brand_id = b.id
-                                        INNER JOIN tb_suppliers s ON p.supplier_id = s.id");
+                                        INNER JOIN tb_suppliers s ON p.supplier_id = s.id
+                                        ORDER BY p.title");
                 $arr['data'] = $product->make_table($products, $category);
 
                 echo json_encode($arr);
