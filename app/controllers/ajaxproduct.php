@@ -39,8 +39,7 @@ Class AjaxProduct extends Controller{
 
                     echo json_encode($arr);
                 }
-            } else if($data->data_type == "delete-row"){
-                show('a');
+            } else if($data->data_type == "delete-row"){ 
                 $product->delete($data->id);
 
                 $arr['message'] = "Produto deletado.";
@@ -52,7 +51,7 @@ Class AjaxProduct extends Controller{
                                         INNER JOIN tb_suppliers s ON p.supplier_id = s.id");
                 $arr['data'] = $product->make_table($products, $category);
 
-                echo 'a';//json_encode($arr);
+                echo json_encode($arr);
             } else if($data->data_type == "toggle-status"){
                 $id = $data->id;
                 $sqlStatusUpdate = "UPDATE tb_products SET status = IF(status = 1, 0, 1) WHERE id = '$id' LIMIT 1";
@@ -72,7 +71,7 @@ Class AjaxProduct extends Controller{
                
                 $product->update($data, $_FILES);
  
-                $arr['message'] = "Produto editado.";
+                $arr['message'] = "Produto deletado.";
                 $arr['message_type'] = "info";
                 $arr['data_type'] = "edit-product";
                 $arr['id'] = $data->id;

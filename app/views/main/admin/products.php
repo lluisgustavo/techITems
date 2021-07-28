@@ -445,16 +445,15 @@
 
 	function handleResult(result){ 
 		if(result != ""){          
-			//gconsole.log(result);
+			console.log(result);
 			var obj = JSON.parse(result); 
 			if(typeof(obj.data_type) != 'undefined'){
 				if(obj.data_type == "add-new"){
 					if(obj.message_type == 'info'){
-						alert(obj.message);
-						hideModal();
-					
+						alert(obj.message); 
 						var table_body = document.querySelector("#table-body");
 						table_body.innerHTML = obj.data;
+						hideModal();
 					} else {
 						alert(obj.message);
 					}   
@@ -466,9 +465,9 @@
 					var table_body = document.querySelector("#table-body");
 					table_body.innerHTML = obj.data;
 				} else if(obj.data_type == "edit-product"){
-					hideEditModal();
 					var table_body = document.querySelector("#table-body");
 					table_body.innerHTML = obj.data;
+					hideEditModal();
 				}
 			}
 		}
