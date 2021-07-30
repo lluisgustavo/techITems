@@ -16,7 +16,7 @@ This is a management system for a technology items store made for SENAI tech IT 
 ## Project Status <a name="project-status"></a>
 Project is: _in progress_
 
-![10%](https://progress-bar.dev/10)
+![10%](https://progress-bar.dev/80)
  
 ## Introduction <a name="introduction"></a>
 
