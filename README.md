@@ -20,7 +20,7 @@ Project is: _in progress_
  
 ## Introduction <a name="introduction"></a>
 
-This is a techology store management system project designed for the SENAI tech IT technician course, which is about analysis and development of systems. I tried my hand on making and MVC, utilizing OOP PHP. It was hard.
+This is a techology store management system project designed for the SENAI tech IT technician course, which is about analysis and development of systems. I tried my hand on making and MVC, utilizing OOP with pure PHP. It was hard and it's not the best, nor the fastest performance, but it works.
 I've learned a lot with this project, not only coding, but also other inner workings of developing a project, such as project management, sytem testing and database modeling.
 
 ## Technologies Used <a name="technologies-used"></a>
