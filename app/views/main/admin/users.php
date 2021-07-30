@@ -36,23 +36,25 @@
 						</div>
 					</div>  
 					<!-- editar user -->
-				<table class="table table-striped table-advance table-hover">
-					<hr>
-					<thead>
-						<tr>
-							<th><i class="fa fa-bullhorn"></i> ID</th>
-							<th><i class="fa fa-table"></i> E-mail</th>
-							<th><i class=" fa fa-edit"></i> Rank </th>
-							<th><i class=" fa fa-edit"></i> Data de Criação </th>  
-							<th><i class=" fa fa-edit"></i> Ação</th> 
-						</tr>
-					</thead>
-					<tbody id="table-body">
-						<?php 
-							echo $tableRows;
-						?>
-					</tbody>
-				</table>
+				<div class="table-responsive">
+    				<table class="table table-striped table-responsive table-advance table-hover">
+    					<hr>
+    					<thead>
+    						<tr>
+    							<th><i class="fa fa-bullhorn"></i> ID</th>
+    							<th><i class="fa fa-table"></i> E-mail</th>
+    							<th><i class=" fa fa-edit"></i> Rank </th>
+    							<th><i class=" fa fa-edit"></i> Data de Criação </th>  
+    							<th><i class=" fa fa-edit"></i> Ação</th> 
+    						</tr>
+    					</thead>
+    					<tbody id="table-body">
+    						<?php 
+    							echo $tableRows;
+    						?>
+    					</tbody>
+				    </table>
+				</div>
 			</div><!-- /content-panel -->
 		</div><!-- /col-md-12 -->
 	</div><!-- /row -->

@@ -5,35 +5,36 @@
 ?>      
 <div class="row mt">
 	<div class="col-md-12">
-		<div class="content-panel">
-			<table class="table table-striped table-advance table-hover"> 
-				<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-new-product">
-					<i class="fa fa-plus"></i>Adicionar Produto
-				</button>
-				
-				<hr>
-				<thead>
-					<tr>
-						<th class="text-right">ID</th>
-						<th><i class="fa fa-copyright"></i> Marca</th>
-						<th><i class="fa fa-barcode"></i> Produto</th>
-						<th><i class="fa fa-bullhorn"></i> Descrição </th>
-						<th><i class="fa fa-bullhorn"></i> Imagem</th>
-						<th><i class="fa fa-list-alt"></i> Categoria</th>
-						<th class="text-right"><i class="fa fa-money"></i> Preço de Compra</th>
-						<th class="text-right"><i class="fa fa-money"></i> Preço de Venda</th> 
-						<th class="text-right"><i class="fa fa-people-arrows"></i> Fornecedor</th> 
-						<th><i class="fa fa-star-o"></i> Status</th>
-						<th><i class=" fa fa-edit"></i> Ação</th>
-					</tr>
-				</thead>
-				<tbody id="table-body">
-					<?php 
-						echo $tableRows;
-					?>
-				</tbody>
-			</table>
-			
+		<div class="content-panel"> 
+		    <div class="table-responsive">
+    			<table class="table table-responsive table-striped table-advance table-hover"> 
+    				<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-new-product">
+    					<i class="fa fa-plus"></i>Adicionar Produto
+    				</button>
+    				
+    				<hr>
+    				<thead>
+    					<tr>
+    						<th class="text-right">ID</th>
+    						<th><i class="fa fa-copyright"></i> Marca</th>
+    						<th><i class="fa fa-barcode"></i> Produto</th>
+    						<th><i class="fa fa-bullhorn"></i> Descrição </th>
+    						<th><i class="fa fa-bullhorn"></i> Imagem</th>
+    						<th><i class="fa fa-list-alt"></i> Categoria</th>
+    						<th class="text-right"><i class="fa fa-money"></i> Preço de Compra</th>
+    						<th class="text-right"><i class="fa fa-money"></i> Preço de Venda</th> 
+    						<th class="text-right"><i class="fa fa-people-arrows"></i> Fornecedor</th> 
+    						<th><i class="fa fa-star-o"></i> Status</th>
+    						<th><i class=" fa fa-edit"></i> Ação</th>
+    					</tr>
+    				</thead>
+    				<tbody id="table-body">
+    					<?php 
+    						echo $tableRows;
+    					?>
+    				</tbody>
+    			</table>
+			</div>
 		</div><!-- /content-panel -->
 	</div><!-- /col-md-12 -->
  

@@ -46,41 +46,45 @@
 
 				<div class="row">
 					<div class="col-6">
-						<table class="table table-striped table-advance table-hover"> 
-							<div class="mt-2">
-								<h4>Estoque</h4>
-							</div>
-							<thead>
-								<tr> 
-									<th><i class="fa fa-bullhorn"></i> Produto</th>
-									<th><i class="fa fa-table"></i> Quantidade</th>    
-								</tr>
-							</thead>
-							<tbody id="table-body-stock">
-								<?php 
-									echo $tableRowsStock;
-								?>
-							</tbody>
-						</table>
+			            <div class="table-responsive">
+    						<table class="table .table-responsive table-striped table-advance table-hover"> 
+    							<div class="mt-2">
+    								<h4>Estoque</h4>
+    							</div>
+    							<thead>
+    								<tr> 
+    									<th><i class="fa fa-bullhorn"></i> Produto</th>
+    									<th><i class="fa fa-table"></i> Quantidade</th>    
+    								</tr>
+    							</thead>
+    							<tbody id="table-body-stock">
+    								<?php 
+    									echo $tableRowsStock;
+    								?>
+    							</tbody>
+    						</table>
+						</div>
 					</div>
 					<div class="col-6">
-						<table class="table table-striped table-advance table-hover"> 
-							<div class="mt-2">
-								<h4>Histórico de Movimentação</h4>
-							</div>
-							<thead>
-								<tr> 
-									<th><i class="fa fa-bullhorn"></i> Produto</th>
-									<th><i class="fa fa-table"></i> Quantidade</th>  
-									<th><i class="fa fa-table"></i> Observação</th>  
-								</tr>
-							</thead>
-							<tbody id="table-body-movement">
-								<?php 
-									echo $tableRowsMovement;
-								?>
-							</tbody>
-						</table>
+			            <div class="table-responsive">
+    						<table class="table table-striped table-advance table-hover"> 
+    							<div class="mt-2">
+    								<h4>Histórico de Movimentação</h4>
+    							</div>
+    							<thead>
+    								<tr> 
+    									<th><i class="fa fa-bullhorn"></i> Produto</th>
+    									<th><i class="fa fa-table"></i> Quantidade</th>  
+    									<th><i class="fa fa-table"></i> Observação</th>  
+    								</tr>
+    							</thead>
+    							<tbody id="table-body-movement">
+    								<?php 
+    									echo $tableRowsMovement;
+    								?>
+    							</tbody>
+    						</table>
+						</div>
 					</div>
 				</div>
 			</div>  

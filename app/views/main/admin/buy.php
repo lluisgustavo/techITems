@@ -65,13 +65,15 @@
 		<div class="row justify-content-center align-items-center my-5"> 
 			<div class="col-md-12" id="cart">
 				<form action="POST">
-					<table id="cart_table" class="table table-striped">
-						<tr> 
-							<th width="100"></th>
-							<th>Item</th>
-							<th>Preço</th>
-						</tr> 
-					</table>
+    			    <div class="table-responsive">
+    					<table id="cart_table" class="table table-striped">
+    						<tr> 
+    							<th width="100"></th>
+    							<th>Item</th>
+    							<th>Preço</th>
+    						</tr> 
+    					</table>
+					</div>
 
 					<button onclick="collectData(event); return false;" class="btn btn-primary" type="submit">Finalizar Compra</button>
 				</form>

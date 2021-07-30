@@ -8,27 +8,29 @@
 	<div class="row mt">
 		<div class="col-md-12">
 			<div class="content-panel">
-				<table class="table table-striped table-advance table-hover">     					
-					<hr>
-					<thead>
-						<tr>
-							<th><i class="fa fa-bullhorn"></i> Pedido</th>
-							<?php if($user_data->rank === "admin" || $user_data->rank === "employee"): ?>
-								<th><i class=" fa fa-edit"></i> Pessoa</th> 
-							<?php endif; ?>
-							<th><i class=" fa fa-edit"></i> Produtos</th>
-							<th><i class="fa fa-table"></i> Valor Total</th>
-							<?php if($user_data->rank === "admin" || $user_data->rank === "employee"): ?>
-								<th><i class=" fa fa-edit"></i> Ação</th> 
-							<?php endif; ?>
-						</tr>
-					</thead>
-					<tbody id="table-body">
-						<?php 
-							echo $tableRows;
-						?>
-					</tbody>
-				</table>
+			    <div class="table-responsive">
+    				<table class="table table-striped table-responsive table-advance table-hover">     					
+    					<hr>
+    					<thead>
+    						<tr>
+    							<th><i class="fa fa-bullhorn"></i> Pedido</th>
+    							<?php if($user_data->rank === "admin" || $user_data->rank === "employee"): ?>
+    								<th><i class=" fa fa-edit"></i> Pessoa</th> 
+    							<?php endif; ?>
+    							<th><i class=" fa fa-edit"></i> Produtos</th>
+    							<th><i class="fa fa-table"></i> Valor Total</th>
+    							<?php if($user_data->rank === "admin" || $user_data->rank === "employee"): ?>
+    								<th><i class=" fa fa-edit"></i> Ação</th> 
+    							<?php endif; ?>
+    						</tr>
+    					</thead>
+    					<tbody id="table-body">
+    						<?php 
+    							echo $tableRows;
+    						?>
+    					</tbody>
+    				</table>
+				</div>
 			</div><!-- /content-panel -->
 		</div><!-- /col-md-12 -->
 	</div><!-- /row -->

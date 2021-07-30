@@ -7,196 +7,201 @@
 	<div class="row mt">
 		<div class="col-md-12">
 			<div class="content-panel">
-				<table class="table table-striped table-advance table-hover">
-					<?php if($user_data->rank === "admin"): ?> 
-					<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-new-supplier">
-						<i class="fa fa-plus"></i>Adicionar Fornecedor
-					</button></h4>
-					
-					<!-- adicionar fornecedor -->
-					<div class="modal fade" id="add-new-supplier" tabindex="-1" aria-labelledby="add-new-supplier" aria-hidden="true">
-						<div class="modal-dialog modal-dialog-centered">
-							<div class="modal-content">
-								<div class="modal-header">
-									<h5 class="modal-title" id="addNewLabel">Adicionar Fornecedor</h5>
-									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-								</div>
-								<form class="form-inline" role="form">
-									<div class="modal-body">
-                                        <h4>Fornecedor</h4>
-										<div class="form-group"> 
-											<input name="fornecedor-nome" id="fornecedor-nome" type="text" class="form-control" placeholder="Nome do Fornecedor" autofocus required>
-										</div> 
-										<div class="form-group"> 
-											<input name="fornecedor-CNPJ" id="fornecedor-CNPJ" type="text" class="form-control" placeholder="CNPJ do Fornecedor" required>
-										</div>
-										<div class="form-group"> 
-											<input name="fornecedor-contato" id="fornecedor-contato" type="text" class="form-control" placeholder="Nome do Contato" required>
-										</div>
-										<div class="form-group"> 
-											<input name="fornecedor-email" id="fornecedor-email" type="email" class="form-control" placeholder="E-mail do Contato" required>
-										</div>
-										<div class="form-group"> 
-											<input name="fornecedor-telefone" id="fornecedor-telefone" type="tel" class="form-control" placeholder="Telefone do Contato" required>
-										</div>
-
-                                        <h4 class="mt-3">Endereço</h4>
-                                        <div class="row">
-											<div class="form-group col-md-3"> 
-												<input onblur="pesquisacep(this.value);" name="fornecedor-endereco-CEP" id="fornecedor-endereco-CEP" type="text" class="form-control" placeholder="CEP" required>
-											</div>
-											<div class="form-group col-md-9"> 
-												<input name="fornecedor-endereco-rua" id="fornecedor-endereco-rua" type="text" class="form-control" placeholder="Rua" required>
-											</div>
-										</div>
-                                        <div class="row">
-                                            <div class="form-group col-md-3"> 
-                                                <input name="fornecedor-endereco-numero" id="fornecedor-endereco-numero" type="text" class="form-control" placeholder="Número" required>
+				<?php if($user_data->rank === "admin"): ?> 
+				<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-new-supplier">
+					<i class="fa fa-plus"></i>Adicionar Fornecedor
+				</button></h4>
+				
+				
+				<?php endif; ?>
+				<hr>
+			    <div class="table-responsive">
+    				<table class="table table-striped table-responsive table-advance table-hover">
+    					<thead>
+    						<tr>
+    							<th><i class="fa fa-bullhorn"></i> ID</th>
+    							<th><i class="fa fa-table"></i> Fornecedor</th>
+    							<th><i class=" fa fa-edit"></i> Contato </th>
+    							<th><i class=" fa fa-edit"></i> E-Mail </th>
+    							<th><i class=" fa fa-edit"></i> Telefone </th>
+    							<th><i class=" fa fa-edit"></i> Endereço </th>
+    							<?php if($user_data->rank === "admin"): ?>
+    							<th><i class=" fa fa-edit"></i> Status</th> 
+    							<th><i class=" fa fa-edit"></i> Ação</th> 
+    							<?php endif; ?>
+    						</tr>
+    					</thead>
+    					<tbody id="table-body">
+    						<?php 
+    							echo $tableRows;
+    						?>
+    					</tbody>
+    				</table>
+				</div>
+				
+				
+				
+    					<!-- adicionar fornecedor -->
+    					<div class="modal fade" id="add-new-supplier" tabindex="-1" aria-labelledby="add-new-supplier" aria-hidden="true">
+    						<div class="modal-dialog modal-dialog-centered">
+    							<div class="modal-content">
+    								<div class="modal-header">
+    									<h5 class="modal-title" id="addNewLabel">Adicionar Fornecedor</h5>
+    									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    								</div>
+    								<form class="form-inline" role="form">
+    									<div class="modal-body">
+                                            <h4>Fornecedor</h4>
+    										<div class="form-group"> 
+    											<input name="fornecedor-nome" id="fornecedor-nome" type="text" class="form-control" placeholder="Nome do Fornecedor" autofocus required>
+    										</div> 
+    										<div class="form-group"> 
+    											<input name="fornecedor-CNPJ" id="fornecedor-CNPJ" type="text" class="form-control" placeholder="CNPJ do Fornecedor" required>
+    										</div>
+    										<div class="form-group"> 
+    											<input name="fornecedor-contato" id="fornecedor-contato" type="text" class="form-control" placeholder="Nome do Contato" required>
+    										</div>
+    										<div class="form-group"> 
+    											<input name="fornecedor-email" id="fornecedor-email" type="email" class="form-control" placeholder="E-mail do Contato" required>
+    										</div>
+    										<div class="form-group"> 
+    											<input name="fornecedor-telefone" id="fornecedor-telefone" type="tel" class="form-control" placeholder="Telefone do Contato" required>
+    										</div>
+    
+                                            <h4 class="mt-3">Endereço</h4>
+                                            <div class="row">
+    											<div class="form-group col-md-3"> 
+    												<input onblur="pesquisacep(this.value);" name="fornecedor-endereco-CEP" id="fornecedor-endereco-CEP" type="text" class="form-control" placeholder="CEP" required>
+    											</div>
+    											<div class="form-group col-md-9"> 
+    												<input name="fornecedor-endereco-rua" id="fornecedor-endereco-rua" type="text" class="form-control" placeholder="Rua" required>
+    											</div>
+    										</div>
+                                            <div class="row">
+                                                <div class="form-group col-md-3"> 
+                                                    <input name="fornecedor-endereco-numero" id="fornecedor-endereco-numero" type="text" class="form-control" placeholder="Número" required>
+                                                </div>
+                                                <div class="form-group col-md-9"> 
+                                                    <input name="fornecedor-endereco-complemento" id="fornecedor-endereco-complemento" type="text" class="form-control" placeholder="Complemento">
+                                                </div>
                                             </div>
-                                            <div class="form-group col-md-9"> 
-                                                <input name="fornecedor-endereco-complemento" id="fornecedor-endereco-complemento" type="text" class="form-control" placeholder="Complemento">
+                                            <div class="row">
+                                                <div class="form-group col-md-4"> 
+                                                    <input name="fornecedor-endereco-bairro" id="fornecedor-endereco-bairro" type="text" class="form-control" placeholder="Bairro" required>
+                                                </div>
+                                                <div class="form-group col-md-4"> 
+                                                    <input name="fornecedor-endereco-cidade" id="fornecedor-endereco-cidade" type="text" class="form-control" placeholder="Cidade" required>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="form-group col-md-4"> 
-                                                <input name="fornecedor-endereco-bairro" id="fornecedor-endereco-bairro" type="text" class="form-control" placeholder="Bairro" required>
+                                            <div class="row">
+                                                <div class="form-group col-md-6"> 
+                                                    <input name="fornecedor-endereco-estado" id="fornecedor-endereco-estado" type="text" class="form-control" placeholder="Estado" required>
+                                                </div>
+                                                <div class="form-group col-md-6"> 
+                                                    <input name="fornecedor-endereco-pais" id="fornecedor-endereco-pais" type="text" class="form-control" placeholder="País" required>
+                                                </div>
                                             </div>
-                                            <div class="form-group col-md-4"> 
-                                                <input name="fornecedor-endereco-cidade" id="fornecedor-endereco-cidade" type="text" class="form-control" placeholder="Cidade" required>
+    										<div class="form-group"> 
+    											<input name="fornecedor-endereco-ref" id="fornecedor-endereco-ref" type="text" class="form-control">
+    										</div>
+    									</div>
+    									<div class="modal-footer">
+    										<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button> 
+    										<button type="submit" onclick="collectData(event); return false;" class="btn btn-theme text-right">Adicionar</button>	
+    									</div> 
+    								</form>
+    							</div>		
+    						</div>
+    					</div>  
+    					<!-- adicionar fornecedor -->
+    
+    					<!-- editar fornecedor -->
+    					<div class="modal fade" id="edit-supplier" tabindex="-1" aria-labelledby="edit-supplier" aria-hidden="true">
+    						<div class="modal-dialog modal-dialog-centered">
+    							<div class="modal-content">
+    								<form class="form-inline" id="edit-product-form" role="form">
+    									<div class="modal-header">
+    										<h5 class="modal-title" id="editProductLabel">Editar Fornecedor</h5>
+    										<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    									</div>
+    									<div class="modal-body">
+                                            <h4>Fornecedor</h4>
+                                            <input name="editar-fornecedor-id" id="editar-fornecedor-id" type="hidden" class="form-control">
+    										<div class="form-group">
+    											<label class="control-label" for="editar-fornecedor-nome">Nome do Fornecedor</label>
+    											<input name="editar-fornecedor-nome" id="editar-fornecedor-nome" type="text" class="form-control" placeholder="Nome do Fornecedor" autofocus required>
+    										</div> 
+    										<div class="form-group">
+    											<label class="control-label" for="editar-fornecedor-CNPJ">CNPJ</label>
+    											<input name="editar-fornecedor-CNPJ" id="editar-fornecedor-CNPJ" type="text" class="form-control" placeholder="CNPJ do Fornecedor" required>
+    										</div>
+    										<div class="form-group">
+    											<label class="control-label" for="editar-fornecedor-contato">Nome do Contato</label>
+    											<input name="editar-fornecedor-contato" id="editar-fornecedor-contato" type="text" class="form-control" placeholder="Nome do Contato" required>
+    										</div>
+    										<div class="form-group">
+    											<label class="control-label" for="editar-fornecedor-email">E-mail do Contato</label>
+    											<input name="editar-fornecedor-email" id="editar-fornecedor-email" type="email" class="form-control" placeholder="E-mail do Contato" required>
+    										</div>
+    										<div class="form-group">
+    											<label class="control-label" for="editar-fornecedor-telefone">Telefone do Contato</label>
+    											<input name="editar-fornecedor-telefone" id="editar-fornecedor-telefone" type="tel" class="form-control" placeholder="Telefone do Contato" required>
+    										</div>
+    
+                                            <h4 class="mt-3">Endereço</h4>
+    										<input name="editar-fornecedor-endereco-id" id="editar-fornecedor-endereco-id" type="hidden" class="form-control">
+    										<div class="form-group">
+    											<label class="control-label" for="editar-fornecedor-endereco-rua">Rua</label>
+    											<input name="editar-fornecedor-endereco-rua" id="editar-fornecedor-endereco-rua" type="text" class="form-control" placeholder="Rua" required>
+    										</div>
+                                            <div class="row">
+                                                <div class="form-group col-md-3">
+                                                    <label class="control-label" for="editar-fornecedor-endereco-numero">Número</label>
+                                                    <input name="editar-fornecedor-endereco-numero" id="editar-fornecedor-endereco-numero" type="text" class="form-control" placeholder="Número" required>
+                                                </div>
+                                                <div class="form-group col-md-9">
+                                                    <label class="control-label" for="editar-fornecedor-endereco-complemento">Complemento</label>
+                                                    <input name="editar-fornecedor-endereco-complemento" id="editar-fornecedor-endereco-complemento" type="text" class="form-control" placeholder="Complemento">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="form-group col-md-6"> 
-                                                <input name="fornecedor-endereco-estado" id="fornecedor-endereco-estado" type="text" class="form-control" placeholder="Estado" required>
+                                            <div class="row">
+                                                <div class="form-group col-md-4">
+                                                    <label class="control-label" for="editar-fornecedor-endereco-CEP">CEP</label>
+                                                    <input name="editar-fornecedor-endereco-CEP" id="editar-fornecedor-endereco-CEP" type="text" class="form-control" placeholder="CEP" required>
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label class="control-label" for="editar-fornecedor-endereco-bairro">Bairro</label>
+                                                    <input name="editar-fornecedor-endereco-bairro" id="editar-fornecedor-endereco-bairro" type="text" class="form-control" placeholder="Bairro" required>
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label class="control-label" for="editar-fornecedor-endereco-cidade">Cidade</label>
+                                                    <input name="editar-fornecedor-endereco-cidade" id="editar-fornecedor-endereco-cidade" type="text" class="form-control" placeholder="Cidade" required>
+                                                </div>
                                             </div>
-                                            <div class="form-group col-md-6"> 
-                                                <input name="fornecedor-endereco-pais" id="fornecedor-endereco-pais" type="text" class="form-control" placeholder="País" required>
+                                            <div class="row">
+                                                <div class="form-group col-md-6">
+                                                    <label class="control-label" for="editar-fornecedor-endereco-estado">Estado</label>
+                                                    <input name="editar-fornecedor-endereco-estado" id="editar-fornecedor-endereco-estado" type="text" class="form-control" placeholder="Estado" required>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label class="control-label" for="editar-fornecedor-endereco-pais">País</label>
+                                                    <input name="editar-fornecedor-endereco-pais" id="editar-fornecedor-endereco-pais" type="text" class="form-control" placeholder="País" required>
+                                                </div>
                                             </div>
-                                        </div>
-										<div class="form-group"> 
-											<input name="fornecedor-endereco-ref" id="fornecedor-endereco-ref" type="text" class="form-control">
-										</div>
-									</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button> 
-										<button type="submit" onclick="collectData(event); return false;" class="btn btn-theme text-right">Adicionar</button>	
-									</div> 
-								</form>
-							</div>		
-						</div>
-					</div>  
-					<!-- adicionar fornecedor -->
-
-					<!-- editar fornecedor -->
-					<div class="modal fade" id="edit-supplier" tabindex="-1" aria-labelledby="edit-supplier" aria-hidden="true">
-						<div class="modal-dialog modal-dialog-centered">
-							<div class="modal-content">
-								<form class="form-inline" id="edit-product-form" role="form">
-									<div class="modal-header">
-										<h5 class="modal-title" id="editProductLabel">Editar Fornecedor</h5>
-										<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-									</div>
-									<div class="modal-body">
-                                        <h4>Fornecedor</h4>
-                                        <input name="editar-fornecedor-id" id="editar-fornecedor-id" type="hidden" class="form-control">
-										<div class="form-group">
-											<label class="control-label" for="editar-fornecedor-nome">Nome do Fornecedor</label>
-											<input name="editar-fornecedor-nome" id="editar-fornecedor-nome" type="text" class="form-control" placeholder="Nome do Fornecedor" autofocus required>
-										</div> 
-										<div class="form-group">
-											<label class="control-label" for="editar-fornecedor-CNPJ">CNPJ</label>
-											<input name="editar-fornecedor-CNPJ" id="editar-fornecedor-CNPJ" type="text" class="form-control" placeholder="CNPJ do Fornecedor" required>
-										</div>
-										<div class="form-group">
-											<label class="control-label" for="editar-fornecedor-contato">Nome do Contato</label>
-											<input name="editar-fornecedor-contato" id="editar-fornecedor-contato" type="text" class="form-control" placeholder="Nome do Contato" required>
-										</div>
-										<div class="form-group">
-											<label class="control-label" for="editar-fornecedor-email">E-mail do Contato</label>
-											<input name="editar-fornecedor-email" id="editar-fornecedor-email" type="email" class="form-control" placeholder="E-mail do Contato" required>
-										</div>
-										<div class="form-group">
-											<label class="control-label" for="editar-fornecedor-telefone">Telefone do Contato</label>
-											<input name="editar-fornecedor-telefone" id="editar-fornecedor-telefone" type="tel" class="form-control" placeholder="Telefone do Contato" required>
-										</div>
-
-                                        <h4 class="mt-3">Endereço</h4>
-										<input name="editar-fornecedor-endereco-id" id="editar-fornecedor-endereco-id" type="hidden" class="form-control">
-										<div class="form-group">
-											<label class="control-label" for="editar-fornecedor-endereco-rua">Rua</label>
-											<input name="editar-fornecedor-endereco-rua" id="editar-fornecedor-endereco-rua" type="text" class="form-control" placeholder="Rua" required>
-										</div>
-                                        <div class="row">
-                                            <div class="form-group col-md-3">
-                                                <label class="control-label" for="editar-fornecedor-endereco-numero">Número</label>
-                                                <input name="editar-fornecedor-endereco-numero" id="editar-fornecedor-endereco-numero" type="text" class="form-control" placeholder="Número" required>
-                                            </div>
-                                            <div class="form-group col-md-9">
-                                                <label class="control-label" for="editar-fornecedor-endereco-complemento">Complemento</label>
-                                                <input name="editar-fornecedor-endereco-complemento" id="editar-fornecedor-endereco-complemento" type="text" class="form-control" placeholder="Complemento">
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="form-group col-md-4">
-                                                <label class="control-label" for="editar-fornecedor-endereco-CEP">CEP</label>
-                                                <input name="editar-fornecedor-endereco-CEP" id="editar-fornecedor-endereco-CEP" type="text" class="form-control" placeholder="CEP" required>
-                                            </div>
-                                            <div class="form-group col-md-4">
-                                                <label class="control-label" for="editar-fornecedor-endereco-bairro">Bairro</label>
-                                                <input name="editar-fornecedor-endereco-bairro" id="editar-fornecedor-endereco-bairro" type="text" class="form-control" placeholder="Bairro" required>
-                                            </div>
-                                            <div class="form-group col-md-4">
-                                                <label class="control-label" for="editar-fornecedor-endereco-cidade">Cidade</label>
-                                                <input name="editar-fornecedor-endereco-cidade" id="editar-fornecedor-endereco-cidade" type="text" class="form-control" placeholder="Cidade" required>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="form-group col-md-6">
-                                                <label class="control-label" for="editar-fornecedor-endereco-estado">Estado</label>
-                                                <input name="editar-fornecedor-endereco-estado" id="editar-fornecedor-endereco-estado" type="text" class="form-control" placeholder="Estado" required>
-                                            </div>
-                                            <div class="form-group col-md-6">
-                                                <label class="control-label" for="editar-fornecedor-endereco-pais">País</label>
-                                                <input name="editar-fornecedor-endereco-pais" id="editar-fornecedor-endereco-pais" type="text" class="form-control" placeholder="País" required>
-                                            </div>
-                                        </div>
-										<div class="form-group">
-											<label class="control-label" for="editar-fornecedor-endereco-ref">Referência</label>
-											<input name="editar-fornecedor-endereco-ref" id="editar-fornecedor-endereco-ref" type="text" class="form-control" placeholder="" required>
-										</div>
-									</div>  
-									<div class="modal-footer">
-										<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button> 
-										<button id="btn-collect-edit-data" type="submit" onclick="collectEditData(this); return false;" class="btn btn-theme text-right">Salvar</button>	
-									</div>
-								</form>
-							<div>
-						</div>
-					</div> 
-					<!-- editar fornecedor -->
-					
-					<?php endif; ?>
-					<hr>
-					<thead>
-						<tr>
-							<th><i class="fa fa-bullhorn"></i> ID</th>
-							<th><i class="fa fa-table"></i> Fornecedor</th>
-							<th><i class=" fa fa-edit"></i> Contato </th>
-							<th><i class=" fa fa-edit"></i> E-Mail </th>
-							<th><i class=" fa fa-edit"></i> Telefone </th>
-							<th><i class=" fa fa-edit"></i> Endereço </th>
-							<?php if($user_data->rank === "admin"): ?>
-							<th><i class=" fa fa-edit"></i> Status</th> 
-							<th><i class=" fa fa-edit"></i> Ação</th> 
-							<?php endif; ?>
-						</tr>
-					</thead>
-					<tbody id="table-body">
-						<?php 
-							echo $tableRows;
-						?>
-					</tbody>
-				</table>
+    										<div class="form-group">
+    											<label class="control-label" for="editar-fornecedor-endereco-ref">Referência</label>
+    											<input name="editar-fornecedor-endereco-ref" id="editar-fornecedor-endereco-ref" type="text" class="form-control" placeholder="" required>
+    										</div>
+    									</div>  
+    									<div class="modal-footer">
+    										<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button> 
+    										<button id="btn-collect-edit-data" type="submit" onclick="collectEditData(this); return false;" class="btn btn-theme text-right">Salvar</button>	
+    									</div>
+    								</form>
+    							<div>
+    						</div>
+    					</div> 
+    					<!-- editar fornecedor -->
 			</div><!-- /content-panel -->
 		</div><!-- /col-md-12 -->
 	</div><!-- /row -->
