@@ -225,6 +225,26 @@ Class Admin extends Controller{
         $this->view('admin/users', $data);
     }
     
+    public function clients(){
+        $User = $this->load_model('User');
+        $user_data = $User->check_login(true, ["admin"]);
+
+        if(is_object($user_data)){
+            $data['user_data'] = $user_data;
+        }
+
+        $db = Database::newInstance(); 
+        $Customer = $this->load_model('Customer');
+        $customers = $db->read("SELECT p.*, c.id as customer_id FROM tb_people as p
+                             LEFT JOIN tb_customers c ON c.person_id = p.id
+                             GROUP BY p.id");  
+        $tableRows = $Customer->make_table($customers); 
+
+        $data['tableRows'] = $tableRows;  
+        $data['page_title'] = "Clientes";
+        $this->view('admin/clients', $data);
+    }
+    
     public function buy(){
         $User = $this->load_model('User');
         $user_data = $User->check_login(true, ["admin", "employee", "customer"]);
