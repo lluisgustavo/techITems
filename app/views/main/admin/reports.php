@@ -6,34 +6,34 @@
 
 <div class="container">   
 	<div class="col-12 m-3">
-		<button type="button" class="btn btn-primary">
+		<a href="./customerreport" target="_blank" class="btn btn-primary">
 			<i class="fa fa-user"></i> Relatório de Clientes 
-		</button> 
+		</a> 
 	</div>
 	<div class="col-12 m-3">
-		<button type="button" class="btn btn-primary">
+		<a href="./stockreport" target="_blank" class="btn btn-primary">
 			<i class="fas fa-boxes"></i> Relatório de Estoque 
-		</button> 
+		</a> 
 	</div>
 	<div class="col-12 m-3">
-		<button type="button" class="btn btn-primary">
+		<a href="./supplierreport" target="_blank"class="btn btn-primary">
 			<i class="fa fa-people-arrows"></i> Relatório de Fornecedores 
-		</button> 
+		</a> 
 	</div>
 	<div class="col-12 m-3">
-		<button type="button" class="btn btn-primary">
+		<a href="./orderreport" target="_blank" class="btn btn-primary">
 			<i class="fa fa-reorder"></i> Relatório de Pedidos 
-		</button> 
+		</a> 
 	</div>
 	<div class="col-12 m-3">
-		<button type="button" class="btn btn-primary">
+		<a href="./productreport" target="_blank" class="btn btn-primary">
 			<i class="fa fa-barcode"></i> Relatório de Produtos 
-		</button> 
+		</a> 
 	</div>
 	<div class="col-12 m-3">
-		<button type="button" class="btn btn-primary">
+		<a href="./userreport" target="_blank" class="btn btn-primary">
 			<i class="fa fa-user"></i> Relatório de Usuários 
-		</button>   
+		</a>   
 	</div>
 </div>
 

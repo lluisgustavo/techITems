@@ -324,4 +324,112 @@ Class Admin extends Controller{
         $data['page_title'] = "Google Analytics";
         $this->view('admin/analytics', $data);
     }
+
+    public function customerreport(){
+        $User = $this->load_model('User');
+        $user_data = $User->check_login(true, ["admin", "employee", "customer"]);
+
+        if(is_object($user_data)){
+            $data['user_data'] = $user_data;
+        }
+
+        $db = Database::newInstance();
+   
+        $sql = "SELECT p.id as ID, p.name as Nome, p.CPF, p.phone as Telefone, p.birth FROM tb_people as p
+                LEFT JOIN tb_customers c ON c.person_id = p.id
+                GROUP BY p.id";
+        $data['dados'] = $db->read($sql);
+        $data['page_title'] = "Relatório de Clientes";
+        $this->view('admin/customerreport', $data);
+    }
+
+    public function userreport(){
+        $User = $this->load_model('User');
+        $user_data = $User->check_login(true, ["admin", "employee", "customer"]);
+
+        if(is_object($user_data)){
+            $data['user_data'] = $user_data;
+        }
+
+        $db = Database::newInstance();
+   
+        $sql = "SELECT * FROM tb_users";
+        $data['dados'] = $db->read($sql);
+        $data['page_title'] = "Relatório de Usuários";
+        $this->view('admin/userreport', $data);
+    }
+
+    public function stockreport(){
+        $User = $this->load_model('User');
+        $user_data = $User->check_login(true, ["admin", "employee", "customer"]);
+
+        if(is_object($user_data)){
+            $data['user_data'] = $user_data;
+        }
+
+        $db = Database::newInstance();
+   
+        $sql = "SELECT s.id, s.movement, p.title, s.created_at FROM tb_stock as s
+                INNER JOIN tb_products as p ON p.id = s.product_id";
+        $data['dados'] = $db->read($sql);
+        $data['page_title'] = "Relatório do Histórico do Estoque";
+        $this->view('admin/stockreport', $data);
+    }
+
+    public function supplierreport(){
+        $User = $this->load_model('User');
+        $user_data = $User->check_login(true, ["admin", "employee", "customer"]);
+
+        if(is_object($user_data)){
+            $data['user_data'] = $user_data;
+        }
+
+        $db = Database::newInstance();
+   
+        $sql = "SELECT * FROM tb_suppliers";
+        $data['dados'] = $db->read($sql);
+        $data['page_title'] = "Relatório de Fornecedores";
+        $this->view('admin/supplierreport', $data);
+    }
+
+    public function orderreport(){
+        $User = $this->load_model('User');
+        $user_data = $User->check_login(true, ["admin", "employee", "customer"]);
+
+        if(is_object($user_data)){
+            $data['user_data'] = $user_data;
+        }
+
+        $db = Database::newInstance();
+   
+        $sql = "SELECT o.id, p.name, p.phone, op.product_quantity, prod.title, prod.price_sell FROM tb_orders as o
+                INNER JOIN tb_customers as c ON o.customer_id = c.id
+                INNER JOIN tb_people as p ON p.id = c.person_id
+                INNER JOIN tb_orders_products as op ON o.id = op.order_id
+                INNER JOIN tb_products as prod ON prod.id = op.product_id";
+        $data['dados'] = $db->read($sql);
+        $data['page_title'] = "Relatório de Pedidos";
+        $this->view('admin/orderreport', $data);
+    }
+
+    public function productreport(){
+        $User = $this->load_model('User');
+        $user_data = $User->check_login(true, ["admin", "employee", "customer"]);
+
+        if(is_object($user_data)){
+            $data['user_data'] = $user_data;
+        }
+
+        $db = Database::newInstance();
+   
+        $sql = "SELECT p.id, p.title, c.category, p.price_buy, p.price_sell, SUM(s.movement) as quantity, sup.supplier_name as Fornecedor FROM tb_products as p
+                INNER JOIN tb_stock as s ON s.product_id = p.id
+                INNER JOIN tb_categories as c ON p.category = c.id
+                INNER JOIN tb_brands as b ON b.id = p.brand_id
+                INNER JOIN tb_suppliers as sup ON sup.id = p.supplier_id
+                GROUP BY p.id";
+        $data['dados'] = $db->read($sql);
+        $data['page_title'] = "Relatório de Produtos";
+        $this->view('admin/productreport', $data);
+    }
 }

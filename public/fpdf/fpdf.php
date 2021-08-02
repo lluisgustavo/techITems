@@ -7,8 +7,7 @@
 * Author:  Olivier PLATHEY                                                     *
 *******************************************************************************/
 
-define('FPDF_VERSION','1.8');
-
+define('FPDF_VERSION','1.8'); 
 class FPDF
 {
 protected $page;               // current page number
@@ -1028,8 +1027,8 @@ protected function _dochecks()
 	if(ini_get('mbstring.func_overload') & 2)
 		$this->Error('mbstring overloading must be disabled');
 	// Ensure runtime magic quotes are disabled
-	if(get_magic_quotes_runtime())
-		@set_magic_quotes_runtime(0);
+	if(ini_get('magic_quotes_runtime'))
+		@ini_set('magic_quotes_runtime', 0);
 }
 
 protected function _checkoutput()
