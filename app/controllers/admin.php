@@ -296,4 +296,32 @@ Class Admin extends Controller{
         $data['page_title'] = "Configurações";
         $this->view('admin/config', $data);
     }
+
+    public function reports(){
+        $User = $this->load_model('User');
+        $user_data = $User->check_login(true, ["admin", "employee", "customer"]);
+
+        if(is_object($user_data)){
+            $data['user_data'] = $user_data;
+        }
+
+        $db = Database::newInstance();
+ 
+        $data['page_title'] = "Relatórios";
+        $this->view('admin/reports', $data);
+    }
+
+    public function analytics(){
+        $User = $this->load_model('User');
+        $user_data = $User->check_login(true, ["admin", "employee", "customer"]);
+
+        if(is_object($user_data)){
+            $data['user_data'] = $user_data;
+        }
+
+        $db = Database::newInstance();
+ 
+        $data['page_title'] = "Google Analytics";
+        $this->view('admin/analytics', $data);
+    }
 }
