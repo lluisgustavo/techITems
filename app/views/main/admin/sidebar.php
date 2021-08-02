@@ -68,14 +68,7 @@
                         <span>Usuários</span>
                     </a> 
                 </li>
-
-                <li class="sub-menu">
-                    <a href="javascript:;" >
-                        <i class="fa fa-hdd-o"></i>
-                        <span>Backup</span>
-                    </a>
-                </li> 
-
+ 
                 <?php elseif($data['user_data']->rank == 'employee'): ?>
 
                 <li class="sub-menu">
