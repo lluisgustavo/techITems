@@ -63,12 +63,34 @@
                 </li> 
 
                 <li class="sub-menu">
+                    <a href="<?= ROOT ?>admin/clients">
+                        <i class="fa fa-user"></i>
+                        <span>Clientes</span>
+                    </a> 
+                </li>
+
+                <li class="sub-menu">
                     <a href="<?= ROOT ?>admin/users">
                         <i class="fa fa-user"></i>
                         <span>Usuários</span>
                     </a> 
                 </li>
- 
+
+                <li class="sub-menu">
+                    <a href="<?= ROOT ?>admin/reports">
+                        <i class="fas fa-scroll"></i>
+                        <span>Relatórios</span>
+                    </a> 
+                </li>
+
+                <li class="sub-menu">
+                    <a href="<?= ROOT ?>admin/analytics">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Analytics</span>
+                    </a> 
+                </li>
+                
+
                 <?php elseif($data['user_data']->rank == 'employee'): ?>
 
                 <li class="sub-menu">
