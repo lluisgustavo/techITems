@@ -5,7 +5,7 @@ This is a management system for a technology items store made for SENAI tech IT 
 
 Employee User
 > employee@employee.com
-> employe123
+> employee123
 
 Customer User:
 > customer@customer.com
