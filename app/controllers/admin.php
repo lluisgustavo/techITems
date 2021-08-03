@@ -217,7 +217,7 @@ Class Admin extends Controller{
         }
 
         $db = Database::newInstance(); 
-        $users = $db->read("SELECT * FROM tb_users ORDER BY email ASC");  
+        $users = $db->read("SELECT * FROM tb_users ORDER BY id ASC");  
         $tableRows = $User->make_table($users); 
 
         $data['tableRows'] = $tableRows;  
