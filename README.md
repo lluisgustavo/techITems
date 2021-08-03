@@ -3,10 +3,6 @@
 This is a management system for a technology items store made for SENAI tech IT technician course. 
 > Live demo [_here_](https://www.luisdesouza.com.br/techitems).
 
-Admin User:
-> admin@admin.com
-> admin123
-
 Employee User
 > employee@employee.com
 > employe123
