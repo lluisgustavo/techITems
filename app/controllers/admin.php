@@ -117,7 +117,7 @@ Class Admin extends Controller{
         if($user_data->rank === "employee"){  
             $suppliers = $db->read("SELECT * FROM tb_suppliers WHERE status = 1 ORDER BY id ASC");
             $tableRows = $supplier->make_table_employee($suppliers, $address); 
-        }
+        } 
 
         $data['tableRows'] = $tableRows; 
         $data['page_title'] = "Fornecedores";

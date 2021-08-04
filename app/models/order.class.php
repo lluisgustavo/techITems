@@ -21,6 +21,10 @@ Class Order{
             
             $sqlNewProductOrder = "INSERT INTO tb_orders_products (order_id, product_id, product_quantity) VALUES (:order_id, :product_id, :product_quantity)";
             $newProductOrder = $db->write($sqlNewProductOrder, $products_order);
+
+            $product['product_id'] = $product_id;
+            $sqlRemoveStock = "";
+            $movementStock = $db->write($sqlRemoveStock, $product);
         }
          
         if($newProductOrder){

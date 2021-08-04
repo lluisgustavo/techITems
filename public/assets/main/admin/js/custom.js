@@ -57,6 +57,54 @@ var Script = function () {
 }();
 
 $(document).ready(function(){
+	//Supplier
+	//Máscara CNPJ
+	$("#fornecedor-CNPJ").mask("99.999.999/9999-99");
+	$("#editar-fornecedor-CNPJ").mask("99.999.999/9999-99");
+	//Email
+	$("#fornecedor-email").mask("A", {
+		translation: {
+			"A": { pattern: /[\w@\-.+]/, recursive: true }
+		}
+	});;
+	//Email
+	$("#editar-fornecedor-email").mask("A", {
+		translation: {
+			"A": { pattern: /[\w@\-.+]/, recursive: true }
+		}
+	});;
+	//Telefone
+	$('#fornecedor-telefone').mask("(99) 99999-9999")
+	.focusout(function (event) {
+		var target, phone, element;
+		target = (event.currentTarget) ? event.currentTarget : event.srcElement;
+		phone = target.value.replace(/\D/g, '');
+		element = $(target);
+		element.unmask();
+		if(phone.length > 10) {
+			element.mask("(99) 99999-9999");
+		} else {
+			element.mask("(99) 9999-99999");
+		}
+	});
+
+	$('#editar-fornecedor-telefone').mask("(99) 99999-9999")
+	.focusout(function (event) {
+		var target, phone, element;
+		target = (event.currentTarget) ? event.currentTarget : event.srcElement;
+		phone = target.value.replace(/\D/g, '');
+		element = $(target);
+		element.unmask();
+		if(phone.length > 10) {
+			element.mask("(99) 99999-9999");
+		} else {
+			element.mask("(99) 9999-99999");
+		}
+	});
+	//CEP
+	$('#fornecedor-endereco-CEP').mask("99.999-999");
+	$('#editar-fornecedor-endereco-CEP').mask("99.999-999");
+
 	$(function () { 
 		$.scrollUp({
 	        scrollName: 'scrollUp', // Element ID

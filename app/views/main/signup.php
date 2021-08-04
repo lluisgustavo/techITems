@@ -3,10 +3,7 @@
 <?php
 	$this->view("header", $data);  
 ?>
-	<div id="signup-page" class="min-h-100"> 
-		<div class="container min-h-100">
-			<div class="row min-h-100 justify-content-center align-items-center">
-				<div class="mt-5"></div>
+	<div id="signup-page" class="min-h-100 h-100">  
 				<div class="card mt-5">
 					<div class="card-header">
 						<h2>Registre-se</h2>
@@ -21,16 +18,16 @@
 							<div class="row justify-content-center">
 								<div class="col-md-6">
 									<h4>Conta</h4>
-									<div class="mb-3">
+									<div class="mb-1">
 										<label for="email" class="form-label">E-mail</label>
 										<input class="form-control" name="register-email" value="<?= isset($_POST['email']) ? $_POST['email'] : ''?>" type="email" placeholder="Email" required/>
 										<div id="emailHelp" class="form-text">Não compartilharemos seu e-mail com ninguém.</div>
 									</div>
-									<div class="mb-3">
+									<div class="mb-1">
 										<label for="password" class="form-label">Senha</label>
 										<input class="form-control" name="password" type="password" placeholder="Senha" required/>
 									</div>
-									<div class="mb-3">
+									<div class="mb-1">
 										<label for="password-retype" class="form-label">Confirme a senha</label>
 										<input class="form-control" name="password-retype" type="password" placeholder="Confirme a Senha" required/>
 									</div> 
@@ -38,54 +35,54 @@
 								<div class="col-md-6"> 
 									<h4>Dados Pessoais</h4>
 									<div class="row">
-										<div class="col-md-8 mb-3"> 
+										<div class="col-md-8 mb-1"> 
 											<input class="form-control" name="register-name" value="<?= isset($_POST['name']) ? $_POST['name'] : ''?>" type="text" placeholder="Nome" required/>
 										</div>
-										<div class="col-md-4 mb-3"> 
+										<div class="col-md-4 mb-1"> 
 											<input class="form-control" id="register-tel" name="register-tel" type="text" placeholder="Telefone" required/>
 										</div>
 									</div>
 									<div class="row">
-										<div class="col-md-4 mb-3"> 
+										<div class="col-md-4 mb-1"> 
 											<input class="form-control" id="register-CPF" name="register-CPF" type="text" placeholder="CPF" required/>
 										</div>
-										<div class="col-md-8 mb-3"> 
+										<div class="col-md-8 mb-1"> 
 											<input class="form-control" name="register-birth" value="" type="date" placeholder="Data de Nascimento" required/>
 										</div>
 									</div>
 									<h5>Endereço</h5>
 									<div class="row">
-										<div class="col-md-3 mb-3">  
+										<div class="col-md-3 mb-1">  
 											<input onblur="pesquisacep(this.value)" class="form-control" id="register-CEP" name="register-CEP" type="text" placeholder="CEP" required/>
 										</div>
-										<div class="col-md-9 mb-3"> 
+										<div class="col-md-9 mb-1"> 
 											<input class="form-control" id="register-street" name="register-street" value="" type="text" placeholder="Nome da Rua" required/> 
 										</div>
 									</div>
 									<div class="row">
-										<div class="col-md-3 mb-3"> 
+										<div class="col-md-3 mb-1"> 
 											<input class="form-control" id="register-number" name="register-number" type="text" placeholder="Número da casa" required/>
 										</div>
-										<div class="col-md-6 mb-3"> 
+										<div class="col-md-6 mb-1"> 
 											<input class="form-control" id="register-complement" name="register-complement" value="" type="email" placeholder="Complemento"/> 
 										</div>
-										<div class="col-md-3 mb-3"> 
+										<div class="col-md-3 mb-1"> 
 											<input class="form-control" id="register-district" name="register-district" type="text" placeholder="Bairro" required/>
 										</div>
 									</div>
 									<div class="row">
-										<div class="col-md-4 mb-3"> 
+										<div class="col-md-4 mb-1"> 
 											<input class="form-control" id="register-city" name="register-city" type="text" placeholder="Cidade" required/>
 										</div>
-										<div class="col-md-4 mb-3"> 
+										<div class="col-md-4 mb-1"> 
 											<input class="form-control" id="register-state" name="register-state" type="text" placeholder="Estado" required/>
 										</div> 
-										<div class="col-md-4 mb-3"> 
+										<div class="col-md-4 mb-1"> 
 											<input class="form-control" id="register-country" name="register-country" type="text" placeholder="País" required/>
 										</div>
 									</div> 
 									<div class="row"> 
-										<div class="col-md-12 mb-3"> 
+										<div class="col-md-12 mb-1"> 
 											<input class="form-control" id="register-ref" name="register-ref" type="text" placeholder="Referência"/>
 										</div>
 									</div> 
@@ -94,9 +91,9 @@
 							<button class="btn btn-primary justify-self-center" type="submit">Registrar</button>
 						</form>  
 					</div>
+					<div class="card-footer">
 				</div>
-			</div>
-		</div> 
+			</div> 
 	</div>	
 
 	<script>  

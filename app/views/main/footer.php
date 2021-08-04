@@ -1,5 +1,5 @@
         <!-- Footer-->
-        <footer class="bg-light py-2">
+        <footer class="bg-light py-2 fixed-bottom">
             <div class="container px-4 px-lg-5"><div class="small text-center text-muted">Copyright &copy; 2021 - techITems</div></div>
         </footer> 
         

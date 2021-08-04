@@ -5,9 +5,8 @@ Class App{
     protected $method = "index";
     protected $params;
 
-    public function __construct(){ 
-        //$this->hsts(); 
-        $url = $this->parseURL();  
+    public function __construct(){   
+        $url = $this->parseURL();   
         if(file_exists("../app/controllers/" . strtolower($url[0]) . ".php")){
             $this->controller = strtolower($url[0]); 
             unset($url[0]);
@@ -30,7 +29,7 @@ Class App{
     }
 
     private function parseURL(){
-        $url = isset($_GET['url']) ? $_GET['url'] : "home";
+        $url = isset($_GET['url']) ? $_GET['url'] : "home"; 
         return explode('/', filter_var(trim($url, "/"), FILTER_SANITIZE_URL));
     }
 
