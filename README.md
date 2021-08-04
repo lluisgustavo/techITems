@@ -44,7 +44,17 @@ I've learned a lot with this project, not only coding, but also other inner work
 - PHPStorm
 
 ## Screenshots <a name="screenshots"></a>
-![](./img/.png)
+#### Front page: ####
+![image](https://user-images.githubusercontent.com/48425588/128104218-c55587df-da6b-44bf-8fa0-82c5bfdb3cb7.png)
+
+#### Login page: ####
+![image](https://user-images.githubusercontent.com/48425588/128104429-d819adf3-f2db-4493-b897-ac8a396579f1.png)
+
+#### Register page: ####
+![image](https://user-images.githubusercontent.com/48425588/128105204-28e53a4d-1039-4970-a94c-6c22568da1be.png)
+
+#### "Admin" panel home: ####
+![image](https://user-images.githubusercontent.com/48425588/128105268-6b680b30-38e9-4164-a0d0-97247537ba8e.png)
 
 ## Acknowledgements <a name="acknowledgements"></a>
 [Qucik Programming](https://www.youtube.com/c/QuickProgramming) 
