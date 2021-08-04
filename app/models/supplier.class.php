@@ -23,6 +23,7 @@ Class Supplier{
 		$nameRegex = '/^([a-zA-Zà-úÀ-Ú0-9]|-|_|\s)+$/';;
 		$CNPJRegex = '/^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$/';
 		$emailRegex = '/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/';
+        $CEPRegex = '/[0-9]{5,5}([- ]?[0-9]{4})?$/';
 
         if(!preg_match($nameRegex, $arr_supplier['supplier_name'])){
             $_SESSION['error'] = "Digite um nome de fornecedor válido";
@@ -33,12 +34,16 @@ Class Supplier{
         }
 
         if(!preg_match($nameRegex, $arr_supplier['contact_name'])){
-            $_SESSION['error'] = "Digite um nome de fornecedor válido";
+            $_SESSION['error'] = "Digite um nome de contato com o fornecedor válido";
         }
 
         if(!preg_match($emailRegex, $arr_supplier['contact_mail'])){
-            $_SESSION['error'] = "Digite um e-mail válido";
+            $_SESSION['error'] = "Digite um e-mail do contato válido";
         }
+
+        if(!preg_match($CEPRegex, $arr_supplier['postalcode'])){
+            $_SESSION['error'] = "Formato de CEP inválido";
+        } 
 
         $arrCheckAddress['street'] = ucwords($data->street);
         $arrCheckAddress['number'] = ucwords($data->number);
@@ -117,6 +122,7 @@ Class Supplier{
 		$nameRegex = '/^([a-zA-Zà-úÀ-Ú0-9]|-|_|\s)+$/';;
 		$CNPJRegex = '/^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$/';
 		$emailRegex = '/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/';
+        $CEPRegex = '/[0-9]{5,5}([- ]?[0-9]{4})?$/';
 
         if(!preg_match($nameRegex, $arr_supplier['supplier_name'])){
             $_SESSION['error'] = "Digite um nome de fornecedor válido";
@@ -133,6 +139,10 @@ Class Supplier{
         if(!preg_match($emailRegex, $arr_supplier['contact_mail'])){
             $_SESSION['error'] = "Digite um e-mail válido";
         }  
+
+        if(!preg_match($CEPRegex, $arr_supplier['postalcode'])){
+            $_SESSION['error'] = "Formato de CEP inválido";
+        } 
 
         if(!isset($_SESSION['error']) || $_SESSION['error'] == ""){
             $sqlUpdateAddress = "UPDATE tb_address SET street = :street, number = :number, complement = :complement, district = :district, city = :city, state = :state, postalcode = :postalcode, country = :country, ref = :ref WHERE id = :address_id";  
