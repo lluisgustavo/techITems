@@ -34,6 +34,8 @@ Class User{
             $address['ref'] = "";
         }
 
+
+        /* Validações Backend */
         $regex = '/^[^0-9][_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/';
 
         if (empty($user['email']) || !preg_match($regex, $user['email'])) {
