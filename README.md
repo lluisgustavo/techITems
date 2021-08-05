@@ -24,7 +24,7 @@ Customer User:
 ## Project Status <a name="project-status"></a>
 Project is: _in progress_
 
-![10%](https://progress-bar.dev/90)
+![10%](https://progress-bar.dev/94)
  
 ## Introduction <a name="introduction"></a>
 
