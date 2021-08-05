@@ -19,9 +19,9 @@
 						</div>
 						<h4 class="name mt-3"><?=$user_data->name ?></h4>  
 						Entrou em <?= date_format(new DateTime($user_data->created_at), "d/m/Y") ?>  
-						<div class="mt-3">
+						<!--<div class="mt-3">
 							<button onclick="toggleActive(<?= $user_data->user_id ?>); return false" type="submit" class="btn btn-danger">Deletar Conta</button>
-						</div> 
+						</div> -->
 					</div>
 				</form>
 			</div>
