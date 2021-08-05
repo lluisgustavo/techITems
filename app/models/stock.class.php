@@ -8,6 +8,11 @@ Class Stock{
  
         $arr['product_id'] = $data->product_id;
         $arr['movement'] = $data->movement;
+
+        if(!is_numeric($arr['movement'])){ 
+            $_SESSION['error'] = "Digite uma quantidade válida";
+        }
+
         $arr['obs'] = $data->obs;
         $arr['created_at'] = date('Y-m-d H:i:s');
         $arr['url_user_updated'] = $_SESSION['user_url']; 
