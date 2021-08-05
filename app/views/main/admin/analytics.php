@@ -2,6 +2,10 @@
 <?php
 require $_SERVER['DOCUMENT_ROOT'] . '\techitems\vendor\autoload.php'; 
 
+use Google\Analytics\Data\V1beta\BetaAnalyticsDataClient;
+use Google\Analytics\Data\V1beta\DateRange;
+use Google\Analytics\Data\V1beta\Dimension;
+use Google\Analytics\Data\V1beta\Metric;
 /**
  * TODO(developer): Replace this variable with your Google Analytics 4
  *   property ID before running the sample.
