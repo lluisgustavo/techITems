@@ -105,6 +105,50 @@ $(document).ready(function(){
 	$('#fornecedor-endereco-CEP').mask("99.999-999");
 	$('#editar-fornecedor-endereco-CEP').mask("99.999-999");
 
+	//Validation Config/Register
+	//CPF
+	$('#cpf-config').mask('000.000.000-00', {reverse: true});
+	$('#register-cpf').mask('000.000.000-00', {reverse: true});
+
+	//Tel
+	$('#tel-config').mask("(99) 99999-9999")
+	.focusout(function (event) {
+		var target, phone, element;
+		target = (event.currentTarget) ? event.currentTarget : event.srcElement;
+		phone = target.value.replace(/\D/g, '');
+		element = $(target);
+		element.unmask();
+		if(phone.length > 10) {
+			element.mask("(99) 99999-9999");
+		} else {
+			element.mask("(99) 9999-99999");
+		}
+	});
+
+	$('#register-tel').mask("(99) 99999-9999")
+	.focusout(function (event) {
+		var target, phone, element;
+		target = (event.currentTarget) ? event.currentTarget : event.srcElement;
+		phone = target.value.replace(/\D/g, '');
+		element = $(target);
+		element.unmask();
+		if(phone.length > 10) {
+			element.mask("(99) 99999-9999");
+		} else {
+			element.mask("(99) 9999-99999");
+		}
+	});
+
+	//CEP
+	$('#register-CEP').mask("99.999-999");
+
+	//Email
+	$("#register-email").mask("A", {
+		translation: {
+			"A": { pattern: /[\w@\-.+]/, recursive: true }
+		}
+	});;
+
 	$(function () { 
 		$.scrollUp({
 	        scrollName: 'scrollUp', // Element ID

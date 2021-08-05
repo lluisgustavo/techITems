@@ -36,7 +36,7 @@
 					<div class="form-group row">
 						<label for="cpf-config" class="col-sm-6 col-form-label">CPF</label>
 						<div class="col-sm-6 mb-2">
-							<input type="text" class="form-control" name="cpf-config" id="cpf-config" value="<?= $user_data->CPF ?>">
+							<input onblur="ValidaCPF(this)" type="text" class="form-control" name="cpf-config" id="cpf-config" value="<?= $user_data->CPF ?>">
 						</div>
 					</div>
 					<div class="form-group row">
@@ -259,6 +259,47 @@ function updatePersonalData(e, id){
 				}
 			}
 		}
+	}
+
+	ValidaCPF = function(element){
+		if($(element).val().trim() == '') return false;
+		var Soma;
+		var Resto;
+		var CPF = $(element).val().trim();
+		CPF = CPF.replace(/\./g,'');
+		CPF = CPF.replace(/-/g,'');
+		Soma = 0;
+
+		if (CPF == "00000000000" || CPF == "11111111111" || CPF == "22222222222" || CPF == "33333333333" ||
+			CPF == "44444444444" || CPF == "55555555555" || CPF == "66666666666" || CPF == "77777777777" ||
+			CPF == "88888888888" || CPF == "99999999999") {
+			if($('.validaCPF')) $('.validaCPF').remove()
+			$(element).after('<small class="w-100 validaCPF text-danger">CPF inválido<small>');
+			return false;
+		}
+
+		for (i=1; i<=9; i++) Soma = Soma + parseInt(CPF.substring(i-1, i)) * (11 - i);
+
+		Resto = (Soma * 10) % 11;
+
+		if ((Resto == 10) || (Resto == 11))  Resto = 0;
+
+		if (Resto != parseInt(CPF.substring(9, 10)) ){
+			if($('.validaCPF')) $('.validaCPF').remove()
+			$(element).after('<small class="w-100 validaCPF text-danger">CPF inválido<small>');
+			return false;
+		}
+		Soma = 0;
+		for (i = 1; i <= 10; i++) Soma = Soma + parseInt(CPF.substring(i-1, i)) * (12 - i);
+		Resto = (Soma * 10) % 11;
+		if ((Resto == 10) || (Resto == 11))  Resto = 0;
+		if (Resto != parseInt(CPF.substring(10, 11) ) ){
+			if($('.validaCPF')) $('.validaCPF').remove()
+			$(element).after('<small class="w-100 validaCPF text-danger">CPF inválido<small>');
+			return false;
+		}
+		if($('.validaCPF')) $('.validaCPF').remove()
+		return true;
 	}
 </script>
 
