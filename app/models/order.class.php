@@ -1,11 +1,10 @@
 <?php 
 
 Class Order{
-    public function create($data = []){
+    public function create($data = [], $model = null){
         $db = Database::newInstance(); 
         $order['customer_id'] = $data->customer_id;
-        $order['ordered_at'] = date("Y-m-d H:i:s");
-        
+        $order['ordered_at'] = date("Y-m-d H:i:s"); 
 
         $sqlNewOrder = "INSERT INTO tb_orders (customer_id, ordered_at) VALUES (:customer_id, :ordered_at)";
         $newOrder = $db->write($sqlNewOrder, $order);
@@ -15,6 +14,7 @@ Class Order{
         $order_id = $order_id[0]->order_id;
  
         $products_order['order_id'] = $order_id;
+ 
         foreach($data->product_IDs as $keyPro => $product_id){
             $products_order['product_id'] = $product_id;
             $products_order['product_quantity'] = $data->product_Qtd[$keyPro];  
@@ -22,9 +22,25 @@ Class Order{
             $sqlNewProductOrder = "INSERT INTO tb_orders_products (order_id, product_id, product_quantity) VALUES (:order_id, :product_id, :product_quantity)";
             $newProductOrder = $db->write($sqlNewProductOrder, $products_order);
 
-            $product['product_id'] = $product_id;
-            $sqlRemoveStock = "";
-            $movementStock = $db->write($sqlRemoveStock, $product);
+            //Movimentar estoque
+            $productArray['product_id'] = $product_id;
+            $sqlGetProduct = 'SELECT p.title FROM tb_products as p
+                                WHERE p.id = :product_id';
+            $productName = $db->read($sqlGetProduct, $productArray)[0]->title;
+            
+            $customerArray['customer_id'] = $data->customer_id;  
+            $sqlGetCustomer = 'SELECT p.name FROM tb_customers as c 
+                                INNER JOIN tb_people p ON p.id = c.person_id
+                                WHERE c.id = :customer_id';
+
+            $customerName = $db->read($sqlGetCustomer, $customerArray)[0]->name;
+
+			$data = new stdClass;
+            $data->product_id =  $products_order['product_id'];
+            $data->movement = (int) ('-' . $products_order['product_quantity']);
+            $data->obs = 'Cliente ' . $customerName . ' comprou ' . $products_order['product_quantity'] . ' x ' . $productName; 
+
+            $model->create($data); 
         }
          
         if($newProductOrder){
