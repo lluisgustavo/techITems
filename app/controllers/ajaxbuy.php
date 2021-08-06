@@ -10,7 +10,8 @@ Class AjaxBuy extends Controller{
             $order = $this->load_model('Order');
 
             if($data->data_type == "add-order"){
-                $check = $order->create($data);   
+                $stock = $this->load_model('Stock');
+                $check = $order->create($data, $stock);   
                 
                 $arr['message'] = "Pedido adicionado.";
                 $arr['message_type'] = "info";
