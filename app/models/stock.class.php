@@ -3,7 +3,7 @@
 Class Stock{
     public function create($data){
         $_SESSION['error'] = "";
-
+ 
         $db = Database::newInstance();  
  
         $arr['product_id'] = $data->product_id;
