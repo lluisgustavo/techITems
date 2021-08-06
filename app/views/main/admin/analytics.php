@@ -6,14 +6,9 @@ use Google\Analytics\Data\V1beta\BetaAnalyticsDataClient;
 use Google\Analytics\Data\V1beta\DateRange;
 use Google\Analytics\Data\V1beta\Dimension;
 use Google\Analytics\Data\V1beta\Metric;
-/**
- * TODO(developer): Replace this variable with your Google Analytics 4
- *   property ID before running the sample.
- */
+
 $property_id = '280922262';
 
-// Using a default constructor instructs the client to use the credentials
-// specified in GOOGLE_APPLICATION_CREDENTIALS environment variable.
 $client = new BetaAnalyticsDataClient();  
 
 // Make an API call.
