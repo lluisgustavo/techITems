@@ -57,7 +57,7 @@ I've learned a lot with this project, not only coding, but also other inner work
 ![image](https://user-images.githubusercontent.com/48425588/128105268-6b680b30-38e9-4164-a0d0-97247537ba8e.png)
 
 ## Acknowledgements <a name="acknowledgements"></a>
-[Qucik Programming](https://www.youtube.com/c/QuickProgramming) 
+[Quick Programming](https://www.youtube.com/c/QuickProgramming) 
 
 ## Contact <a name="contact"></a>
 Created by [@lluisgustavo](https://www.luisdesouza.com.br/)
